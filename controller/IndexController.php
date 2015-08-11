@@ -12,12 +12,12 @@ namespace Controller;
 class IndexController
 {
     function __call($name,$args){
-        die('指定的方法不存在！');
+        die('鎸囧畾鐨勬柟娉曚笉瀛樺湪');
     }
     public function index(){
-        $this->render(
-            'index.html',
-            ''
-        );
+        $this->assign(array(
+            'page_title' => '锟斤拷页',
+        ));
+        $this->render();
     }
 }
