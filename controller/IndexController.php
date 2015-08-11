@@ -16,7 +16,7 @@ class IndexController
     }
     public function index(){
         $this->assign(array(
-            'page_title' => '��ҳ',
+            'page_title' => '首页',
         ));
         $this->render();
     }
