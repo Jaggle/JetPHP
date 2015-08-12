@@ -15,5 +15,5 @@
 	$smarty->config_dir = JET.'/config/';
 	$smarty->cache_dir = RUNTIME.'/cacha/';
 	require_once(JET.'jet.php');
-	//ds
+	//dsfdf
 	jet::start();
