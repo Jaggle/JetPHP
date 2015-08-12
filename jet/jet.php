@@ -4,7 +4,7 @@ class jet{
     public static function start(){
 
        $route = self::URL_parse();
-       $route['contrl'] = trim(ucfirst($route[0])) ? trim(ucfirst($route[0])) : "index";
+       $route['contrl'] = @trim(ucfirst($route[0])) ? @trim(ucfirst($route[0])) : "index";
        $route['method'] = @trim($route[1]) ? @trim($route[1]) : 'index';
        if(file_exists(CTL.$route['contrl']).'Controller.php'){
             require_once(CTL.$route['contrl'].'Controller.php');

@@ -16,6 +16,7 @@ class IndexController
     }
     public function index(){
        echo "欢迎来到首页";
+       $smarty
     }
     public function explore(){
         echo "欢迎来到发现页面！";
