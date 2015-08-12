@@ -1,18 +1,36 @@
 <?php
-
+require_once(JET.'common/functions.php');
 class jet{
     public static function start(){
-        echo "hello";
-        var_dump(self::URL_parse());
+
+       $route = self::URL_parse();
+       $route['contrl'] = trim(ucfirst($route[0])) ? trim(ucfirst($route[0])) : "index";
+       $route['method'] = @trim($route[1]) ? @trim($route[1]) : 'index';
+       if(file_exists(CTL.$route['contrl']).'Controller.php'){
+            require_once(CTL.$route['contrl'].'Controller.php');
+            $ctlName = $route['contrl'].'Controller';
+           $contrl = new $ctlName;
+            if(method_exists($contrl,$route['method'])){
+
+                $contrl->$route['method']();
+            }else{
+                die('æ–¹æ³•ä¸å­˜åœ¨');
+            }
+       }else{
+                die('æ§åˆ¶å™¨ä¸å­˜åœ¨');
+       }
     }
     /*
-     * ¸ù¾İÍêÕûµÄURl½âÎö³ö¿ØÖÆÆ÷ºÍ·½·¨ÒÔ¼°ÆäËû²ÎÊı
      *
-     * @return Ò»¸öÊı×é£¬°üÀ¨¿ØÖÆÆ÷Ãû×Ö£¬·½·¨Ãû×Ö£¬ÒÔ¼°ÆäËû²ÎÊı
+     *
+     * @return
      * */
     protected  function URL_parse($url= null){
         $qs = $_SERVER['PHP_SELF'];
         $arr = explode('/',$qs);
+        $arr = array_rid($arr,$ele='');
+        unset($arr[1]);
+        $arr = array_values($arr);
         return $arr;
     }
 }

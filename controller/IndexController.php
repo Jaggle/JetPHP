@@ -6,7 +6,7 @@
  * Time: 13:14
  */
 
-namespace Controller;
+
 
 
 class IndexController
@@ -15,9 +15,9 @@ class IndexController
         die('指定的方法不存在');
     }
     public function index(){
-        $this->assign(array(
-            'page_title' => '首页',
-        ));
-        $this->render();
+       echo "欢迎来到首页";
+    }
+    public function explore(){
+        echo "欢迎来到发现页面！";
     }
 }
