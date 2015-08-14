@@ -15,8 +15,8 @@ class IndexController
         die('指定的方法不存在');
     }
     public function index(){
-       
 	   global $smarty;
+	   $smarty->assign('TPL_URI',TPL_URI);
        $smarty->display('index.html');
     }
     public function explore(){

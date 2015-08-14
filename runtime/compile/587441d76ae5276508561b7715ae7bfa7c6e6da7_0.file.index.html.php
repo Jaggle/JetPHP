@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2015-08-13 07:39:25
+<?php /* Smarty version 3.1.27, created on 2015-08-14 03:11:55
          compiled from "D:\server\www\jetstar\views\default\index.html" */ ?>
 <?php
-/*%%SmartyHeaderCode:1341255cc2d8d6bc775_18518490%%*/
+/*%%SmartyHeaderCode:267455cd405b801b81_90626008%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,33 +9,43 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '587441d76ae5276508561b7715ae7bfa7c6e6da7' => 
     array (
       0 => 'D:\\server\\www\\jetstar\\views\\default\\index.html',
-      1 => 1439444330,
+      1 => 1439514714,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1341255cc2d8d6bc775_18518490',
+  'nocache_hash' => '267455cd405b801b81_90626008',
+  'variables' => 
+  array (
+    'TPL_URI' => 0,
+  ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_55cc2d8d722088_35657886',
+  'unifunc' => 'content_55cd405b882a24_18671313',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_55cc2d8d722088_35657886')) {
-function content_55cc2d8d722088_35657886 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_55cd405b882a24_18671313')) {
+function content_55cd405b882a24_18671313 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
+$_smarty_tpl->properties['nocache_hash'] = '267455cd405b801b81_90626008';
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="css.css">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="banner.css">
-    <link rel="stylesheet" href="quickgate.css">
-    	<link rel="stylesheet" href="sideblock.css" />
+    <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+css/css.css">
+    <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+css/index.css">
+    <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+css/banner.css">
+    <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+css/quickgate.css">
+    	<link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+css/sideblock.css" />
     <?php echo '<script'; ?>
- src="js/jquery.js"><?php echo '</script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+js/jquery.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
  type="text/javascript">
@@ -45,7 +55,8 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
 </head>
 <body>
 <div class="head">
-    <div class="logo"><img src="./images/logo238.png" alt=""></div>
+    <div class="logo"><img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/logo238.png" alt=""></div>
     <div class="searchbar">
         <ul class="searchtype">
             <li style="background: coral;color: white;">老师</li>
@@ -102,16 +113,20 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
     </ul>
     <div id="banner_list">
         <a href="#" target="_blank">
-            <img src="./images/sample-pic-1000.jpg" title="夜色空凝www.yeskn.com" alt="夜色空凝www.yeskn.com"  width="1230px" height="auto"/>
+            <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/sample-pic-1000.jpg" title="夜色空凝www.yeskn.com" alt="夜色空凝www.yeskn.com"  width="1230px" height="auto"/>
         </a>
         <a href="#" target="_blank">
-            <img src="./images/sample-pic-1000.jpg" title="夜色空凝www.yeskn.com" alt="夜色空凝www.yeskn.com"  width="1230px" height="auto"/>
+            <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/sample-pic-1000.jpg" title="夜色空凝www.yeskn.com" alt="夜色空凝www.yeskn.com"  width="1230px" height="auto"/>
         </a>
         <a href="#" target="_blank">
-            <img src="./images/sample-pic-1000.jpg" title="夜色空凝www.yeskn.com" alt="夜色空凝www.yeskn.com"  width="1230px" height="auto"/>
+            <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/sample-pic-1000.jpg" title="夜色空凝www.yeskn.com" alt="夜色空凝www.yeskn.com"  width="1230px" height="auto"/>
         </a>
         <a href="#" target="_blank">
-            <img src="./images/sample-pic-1000.jpg" title="夜色空凝www.yeskn.com" alt="夜色空凝www.yeskn.com"  width="1230px" height="auto"/>
+            <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/sample-pic-1000.jpg" title="夜色空凝www.yeskn.com" alt="夜色空凝www.yeskn.com"  width="1230px" height="auto"/>
         </a>
     </div>
 </div>
@@ -135,11 +150,13 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
             <h3>热门回答</h3>
             <div class="pic-qa">
                 <div class="imgpis">
-                    <img src="./images/pic-sample-155x90.png" alt="">
+                    <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png" alt="">
                     <div>雅思听力的评分标准</div>
                 </div>
                 <div class="imgpis">
-                    <img src="./images/pic-sample-155x90.png" alt="">
+                    <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png" alt="">
                     <div>雅思听力的评分标准</div>
                 </div>
             </div>
@@ -157,7 +174,8 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
             <div class="slice new-exp">
             <h3>最新经验</h3>
             <div class="imgpis">
-                <img src="./images/pic-sample-155x90.png" alt="">
+                <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png" alt="">
                 <div>雅思听力的评分标准</div>
             </div>
             <div class="list">
@@ -176,23 +194,27 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
             </div>
             <div class="more">更多&gt;&gt;</div>
             <div class="imgpis">
-                <img src="./images/pic-sample-155x90.png" alt="">
+                <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png" alt="">
                 <div>雅思听力的评分标准</div>
                 <div class="cos-price">￥9800</div>
 
             </div>
             <div class="imgpis">
-                <img src="./images/pic-sample-155x90.png" alt="">
+                <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png" alt="">
                 <div>雅思听力的评分标准</div>
                 <div class="cos-price">￥9800</div>
             </div>
             <div class="imgpis">
-                <img src="./images/pic-sample-155x90.png" alt="">
+                <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png" alt="">
                 <div>雅思听力的评分标准</div>
                 <div class="cos-price">￥9800</div>
             </div>
             <div class="imgpis">
-                <img src="./images/pic-sample-155x90.png" alt="">
+                <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png" alt="">
                 <div>雅思听力的评分标准</div>
                 <div class="cos-price">￥9800</div>
             </div>
@@ -203,11 +225,13 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
             <h3>精选资料</h3>
             <div class="chs-img-list">
                 <div class="imgpis">
-                    <img src="./images/pic-sample-155x90.png" alt="">
+                    <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png" alt="">
                     <div>雅思听力的评分标准</div>
                 </div>
                 <div class="imgpis">
-                    <img src="./images/pic-sample-155x90.png" alt="">
+                    <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png" alt="">
                     <div>雅思听力的评分标准</div>
                 </div>
             </div>
@@ -274,7 +298,8 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
         <ol>
             <li class="firstli">
                 <div class="">
-                    <a href="#"><img src="./images/pic-sample-155x90.png " alt=""></a>
+                    <a href="#"><img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png " alt=""></a>
                     <div class="title-link"><a href="#">MH370或经历僵尸飞行，什么是僵尸飞行</a></div>
                     <div class="summary">“僵尸飞行”是指本来应有人驾驶的飞机因为某种原因...<a href="#">详细</a></div>
                 </div>
@@ -290,7 +315,8 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
         <ol>
             <li class="firstli">
                 <div class="">
-                    <a href="#"><img src="./images/pic-sample-155x90.png " alt=""></a>
+                    <a href="#"><img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png " alt=""></a>
                     <div class="title-link"><a href="#">MH370或经历僵尸飞行，什么是僵尸飞行</a></div>
                     <div class="summary">“僵尸飞行”是指本来应有人驾驶的飞机因为某种原因...<a href="#">详细</a></div>
                 </div>
@@ -306,7 +332,8 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
         <ol>
             <li class="firstli">
                 <div class="">
-                    <a href="#"><img src="./images/pic-sample-155x90.png " alt=""></a>
+                    <a href="#"><img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png " alt=""></a>
                     <div class="title-link"><a href="#">MH370或经历僵尸飞行，什么是僵尸飞行</a></div>
                     <div class="summary">“僵尸飞行”是指本来应有人驾驶的飞机因为某种原因...<a href="#">详细</a></div>
                 </div>
@@ -322,7 +349,8 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
         <ol>
             <li class="firstli">
                 <div class="">
-                    <a href="#"><img src="./images/pic-sample-155x90.png " alt=""></a>
+                    <a href="#"><img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png " alt=""></a>
                     <div class="title-link"><a href="#">MH370或经历僵尸飞行，什么是僵尸飞行</a></div>
                     <div class="summary">“僵尸飞行”是指本来应有人驾驶的飞机因为某种原因...<a href="#">详细</a></div>
                 </div>
@@ -339,7 +367,8 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
         <ol>
             <li class="firstli">
                 <div class="">
-                    <a href="#"><img src="./images/pic-sample-155x90.png " alt=""></a>
+                    <a href="#"><img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png " alt=""></a>
                     <div class="title-link"><a href="#">MH370或经历僵尸飞行，什么是僵尸飞行</a></div>
                     <div class="summary">“僵尸飞行”是指本来应有人驾驶的飞机因为某种原因...<a href="#">详细</a></div>
                 </div>
@@ -355,7 +384,8 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
         <ol>
             <li class="firstli">
                 <div class="">
-                    <a href="#"><img src="./images/pic-sample-155x90.png " alt=""></a>
+                    <a href="#"><img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png " alt=""></a>
                     <div class="title-link"><a href="#">MH370或经历僵尸飞行，什么是僵尸飞行</a></div>
                     <div class="summary">“僵尸飞行”是指本来应有人驾驶的飞机因为某种原因...<a href="#">详细</a></div>
                 </div>
@@ -371,7 +401,8 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
         <ol>
             <li class="firstli">
                 <div class="">
-                    <a href="#"><img src="./images/pic-sample-155x90.png " alt=""></a>
+                    <a href="#"><img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png " alt=""></a>
                     <div class="title-link"><a href="#">MH370或经历僵尸飞行，什么是僵尸飞行</a></div>
                     <div class="summary">“僵尸飞行”是指本来应有人驾驶的飞机因为某种原因...<a href="#">详细</a></div>
                 </div>
@@ -387,7 +418,8 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
         <ol>
             <li class="firstli">
                 <div class="">
-                    <a href="#"><img src="./images/pic-sample-155x90.png " alt=""></a>
+                    <a href="#"><img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/pic-sample-155x90.png " alt=""></a>
                     <div class="title-link"><a href="#">MH370或经历僵尸飞行，什么是僵尸飞行</a></div>
                     <div class="summary">“僵尸飞行”是指本来应有人驾驶的飞机因为某种原因...<a href="#">详细</a></div>
                 </div>
@@ -408,21 +440,24 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
 			<div class="change">换一换</div>
 				<div class="type type1">
 					<div class="resource-list">
-						<img src="images/avatar-sample-200x200.jpeg" alt="" />
+						<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
 						</div>
 					</div>
 					<div class="resource-list">
-						<img src="images/avatar-sample-200x200.jpeg" alt="" />
+						<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
 						</div>
 					</div>
 					<div class="resource-list">
-						<img src="images/avatar-sample-200x200.jpeg" alt="" />
+						<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
@@ -431,21 +466,24 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
 				</div>
 				<div class="type hide type2">
 					<div class="resource-list">
-			<img src="images/avatar-sample-200x200.jpeg" alt="" />
+			<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
 						</div>
 			</div>
 			<div class="resource-list">
-				<img src="images/avatar-sample-200x200.jpeg" alt="" />
+				<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
 						</div>
 			</div>
 			<div class="resource-list">
-				<img src="images/avatar-sample-200x200.jpeg" alt="" />
+				<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
@@ -454,21 +492,24 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
 				</div>
 				<div class="type hide type3">
 					<div class="resource-list">
-				<img src="images/avatar-sample-200x200.jpeg" alt="" />
+				<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
 						</div>
 			</div>
 			<div class="resource-list">
-				<img src="images/avatar-sample-200x200.jpeg" alt="" />
+				<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
 						</div>
 			</div>
 			<div class="resource-list">
-				<img src="images/avatar-sample-200x200.jpeg" alt="" />
+				<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
@@ -477,21 +518,24 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
 				</div>
 				<div class="type hide type4">
 					<div class="resource-list">
-			<img src="images/avatar-sample-200x200.jpeg" alt="" />
+			<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
 						</div>
 			</div>
 			<div class="resource-list">
-				<img src="images/avatar-sample-200x200.jpeg" alt="" />
+				<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
 						</div>
 			</div>
 			<div class="resource-list">
-				<img src="images/avatar-sample-200x200.jpeg" alt="" />
+				<img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/avatar-sample-200x200.jpeg" alt="" />
 						<div class="text">
 							<div class="title"><a href="#">此处是标题</a></div>
 							<div class="summary">此处是摘要，大概有20字左右的摘要</div>
@@ -533,13 +577,15 @@ $_smarty_tpl->properties['nocache_hash'] = '1341255cc2d8d6bc775_18518490';
                     <span class="arrow">
                         <i></i>
                     </span>
-                    <img src="images/weixin-code.png">
+                    <img src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+images/weixin-code.png">
                 </div>
         </div>
 	</div><!--边栏结束-->
 </div>
 <?php echo '<script'; ?>
- src="index.js" tyle="text/javascript"><?php echo '</script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['TPL_URI']->value;?>
+js/index.js" tyle="text/javascript"><?php echo '</script'; ?>
 >
 </body>
 </html><?php }

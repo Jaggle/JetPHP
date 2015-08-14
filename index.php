@@ -5,6 +5,7 @@
 	define('ROOT',dirname(__FILE__));
 	define('CTL',dirname(__FILE__).'/controller/');
 	define('VIEW',ROOT.'/views/default');
+	define("TPL_URI",'/views/default/');
 	define('RUNTIME',ROOT.'/runtime/');
 	define('JET',ROOT.'/jet/');
 	define('SMARTY_DIR',ROOT.'/smarty/');
