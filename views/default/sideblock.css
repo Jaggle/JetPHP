@@ -1,0 +1,143 @@
+.sidebar{
+	width:280px;
+	float:left;
+}
+.side-block{
+	position: relative;
+	min-height: 220px;
+	padding-bottom: 10px;
+	
+}
+.sidebar h2{
+	margin-top: 15PX;
+	color: #A2D4DD;
+	padding-bottom: 10px;
+	margin-bottom: 0;
+	border-bottom: 1px solid #A2D4DD;
+	
+}
+.side-block .change{
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	right: 0;
+}
+.side-block .resource-list{
+	clear: both;
+	padding: 10px;
+}
+.side-block .resource-list img{
+	width: 50px;
+	height: 50px;
+	padding-right: 10px;
+	float: left;
+}
+.side-block .resource-list .text{
+	width: auto;
+	height: 50px;
+	float: left;
+	
+}
+/*热点*/
+.side-hot ul, .side-special ul{
+	zoom: 1;
+	padding-left: 30px;
+}
+.side-hot ul li,.side-special ul li{
+	list-style-type:  circle;
+	color: gray;
+}
+.side-hot ul li a,.side-special ul li a{
+	color: gray; 
+}
+side-link {
+	margin-top:20px;
+	overflow:hidden
+}
+.side-link a {
+	display:block;
+	position:relative;
+	float:left;
+	width:135px;
+	height:40px;
+	line-height:40px;
+	border-radius:4px
+}
+.side-link a span {
+	position:absolute;
+	top:7px;
+	width:30px;
+	height:25px
+}
+.side-link a:hover {
+	text-decoration:none
+}
+.side-link a.weixin {
+	border:1px #85c155 solid;
+	text-indent:1.5em;
+	margin-right:6px;
+	color:#85c155
+}
+.side-link a.weixin span {
+	background:url(images/weixin-icon.png) center center no-repeat
+}
+.side-link a.weixin:hover {
+	background-color:#85c155;
+	color:white
+}
+.side-link a.weixin:hover span {
+	background:url(images/weixin-icon-linked.png) center center no-repeat
+}
+.side-link a.weibo {
+	text-indent:3em;
+	border:1px #e5554f solid;
+	color:#e5554f
+}
+.side-link a.weibo span {
+	background:url(images/weibo-icon.png) center center no-repeat
+}
+.side-link a.weibo:hover {
+	background-color:#e5554f;
+	color:white
+}
+.side-link a.weibo:hover span {
+	background:url(images/weibo-icon-linked.png) center center no-repeat
+}
+.side-link .dimensions-code {
+	display:none;
+	position:relative;
+	width:145px;
+	float:left;
+	margin-top:10px
+}
+.side-link .dimensions-code img {
+	width:145px;
+	margin-top:6px;
+	border:1px #f4f4f4 solid
+}
+.side-link .arrow {
+	display:block;
+	position:absolute;
+	top:-13px;
+	left:62px;
+	height:0;
+	width:0;
+	font-size:0;
+	line-height:0;
+	border-color:transparent transparent #f4f4f4 transparent;
+	border-style:dashed dashed solid dashed;
+	border-width:10px
+}
+.side-link .arrow i {
+	position:absolute;
+	top:-9px;
+	left:-10px;
+	display:block;
+	height:0;
+	width:0;
+	font-size:0;
+	line-height:0;
+	border-color:transparent transparent #fff transparent;
+	border-style:dashed dashed solid dashed;
+	border-width:10px
+}

@@ -1,0 +1,64 @@
+/**
+ * Created by Jake on 2015/8/11.
+ */
+.content{
+    width: 950px;
+    height: auto;
+    float: left;
+}
+.content h2{
+    color:#A2D4DD;
+    padding-bottom: 10px;
+    margin-right: 50px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #A2D4DD;
+}
+.content h3{
+    margin-top: 0;
+}
+.q-slice{
+    width: 450px;
+    height: 280px;
+    padding: 10px 10px 10px 0;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    _height: 280px;
+}
+.q-slice .firstli {
+    width: 430px;
+    height: 90px;
+    list-style: none;
+    clear: both;
+    padding: 5px;
+    margin-bottom: 10px;
+
+}
+.q-slice .firstli a{
+    padding: 0;
+}
+.q-slice li{
+    list-style: none;
+    position: relative;
+    padding: 5px  0;
+
+}
+.q-slice li a{
+    color: grey;
+    padding-left: 20px;
+}
+.q-slice .firstli .title-link a{
+    color: grey;
+   font-size: 15px !important;
+}
+.q-slice .firstli .summary{
+
+}
+.q-slice .firstli .summary a{
+    color: #428BCA;
+}
+.q-slice .firstli img{
+    width: 155px;
+    height: 90px;
+   float: left;
+}

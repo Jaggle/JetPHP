@@ -4,7 +4,7 @@
 	//这个文件设置程序的基础信息
 	define('ROOT',dirname(__FILE__));
 	define('CTL',dirname(__FILE__).'/controller/');
-	define('VIEW',ROOT.'/views/');
+	define('VIEW',ROOT.'/views/default');
 	define('RUNTIME',ROOT.'/runtime/');
 	define('JET',ROOT.'/jet/');
 	define('SMARTY_DIR',ROOT.'/smarty/');

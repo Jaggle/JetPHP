@@ -15,8 +15,9 @@ class IndexController
         die('指定的方法不存在');
     }
     public function index(){
-       echo "欢迎来到首页";
-       $smarty
+       
+	   global $smarty;
+       $smarty->display('index.html');
     }
     public function explore(){
         echo "欢迎来到发现页面！";
