@@ -22,4 +22,7 @@ class IndexController
     public function explore(){
         echo "欢迎来到发现页面！";
     }
+    public function search(){
+        echo "这是search方法";
+    }
 }
