@@ -7,17 +7,15 @@
  */
 
 
-
-
-class IndexController
+class IndexController extends CommonController
 {
+
     function __call($name,$args){
         die('指定的方法不存在');
     }
     public function index(){
-       
-	   global $smarty;
-       $smarty->display('index.html');
+        $this->assign('title',"Jetstar首页");
+       $this->display('index.html');
     }
     public function explore(){
         echo "欢迎来到发现页面！";
