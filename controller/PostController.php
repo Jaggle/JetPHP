@@ -35,7 +35,40 @@ class PostController extends CommonController
 
     }
 
-    public function test(){
-       $this->redirect('login');
+    /**
+     * 发布文章功能
+     * data有如下键：
+     *      title 标题
+     *      summary 摘要
+     *      content 内容
+     *      publish_time 发布时间
+     *      author 作者
+     *      @todo cover 封面图片的路径 默认在uploads/image目录并且用时间隔开
+     *
+     *
+     */
+    public function publish()
+    {
+        if($_POST['action'] !== 'do_publish')
+        {
+            $this->render();
+            exit();
+        }
+        else
+        {
+            $data = jet_Get('publish');
+
+
+            if($data['summary'] == '')
+            {
+                $data['summary'] = substr($data['content'],0,jet_config('summary_length'));
+            }
+
+            $data['publish_time'] = time();
+
+            $data['author'] = $this->model('user')->current_user_name();
+        }
+
+
     }
 }

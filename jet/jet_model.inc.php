@@ -29,14 +29,10 @@ class JET_MODEL
         //dump($this->mysqli,0);
         //echo "________________________________________________________________________________";
         $this->mysqli->set_charset("utf8");
-        $this->setup();
+
 
     }
-    /**
-     * todo 这个函数是干嘛的？
-     */
-    public function setup()
-    {}
+
     public function model($model)
     {
         return Jet::model($model);

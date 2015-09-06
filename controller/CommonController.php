@@ -19,9 +19,8 @@ class CommonController
      */
     function __construct(){
 
-        require_once(ROOT.'config.php');
+        $this->config = include (ROOT.'config.php');
 
-        $this->config = $config;
         $this->cookie_prefix = $this->config['cookie_prefix'];
         require_once(ROOT.'router.config.php');
 
