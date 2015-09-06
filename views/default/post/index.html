@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$title}</title>
+</head>
+<body>
+
+{foreach from=$post item=p key=newsId name=p}
+<h1>{$p.title}</h1>
+<div class="content">
+    {$p.content}
+</div>
+
+{/foreach}
+</body>
+</html>
