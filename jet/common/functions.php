@@ -45,16 +45,16 @@ function get_extension($file)
 }
 
 /*
- * �ϴ������ļ�
+ * jet 系列函数之文件上传
  * */
-function jetUpload($name = 'random',$type = 'image')
+function jet_Upload($name = 'random',$type = 'image')
 {
-    if($type and !file_exists(ROOT.'uploads/'.$type)){
-        mkdir(ROOT.'uploads/'.$type);
+    if($type and !file_exists(ROOT.'/uploads/'.$type)){
+        mkdir(ROOT.'/uploads/'.$type);
     }
     $f = array_keys($_FILES)[0];
-    $ext = get_extension($_FILES[$f]['name']); //�ļ���׺
-    $save_path = $type ? ROOT . 'uploads/'.$type.'/' : ROOT . 'uploads/';
+    $ext = get_extension($_FILES[$f]['name']);
+    $save_path = $type ? ROOT . '/uploads/'.$type.'/' : ROOT . 'uploads/';
     $save_name = $name ? $name.'.'.$ext : jetRandString(12).'.'.$ext;
 
     return move_uploaded_file($_FILES[$f]["tmp_name"], $save_path . $save_name) || false;
@@ -190,8 +190,12 @@ function jet_Post($s)
  * jet 系列函数后
  * jet_File() 获得$_FILES数组
  */
-function jet_Files($s)
+function jet_Files($s = null)
 {
+    if($s == null)
+    {
+        return $_FILES;
+    }
     return $_FILES[$s];
 }
 
@@ -202,7 +206,7 @@ function jet_Files($s)
  */
 function jet_config($s)
 {
-    $config =  include(CONFIG_PATH.'config.php');
+    $config =  include(CONFIG_PATH.'/config.php');
    return $config[$s];
 }
 

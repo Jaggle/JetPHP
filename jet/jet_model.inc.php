@@ -159,18 +159,20 @@ class JET_MODEL
     /**
      * order子句
      */
-    public function order()
+    public function order($order)
     {
-
+        $this->option['order'] = $order;
+        return $this;
     }
 
     /**
      * limit子句
      *
      */
-    public function limit()
+    public function limit($limit)
     {
-
+        $this->option['limit'] = $limit;
+        return $this;
     }
 
     /**
@@ -258,20 +260,27 @@ class JET_MODEL
     }
 
     /**
-     * get_field子句
-     * get_field子句后面不应该有其他子句
-     * 得到一条数据
+     * update子句
      */
-    public function get_field()
+    public function update()
     {
 
     }
 
     /**
-     * update子句
+     * 字段加1
+     * @return true or false
      */
-    public function update()
+    public function increase($field)
     {
+        $sql = "update $this->option['table'] set '$field' = '$field'+1 ";
+
+        $this->mysqli->query($sql);
+
+        if($this->mysqli->errno == 0)
+            return true;
+        else
+            return false;
 
     }
 

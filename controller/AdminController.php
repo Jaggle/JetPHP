@@ -59,6 +59,26 @@ class AdminController extends CommonController
     {
         $this->render('admin/error-404');
     }
+    public function publish()
+    {
+        $this->render();
+    }
+    public function form_elements()
+    {
+        $this->render();
+    }
+    //文件上传
+    public function dropzone()
+    {
+        $this->render();
+    }
+
+    //用户登录
+    public function login()
+    {
+        $this->render();
+    }
+
 
 
 

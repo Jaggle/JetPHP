@@ -25,8 +25,8 @@ class IndexController extends CommonController
 
 
         //文章列表
-        $post_list = $this->model('post')->select();
-        //dump($post_list);
+        $post_list = $this->model('post')->order('publish_time ASC')->select();
+
         $this->assign('posts',$post_list);
 
         $this->render();

@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>��¼ҳ�� - Bootstrap��̨����ϵͳģ��Ace����</title>
+		<title>登录</title>
 		<meta name="keywords" content="Bootstrapģ��,Bootstrapģ������,Bootstrap�̳�,Bootstrap����" />
 		<meta name="description" content="վ���ز��ṩBootstrapģ��,Bootstrap�̳�,Bootstrap���ķ�������Bootstrap�������" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -69,18 +69,18 @@
 
 											<div class="space-6"></div>
 
-											<form>
+											<form action="/account/login" method="post" id="lg-form">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
+															<input type="text" class="form-control" placeholder="Username" name="user" />
 															<i class="icon-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" />
+															<input type="password" class="form-control" placeholder="Password" name="pswd" />
 															<i class="icon-lock"></i>
 														</span>
 													</label>
@@ -93,15 +93,18 @@
 															<span class="lbl"> Remember Me</span>
 														</label>
 
-														<button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+														<input type="hidden" name="action" value="do_login" />
+														<input type="hidden" name="backurl" value="/admin/">
+														<button type="button" class="width-35 pull-right btn btn-sm btn-primary btn-login">
 															<i class="icon-key"></i>
-															Login
+															登录
 														</button>
 													</div>
 
 													<div class="space-4"></div>
 												</fieldset>
 											</form>
+
 
 											<div class="social-or-login center">
 												<span class="bigger-110">Or Login Using</span>
@@ -192,7 +195,7 @@
 											<div class="space-6"></div>
 											<p> Enter your details to begin: </p>
 
-											<form>
+											<form action="/acount/login" method="post">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -300,6 +303,14 @@
 			 jQuery('#'+id).addClass('visible');
 			}
 		</script>
-	<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+
+		<script>
+			$(function(){
+				$(".btn-login").click(function(){
+					$("#lg-form").submit();
+				});
+			})
+		</script>
+
 </body>
 </html>

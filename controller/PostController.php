@@ -52,7 +52,7 @@ class PostController extends CommonController
         //判断用户是否已经登录
         if($this->is_login($this->current_user()) == false )
         {
-            $this->redirect('请先登录','home_page');
+            $this->redirect('请先登录','R:home_page');
         }
         if(jet_Post('action') !== 'do_publish')
         {
@@ -63,9 +63,9 @@ class PostController extends CommonController
         {
             $data = jet_Post('post');
 
-            if(jet_Post('summary') == '')
+            if($data['summary'] == false)
             {
-                $data['summary'] = substr($data['content'],0,jet_config('summary_length'));
+                $data['summary'] = substr(strip_tags($data['content']),0,jet_config('summary_length'));
             }
 
             $data['publish_time'] = time();
@@ -77,7 +77,7 @@ class PostController extends CommonController
             $flag = $this->model('post')->insert($data);
 
             if($flag)
-                $this->redirect('添加文章成功！','home_page');
+                $this->redirect('添加文章成功！','R:home_page');
             else
                 die('添加失败！');
         }

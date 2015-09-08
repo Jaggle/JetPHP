@@ -2,11 +2,18 @@
 
 require_once(JET.'/common/functions.php');
 
-define('CONFIG_PATH',dirname(__FILE__));
+//路径
+define('CONFIG_PATH',ROOT);
 define('CTL', ROOT . '/controller');
 define('VIEW', ROOT . '/views/default');
 define('RUNTIME', ROOT . '/runtime');
 define('VENDOR', JET.'/vendor');
+
+
+//地址
+define('__STATIC__','/views/static');
+
+//smarty配置
 require_once(SMARTY_DIR . 'Smarty.class.php');
 $smarty = new Smarty;
 $smarty->template_dir = VIEW;

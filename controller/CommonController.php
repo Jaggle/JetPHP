@@ -101,17 +101,35 @@ class CommonController
     /**
      * redirect函数,普通提示
      * todo
-     *
+     * 用R:来区分正常路径和路由,
      */
     public function redirect($msg,$router)
     {
         $this->assign('msg',$msg);
+        $router = trim($router);  //首先去掉前后多余字符
+        //路由
+        if(strstr($router,':'))
+        {
 
-        $url = $this->router[$router];
+            $router = substr($router,1); //去掉开头的R
+            $router = str_replace(':','',$router);//去掉冒号
+            $router = trim($router);//再次去掉多余的空格
+            $url = $this->router[$router];
+        }
+        //直接相对网址，相对域名而言
+        else
+        {
+            if(substr($router,0,1) != '/')
+
+                $url = URL.'/'.$router;
+            else
+                $url = URL.$router;
+
+        }
+
+
 
         $this->assign('url',$url);
-
-
         $this->render('notice/redirect.html');
         exit();
     }

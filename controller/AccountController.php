@@ -27,9 +27,9 @@ class AccountController extends CommonController
         }
 
         //渲染模板
-        if(@$_POST['action'] != 'do_login')
+        if(jet_Post('action') != 'do_login')
         {
-            $this->render();
+            $this->render('admin/login');
         }
         //提交登录
         else
@@ -51,8 +51,14 @@ class AccountController extends CommonController
 
                 $f2 = $this->set_session($user,'1');
 
+                $refer = jet_Post('backurl');
+
+
+                if(empty($refer))
+                    $refer = 'R:home_page';
+
                 if($f1 and $f2)
-                    $this->redirect('登录成功！','home_page');
+                    $this->redirect('登录成功！',$refer);
             }else
             {
                 dump($this->model('user')->get_pswdByUserName($user));
@@ -70,16 +76,16 @@ class AccountController extends CommonController
         //尚未登录
         if(!$this->get_cookie('user'))
         {
-            $this->redirect('你尚未登录哦','home_page');
+            $this->redirect('你尚未登录哦','R:home_page');
             exit;
         }
         if($this->let_cookie('user'))
         {
-            $this->redirect('退出成功！','home_page');
+            $this->redirect('退出成功！','R:home_page');
         }
         else
         {
-            $this->redirect('退出失败！','home_page');
+            $this->redirect('退出失败！','R:home_page');
         }
     }
 
