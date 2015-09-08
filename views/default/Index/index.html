@@ -10,16 +10,31 @@
 		</header>
 		<div class="sidebar">
 			<div>
-				<table width="80%" cellpadding="2" cellspacing="1" border="0" class="calendar"><tbody><tr><td class="calendar_h" align="center" colspan="7"><a href="/logs/2015/8/">«</a>&nbsp;2015年&nbsp;9月&nbsp;<a href="/logs/2015/10/">»</a></td></tr><tr><td class="week">日</td><td class="week">一</td><td class="week">二</td><td class="week">三</td><td class="week">四</td><td class="week">五</td><td class="week">六</td></tr><tr><td class="day">&nbsp;</td><td class="day">&nbsp;</td><td class="day">1</td><td class="day">2</td><td class="day">3</td><td class="today">4</td><td class="day">5</td></tr><tr><td class="day">6</td><td class="day">7</td><td class="day">8</td><td class="day">9</td><td class="day">10</td><td class="day">11</td><td class="day">12</td></tr><tr><td class="day">13</td><td class="day">14</td><td class="day">15</td><td class="day">16</td><td class="day">17</td><td class="day">18</td><td class="day">19</td></tr><tr><td class="day">20</td><td class="day">21</td><td class="day">22</td><td class="day">23</td><td class="day">24</td><td class="day">25</td><td class="day">26</td></tr><tr><td class="day">27</td><td class="day">28</td><td class="day">29</td><td class="day">30</td><td class="day">&nbsp;</td><td class="day">&nbsp;</td><td class="day">&nbsp;</td></tr></tbody></table>
+
+				<ul>
+					<li>
+						{if $status== 1}
+						<a href="/account/logout">退出</a>
+						{else}
+						<a href="/account/login">登录</a>
+						{/if}
+					</li>
+					<li>
+						<a href="/post/publish">发布文章</a>
+					</li>
+
+					<h7>文章列表</h7>
+					<ul>{foreach from=$posts item=p key=newsId name=p}
+						<li>{$p.title}</li>
+						{/foreach}
+					</ul>
+				</ul>
+
 			</div>
 
 
 		</div>
-		{if $status== 1}
-			<a href="/account/logout">退出</a>
-		{else}
-		<a href="/account/login">登录</a>
-		{/if}
+
 
 		<br>
 

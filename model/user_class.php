@@ -49,4 +49,16 @@ class user_class extends JET_MODEL
         return $string;
     }
 
+    /**
+     * 得到当前用户的id
+     */
+    public function current_user_name()
+    {
+        //todo 需要做好加密解密函数
+        $identity  = jet_cookie('user');
+        $user = jet_Decrypt($identiy);
+        echo $user;
+    }
+
+
 }

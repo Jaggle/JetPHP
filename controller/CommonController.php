@@ -19,9 +19,8 @@ class CommonController
      */
     function __construct(){
 
-        require_once(ROOT.'config.php');
+        $this->config = include (ROOT.'config.php');
 
-        $this->config = $config;
         $this->cookie_prefix = $this->config['cookie_prefix'];
         require_once(ROOT.'router.config.php');
 
@@ -74,7 +73,8 @@ class CommonController
      * @return mixed
      */
     public function model($model = null){
-        return Jet::model($model);
+        //return Jet::model($model);
+        return new JET_MODEL($model);
     }
 
     /**
@@ -206,9 +206,9 @@ class CommonController
      */
     public function is_login($user)
     {
-        $user_indentifier = $this->model('user')->getIndentifier($user);
-        //dump($user_indentifier);
-        if($this->get_cookie('user') != $user_indentifier)
+        $identity = $this->model('user')->where("user = '".$user."'")->find('identity');
+
+        if($this->get_cookie('user') != $identity)
         {
 
             return false;
@@ -223,6 +223,17 @@ class CommonController
             return false;
         }
 
+    }
+
+    /**
+     * todo current_user - 应该有很好的获取当前用户的方法
+     * 获取当前用户
+     */
+    public function current_user()
+    {
+        $identity = $this->get_cookie('user');
+        $user_name = $this->model('user')->where("identity = '$identity'")->find('user');
+        return $user_name;
     }
 
 

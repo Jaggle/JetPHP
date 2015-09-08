@@ -11,6 +11,8 @@
  * ȥ������Ԫ�صĿ�ֵ��Ĭ��ȥ�����ַ���
  *
  */
+
+
 function array_rid($arr, $ele = null)
 {
     foreach ($arr as $k => $v) {
@@ -131,14 +133,83 @@ function jet_Encrypt($string,$key)
     $tKey = md5($key);
     $bString = base64_encode($string);
     $salt = 'jet is a cat';
-    
+
 
 }
 
 /**
  * jet系列函数 之 原创解密函数
  */
-function jet_Decrypt($strig)
+function jet_Decrypt($string)
 {
 
+
+    return $string;
+}
+
+/**
+ * jet系列函数
+ * jet_get() 得到整个$_GET[]数组
+ * s string 需要取得的元素的键名
+ */
+function jet_Get($s)
+{
+    return $_GET[$s];
+}
+
+/**
+ * jet 系列函数
+ * jet_Post() 得到post值
+ * s string 需要取得的元素的键名
+ */
+function jet_Post($s)
+{   if(isset($_POST[$s]))
+        return $_POST[$s];
+}
+
+/**
+ * jet 系列函数后
+ * jet_File() 获得$_FILES数组
+ */
+function jet_Files($s)
+{
+    return $_FILES[$s];
+}
+
+/**
+ * jet 系列函数
+ * jet_config($s)
+ * 获得一个config
+ */
+function jet_config($s)
+{
+    $config =  include(CONFIG_PATH.'config.php');
+   return $config[$s];
+}
+
+/**
+ * jet 系列函数
+ * jet_cookie 设置或者取得cookie值
+ */
+function jet_cookie($name,$value = null,$expire = null,$path = null, $domain = null)
+{
+    //判断前缀
+    if(strpos($name,jet_config('cookie_prefix')) == false)
+    {
+        $name = jet_config('cookie_prefix').$name;
+    }
+
+    //设置cookie
+    if($expire > 0)
+    {
+        setcookie($name,$value,$expire,$path,$domain);
+    }
+
+    //获得cookie
+    else
+    {
+
+        return $_COOKIE[$name];
+
+    }
 }
