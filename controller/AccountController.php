@@ -39,7 +39,7 @@ class AccountController extends CommonController
             $pswd = md5($pswd);
 
 
-            if($pswd == $this->model('user')->get_pswdByUserName($user))
+            if($pswd == $this->model('user')->where("user = '$user'")->find('pswd'))
             {
                 //创建cookie
                 //用户名加盐处理

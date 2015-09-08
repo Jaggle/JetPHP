@@ -15,6 +15,7 @@ a:hover {
 }
 ul, li {
     list-style: none;
+    padding: 10px;
 }
 img {
     margin: 10px 0;

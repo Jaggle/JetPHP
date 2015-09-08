@@ -16,16 +16,19 @@ class IndexController extends CommonController
 
     public function index()
     {
+
         $this->assign('title', "Jetstar首页");
-        $user = $this->model('user')->get_userNameById(1);
-
-
-        $this->assign('status',$this->is_login($user));
-
-
-
-
+        $user = $this->current_user();
+        $c_user = $this->current_user();
+        $this->assign('status',$this->is_login($c_user));
         $this->assign('user',$user);
+
+
+        //文章列表
+        $post_list = $this->model('post')->select();
+        //dump($post_list);
+        $this->assign('posts',$post_list);
+
         $this->render();
     }
 

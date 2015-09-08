@@ -19,7 +19,8 @@ class CommonController
      */
     function __construct(){
 
-        $this->config = require(ROOT.'config.php');
+        $this->config = include (ROOT.'config.php');
+
         $this->cookie_prefix = $this->config['cookie_prefix'];
         require_once(ROOT.'router.config.php');
 
@@ -72,7 +73,8 @@ class CommonController
      * @return mixed
      */
     public function model($model = null){
-        return Jet::model($model);
+        //return Jet::model($model);
+        return new JET_MODEL($model);
     }
 
     /**
@@ -137,7 +139,7 @@ class CommonController
         }
         if($domain == null)
         {
-            //$domain = URL; todo 更好的cookie控制
+            $domain = URL;
         }
 
         $flag = setcookie($this->cookie_prefix.$name,$value,$expire,$path,$domain);
@@ -199,33 +201,39 @@ class CommonController
 
     /**
      * 判断用户是否登录
-     * todo 判断用户登录不能通过获取session的方式，因为关闭浏览器会清除session
      * @param $user
      * @return bool
      */
     public function is_login($user)
     {
-        $identity = $this->model('user')->getIdentity($user);
-        if($this->get_cookie('user') == $identity)
+        $identity = $this->model('user')->where("user = '".$user."'")->find('identity');
+
+        if($this->get_cookie('user') != $identity)
         {
 
+            return false;
+        }
+        if($this->get_session($user))
+        {
             return true;
         }
         else
         {
+           // dump($this->get_session($user));
             return false;
         }
+
     }
 
     /**
-     * 通过cookie获取当前用户的id，获取不到则返回false
-     * todo 应该有更安全的机制，而不是直接通过cookie这么简单
+     * todo current_user - 应该有很好的获取当前用户的方法
+     * 获取当前用户
      */
     public function current_user()
     {
         $identity = $this->get_cookie('user');
-        $user = $this->model('user')->getFiled('user')->where("identity = '".$identity."'");
-        return $user;
+        $user_name = $this->model('user')->where("identity = '$identity'")->find('user');
+        return $user_name;
     }
 
 
