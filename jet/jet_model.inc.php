@@ -13,24 +13,29 @@ class JET_MODEL
     public $prefix;
     public $setting;
     public $mysqli;
+
+    private $option = array(
+        'field' => '',
+        'table' => '',
+        'where' => '',
+        'order' => '',
+        'limit' => '',
+    );
+
+    private $sql;
     private $_current_db = 'master';
     private $_shutdown_query = array();
-    private $_found_rows =0;
+    private $_found_rows = 0;
 
     /**
      * 构造函数
      *
      */
-    public function __construct(){
-
-
-        $this->mysqli = new mysqli('localhost','root','','test');
-        //$r= $this->mysqli->query('select * from user');
-        //dump($this->mysqli,0);
-        //echo "________________________________________________________________________________";
+    public function __construct($table)
+    {
+        $this->mysqli = new mysqli('localhost', 'root', '', 'test');
         $this->mysqli->set_charset("utf8");
-
-
+        $this->option['table'] = $table;
     }
 
     public function model($model)
@@ -56,25 +61,18 @@ class JET_MODEL
      */
     public function get_table($name)
     {
-        return $this->get_prefix().$name;
+        return $this->get_prefix() . $name;
     }
 
-    /**
-     * 选取数据库
-     */
-    public function select()
-    {
-        return $this->db()->select();
-    }
 
     /**
      * 查询一行数据，返回数组
      */
-    public function get_row($table,$id)
+    public function get_row($table, $id)
     {
 
 
-        $query="select * from $table where  id= $id";
+        $query = "select * from $table where  id= $id";
         $result = $this->mysqli->query($query);
         //debug();
         $row = $result->fetch_row();
@@ -85,30 +83,30 @@ class JET_MODEL
     /**
      * 查询一个字段，返回string
      */
-    public function get_field($table,$field,$key,$val)
-    {
-        $query = "SELECT $field FROM $table where $key = '".$val."'";
+//    public function get_field($table,$field,$key,$val)
+//    {
+//        $query = "SELECT $field FROM $table where $key = '".$val."'";
+//
+//        $result = $this->mysqli->query($query);
+//        //dump($query,0);
+//
+//        if ($result)
+//        {
+//            if($result->num_rows>0)
+//            {
+//                while($row =$result->fetch_array() ){                        //循环输出结果集中的记录
+//                    $v = $row[0];
+//                    //dump($v);
+//                    return $v;
+//
+//                }
+//            }
+//        }
+//
+//
+//    }
 
-        $result = $this->mysqli->query($query);
-        //dump($query,0);
-
-        if ($result)
-        {
-            if($result->num_rows>0)
-            {
-                while($row =$result->fetch_array() ){                        //循环输出结果集中的记录
-                    $v = $row[0];
-                    //dump($v);
-                    return $v;
-
-                }
-            }
-        }
-
-
-    }
-
-    public function get_page($table,$where = null,$order = null , $page = null,$limit = 10)
+    public function get_page($table, $where = null, $order = null, $page = null, $limit = 10)
     {
         if (!$page) {
             $page = 1;
@@ -128,7 +126,7 @@ class JET_MODEL
         //首先获得除了page之外的所有结果集
         $query = "SELECT * FROM $table";
         $result = $this->mysqli->query($query);
-        $v =array();
+        $v = array();
         if ($result) {
             if ($result->num_rows > 0) {
                 //一个row就是一行记录
@@ -139,14 +137,183 @@ class JET_MODEL
         }
 
         //dump($this->mysqli);
-        $start_row = ($page-1) * $limit + 1;
+        $start_row = ($page - 1) * $limit + 1;
 
         $v = array_slice($v, $start_row, $limit);
 
         return $v;
+    }
+
+    /**
+     * where子句
+     * 使支持直接通过系统model获得数据
+     */
+    public function where($s)
+    {
+        $this->option['where'] = $s;
+        return $this;
+
+    }
+
+    /**
+     * order子句
+     */
+    public function order()
+    {
+
+    }
+
+    /**
+     * limit子句
+     *
+     */
+    public function limit()
+    {
+
+    }
+
+    /**
+     * find 子句
+     * find子句之后不应该有其他子句
+     * find子句用于返回符合查询结果的一个字段，
+     * @return string;
+     */
+    public function find($field)
+    {
+        $sql = $this->make_sql();
+        $result = $this->mysqli->query($sql);
+        $r =array();
+        if ($result) {
+            if ($result->num_rows > 0) {
+                //一个row就是一行记录
+                while ($row = $result->fetch_array()) {
+                    return $row[$field];
+                }
+
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * select子句
+     * select子句之后不应该有其他子句
+     * @return array 一个二元数组
+     */
+    public function select()
+    {
+        $sql = $this->make_sql();
+        $result = $this->mysqli->query($sql);
+        $r =array();
+
+        //dump($result->fetch_array());die;
+        if ($result) {
+            if ($result->num_rows > 0) {
+                //一个row就是一行记录
+                while ($row = $result->fetch_array()) {
+                  array_push($r,$row);
+                }
+                return $r;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+
+    }
+    /**
+     * insert操作,插入一条数据到数据库中
+     */
+    public function insert($data)
+    {
+        $columns = array_keys($data);
+
+        $columns = implode(',',$columns);
+
+        foreach($data as  $key =>$v)
+        {
+            $data[$key] = "'".$v."'";
+        }
+
+        $values =  implode(',',$data);
+
+        $sql = "insert into ".$this->option['table']."(".$columns.")"." values "."(".$values.")";
+
+
+
+        $result = $this->mysqli->query($sql);
+
+
+
+        if($this->mysqli->errno == 0)
+            return true;
+        else
+            return false;
+
+    }
+
+    /**
+     * get_field子句
+     * get_field子句后面不应该有其他子句
+     * 得到一条数据
+     */
+    public function get_field()
+    {
+
+    }
+
+    /**
+     * update子句
+     */
+    public function update()
+    {
+
+    }
+
+    /**
+     * make_sql()
+     * 创建$sql查询字符串
+     */
+    public function make_sql()
+    {
+        if(empty($this->option['field']))
+        {
+            $this->sql = "SELECT * ";
+        }
+        else
+        {
+            $this->sql = "select ".$this->option['field'];
+        }
+        if(empty($this->option['table']))
+        {
+            die('没有选择数据表');
+        }
+        else
+        {
+            $this->sql .= ' from '.$this->option['table'];
+        }
+        if(!empty($this->option['where']))
+        {
+            $this->sql .= ' where '.$this->option['where'];
+        }
+        if(!empty($this->option['order']))
+        {
+            $this->sql .= ' order by '.$this->option['order'];
+        }
+        if(!empty($this->option['limit']))
+        {
+            $this->sql .= ' limit '.$this->option['limit'];
+        }
+
+        return $this->sql;
 
 
     }
+
 
 
 

@@ -49,24 +49,32 @@ class PostController extends CommonController
      */
     public function publish()
     {
-        if($_POST['action'] !== 'do_publish')
+        if(jet_Post('action') !== 'do_publish')
         {
             $this->render();
             exit();
         }
         else
         {
-            $data = jet_Get('publish');
+            $data = jet_Post('post');
 
-
-            if($data['summary'] == '')
+            if(jet_Post('summary') == '')
             {
                 $data['summary'] = substr($data['content'],0,jet_config('summary_length'));
             }
 
             $data['publish_time'] = time();
 
-            $data['author'] = $this->model('user')->current_user_name();
+            $data['author'] = $this->current_user();
+
+            //dump($data);
+
+            $flag = $this->model('post')->insert($data);
+
+            if($flag)
+                $this->redirect('添加文章成功！','home_page');
+            else
+                die('添加失败！');
         }
 
 

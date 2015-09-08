@@ -163,8 +163,8 @@ function jet_Get($s)
  * s string 需要取得的元素的键名
  */
 function jet_Post($s)
-{
-    return $_POST[$s];
+{   if(isset($_POST[$s]))
+        return $_POST[$s];
 }
 
 /**
