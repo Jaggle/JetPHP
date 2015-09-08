@@ -17,19 +17,11 @@ class IndexController extends CommonController
     public function index()
     {
         $this->assign('title', "Jetstar首页");
-        $user = $this->model('user')->get_userNameById(2);
+        $user = $this->model('user')->get_userNameById(1);
 
 
         $this->assign('status',$this->is_login($user));
 
-
-       // $status = $this->model('user')->is_login();
-
-
-      /*  $account = new AccountController();
-        $status = $account->is_login();
-        $this->assign('status',$status);*/
-        //$this->set_cookie('user',$user);
 
 
 

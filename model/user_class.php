@@ -41,10 +41,10 @@ class user_class extends JET_MODEL
      * @param $user
      * @return string
      */
-    public function getIndentifier($user)
+    public function getIdentity($user)
     {
 
-        $string = $this->get_field('user','indentifier','user',$user);
+        $string = $this->get_field('user','identity','user',$user);
 
         return $string;
     }

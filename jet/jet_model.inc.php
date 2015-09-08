@@ -148,9 +148,8 @@ class JET_MODEL
         $v = array_slice($v, $start_row, $limit);
 
         return $v;
-
-
     }
+
 
 
 

@@ -43,10 +43,11 @@ class AccountController extends CommonController
             {
                 //创建cookie
                 //用户名加盐处理
-                $salt = $this->config['jet_indentifier'];
+                $salt = $this->config['jet_identity'];
                 $s = md5($salt+$user);
                 //dump($s);
-                $this->set_cookie('user',$s);
+                $flag = $this->set_cookie('user',$s);
+
                 $this->set_session($user,'1');
 
                 //dump($_SESSION);

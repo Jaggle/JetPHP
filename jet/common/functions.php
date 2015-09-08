@@ -8,7 +8,7 @@
 
 
 /**
- * ȥ������Ԫ�صĿ�ֵ��Ĭ��ȥ�����ַ���
+ *
  *
  */
 function array_rid($arr, $ele = null)
@@ -22,7 +22,7 @@ function array_rid($arr, $ele = null)
 }
 
 /*
- * ��������ַ���
+ *
  * */
 function jetRandString($len = 8)
 {
@@ -35,7 +35,7 @@ function jetRandString($len = 8)
 
 
 /*
- * ��ȡ�ļ��ĺ�׺
+ * 获取文件的后缀
  * */
 function get_extension($file)
 {
@@ -63,7 +63,7 @@ function jetUpload($name = 'random',$type = 'image')
  * �����޸�����Ϊdump����
  *
  */
-function dump($var,$flag = 1){
+function dump($var,$flag = 0){
     echo "<pre>";
     var_dump($var);
     echo "</pre>";
@@ -119,6 +119,25 @@ function debug($flag = false){
     {
         die;
     }
+}
+
+/**
+ * debug 升级版
+ * 默认终止运行
+ */
+function jet_Debug($flag = true)
+{
+    echo "<strong>COOKie----------------------</strong><br/>";
+    dump($_COOKIE);
+    echo "<strong>SESSION---------------------</strong><br/>";
+    dump($_SESSION);
+    echo "<strong>GET---------------------</strong><br/>";
+    dump($_GET);
+
+    echo "<strong>POST---------------------</strong><br/>";
+    dump($_POST);
+
+    !$flag or die();
 }
 
 /**
