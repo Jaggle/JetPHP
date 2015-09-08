@@ -19,14 +19,15 @@ class CommonController
      */
     function __construct(){
 
-        $this->config = include (ROOT.'config.php');
+        $this->config = include(ROOT.'/config.php');
 
         $this->cookie_prefix = $this->config['cookie_prefix'];
-        require_once(ROOT.'router.config.php');
 
-        $this->router = $router;
 
-        $this->assign('front_path',$this->config['temp_path']);
+        $this->router = include(ROOT.'/router.config.php');
+
+
+        $this->assign('front',$this->config['temp_path']);
     }
 
     /**
@@ -51,10 +52,13 @@ class CommonController
             $trace = debug_backtrace();
             //dump($trace);
             $method = $trace[1]['function'];
+            $method = str_replace('_','-',$method);
             $ctrl  = substr($trace[1]['class'],0,-10);
             $smarty->display($ctrl.'/'.$method.'.html');
 
         }else{
+            if(strstr($temp,'.html') == false)
+            $temp .= '.html';
             $smarty->display($temp);
         }
 
@@ -102,8 +106,12 @@ class CommonController
     public function redirect($msg,$router)
     {
         $this->assign('msg',$msg);
+
         $url = $this->router[$router];
+
         $this->assign('url',$url);
+
+
         $this->render('notice/redirect.html');
         exit();
     }
@@ -137,13 +145,10 @@ class CommonController
         {
             $path = '/';
         }
-        if($domain == null)
-        {
-            $domain = URL;
-        }
+
 
         $flag = setcookie($this->cookie_prefix.$name,$value,$expire,$path,$domain);
-
+        //dump($this->cookie_prefix.$name);
         return $flag;
     }
 
@@ -204,8 +209,19 @@ class CommonController
      * @param $user
      * @return bool
      */
-    public function is_login($user)
+    public function is_login($user = null)
     {
+        if($user == null)
+        {
+            $identity = $this->get_cookie('user');
+            $user = $this->model('user')->where("identity = '".$identity."'")->find('user');
+            if($user)
+                return true;
+            else
+                return false;
+
+        }
+
         $identity = $this->model('user')->where("user = '".$user."'")->find('identity');
 
         if($this->get_cookie('user') != $identity)

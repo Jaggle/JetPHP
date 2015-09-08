@@ -18,18 +18,18 @@ class PostController extends CommonController
     function __construct()
     {
         parent::__construct();
-        require_once(JET.'common/functions.php');
+        require_once(JET.'/common/functions.php');
     }
 
 
     public function index($id)
     {
 
-        $post_data = $this->model('post')->get_post_list('',$id,3,'id','');
+        $data = $this->model('post')->where("id = '$id'")->select();
 
         $this->assign('title', "夜色空凝");
         $this->assign('id',$id);
-        $this->assign('post',$post_data);
+        $this->assign('post',$data);
         $this->assign('cookie',$_COOKIE);
         $this->render();
 
@@ -49,6 +49,11 @@ class PostController extends CommonController
      */
     public function publish()
     {
+        //判断用户是否已经登录
+        if($this->is_login($this->current_user()) == false )
+        {
+            $this->redirect('请先登录','home_page');
+        }
         if(jet_Post('action') !== 'do_publish')
         {
             $this->render();
@@ -76,7 +81,22 @@ class PostController extends CommonController
             else
                 die('添加失败！');
         }
+    }
+    /**
+     * @note urlencode只接受字符串变量
+     */
+    public function JSON_list()
+    {
+        $data = $this->model('post')->select();
 
-
+        foreach($data as $key => $value)
+        {
+            foreach($value as $k => $v)
+            {
+                $data[$key][$k] = urlencode($v);
+            }
+        }
+        $data = json_encode($data);
+        echo urldecode($data);
     }
 }

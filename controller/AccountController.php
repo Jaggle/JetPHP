@@ -45,13 +45,14 @@ class AccountController extends CommonController
                 //用户名加盐处理
                 $salt = $this->config['jet_identity'];
                 $s = md5($salt+$user);
-                //dump($s);
-                $flag = $this->set_cookie('user',$s);
 
-                $this->set_session($user,'1');
+                $f1 = $this->set_cookie('user',$s);
 
-                //dump($_SESSION);
-                $this->redirect('登录成功！','home_page');
+
+                $f2 = $this->set_session($user,'1');
+
+                if($f1 and $f2)
+                    $this->redirect('登录成功！','home_page');
             }else
             {
                 dump($this->model('user')->get_pswdByUserName($user));

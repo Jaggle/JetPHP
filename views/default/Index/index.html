@@ -2,31 +2,37 @@
 	<head>
 		<title>首页 ,你好 {$user}</title>
 		<meta charset="utf-8" />
-		<link rel="stylesheet" href="{$front_path}/static/css/common.css">
+		<link rel="stylesheet" href="{{$front}}/static/css/common.css">
 	</head>
 	<body>
 		<header>
-			<img src="{$front_path}/static/images/header.jpg" alt="">
+			<img src="{{$front}}/static/images/header.jpg" alt="">
 		</header>
 		<div class="sidebar">
 			<div>
 
 				<ul>
 					<li>
-						{if $status== 1}
+						{{if $status== 1}}
 						<a href="/account/logout">退出</a>
-						{else}
+						{{else}}
 						<a href="/account/login">登录</a>
-						{/if}
+						{{/if}}
 					</li>
+
+					<li>
+
+					<a href="/admin">进入后台</a>
+					</li>
+
 					<li>
 						<a href="/post/publish">发布文章</a>
 					</li>
 
 					<h7>文章列表</h7>
-					<ul>{foreach from=$posts item=p key=newsId name=p}
-						<li>{$p.title}</li>
-						{/foreach}
+					<ul>{{foreach from=$posts item=p key=newsId name=p}}
+						<li><a href="/post/{{$p.id}}">{{$p.title}}</a></li>
+						{{/foreach}}
 					</ul>
 				</ul>
 

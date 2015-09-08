@@ -12,6 +12,24 @@ class jet
         $route = self::URL_parse();
         $route['contrl'] = @trim(ucfirst($route[0])) ? @trim(ucfirst($route[0])) : "index";
         $route['method'] = @trim($route[1]) ? @trim($route[1]) : 'index';
+        if(strstr($route['method'],'.html') or strstr($route['method'],'.htm'))
+        {   $m =  $route['method'];
+            $tm = '';
+            for($i=0;$i<strlen($m);$i++)
+            {
+                if(substr($m,$i,1) != '.')
+                {
+                    $tm = substr($m,0,$i+1);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            $route['method'] = $tm;
+        }
+        $route['method'] = str_replace('-','_',$route['method']);
+
         if (file_exists(CTL . $route['contrl']) . 'Controller.class.php') {
             $ctlName = $route['contrl'] . 'Controller';
             $contrl = new $ctlName;
@@ -23,11 +41,13 @@ class jet
                 //$contrl->test();
                 return;
             }
+            //dump($route);
             if (method_exists($contrl, $route['method'])) {
 
                 $contrl->$route['method']();
             } else {
-                die('方法不存在');
+
+                die('控制器'.$route['contrl'].'的方法不存在'.$route['method']);
             }
         } else {
             die('控制器不存在');

@@ -2,16 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{$title}</title>
+    <title>{{$title}}</title>
+
+    <link rel="stylesheet" href="{{$front}}/static/css/common.css">
 </head>
 <body>
 
-{foreach from=$post item=p key=newsId name=p}
-<h1>{$p.title}</h1>
+{{foreach from=$post item=pt}}
+<h1>{{$pt.title}}</h1>
+<p>作者：{{$pt.author}} | 时间:{{$pt.publish_time}}</p>
+<p>摘要：{{$pt.summary}}</p>
 <div class="content">
-    {$p.content}
+    {{$pt.content}}
 </div>
 
-{/foreach}
+{{/foreach}}
 </body>
 </html>

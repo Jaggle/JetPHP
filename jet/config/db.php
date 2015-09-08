@@ -1,7 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2015/9/8
- * Time: 10:37
- */
+//数据库配置文件
+return [
+
+    'host'  => 'localhost',
+    'name'  => 'test',
+    'user'  => 'root',
+    'pswd'  => '',
+    'port'  => '3306',
+    'prefix'=> 'jet_',
+
+];

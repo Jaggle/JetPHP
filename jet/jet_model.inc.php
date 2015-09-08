@@ -14,6 +14,8 @@ class JET_MODEL
     public $setting;
     public $mysqli;
 
+    private $_db;
+
     private $option = array(
         'field' => '',
         'table' => '',
@@ -23,9 +25,6 @@ class JET_MODEL
     );
 
     private $sql;
-    private $_current_db = 'master';
-    private $_shutdown_query = array();
-    private $_found_rows = 0;
 
     /**
      * 构造函数
@@ -33,7 +32,9 @@ class JET_MODEL
      */
     public function __construct($table)
     {
-        $this->mysqli = new mysqli('localhost', 'root', '', 'test');
+        $this->_db = require(JET.'/config/db.php');
+        $db = $this->_db;
+        $this->mysqli = new mysqli($db['host'], $db['user'], $db['pswd'], $db['name']);
         $this->mysqli->set_charset("utf8");
         $this->option['table'] = $table;
     }
@@ -213,7 +214,7 @@ class JET_MODEL
         if ($result) {
             if ($result->num_rows > 0) {
                 //一个row就是一行记录
-                while ($row = $result->fetch_array()) {
+                while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
                   array_push($r,$row);
                 }
                 return $r;
