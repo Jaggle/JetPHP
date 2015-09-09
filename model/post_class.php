@@ -10,29 +10,36 @@
 
 
 
-class post_class extends JET_MODEL
+class post_class
 {
-    public function get_post_by_id($id)
-    {
 
-        return  $this->get_row('post', $id);
-    }
+    public function publish(){
 
-    public function get_post_list($category_id,$page,$per_page,$order_by,$pub_time)
-    {
-        $where = array();
+        $data = jet_Post('post');
 
-        if($category_id)
+        if($data['summary'] == false)
         {
-            $where[] = 'category_id = '.intval($category_id);
+            $data['summary'] = substr(strip_tags($data['content']),0,jet_config('summary_length'));
         }
 
-        if($pub_time)
-        {
-            $where[] = 'pub_time >' . (time() - $pub_time*24*60*60);
-        }
+        $data['publish_time'] = time();
 
-        return $this->get_page('post','',$order_by , $page , $per_page);
+        $data['author'] = $this->current_user();
+
+        //dump($data);
+
+        $flag = $this->model('post')->insert($data);
+
+        return $flag;
 
     }
+
+    public function delete(){}
+
+    public function modify(){}
+
+    public function toDraft(){}
+
+    public function get_list(){}
+
 }

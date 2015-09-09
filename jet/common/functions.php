@@ -173,7 +173,8 @@ function jet_Decrypt($string)
  */
 function jet_Get($s)
 {
-    return $_GET[$s];
+    if(isset($_GET[$s]))
+        return $_GET[$s];
 }
 
 /**
@@ -182,8 +183,26 @@ function jet_Get($s)
  * s string 需要取得的元素的键名
  */
 function jet_Post($s)
-{   if(isset($_POST[$s]))
-        return $_POST[$s];
+{
+    if(isset($_POST[$s]))
+    {
+        $p = $_POST[$s];
+
+        //字符串
+        if(is_string($p))
+            $p = trim($p);
+
+        //数组
+        else if( is_array($p) )
+        {
+            foreach($p as $key => $value )
+            {
+                $p[$key] = trim($value);
+            }
+        }
+        return $p;
+
+    }
 }
 
 /**
@@ -206,7 +225,7 @@ function jet_Files($s = null)
  */
 function jet_config($s)
 {
-    $config =  include(CONFIG_PATH.'/config.php');
+    $config = include(CONFIG . '/common.config.php');
    return $config[$s];
 }
 

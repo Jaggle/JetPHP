@@ -19,6 +19,8 @@ class IndexController extends CommonController
 
         $this->assign('title', "Jetstar首页");
         $user = $this->current_user();
+
+        //登录状态
         $c_user = $this->current_user();
         $this->assign('status',$this->is_login($c_user));
         $this->assign('user',$user);
@@ -26,6 +28,7 @@ class IndexController extends CommonController
 
         //文章列表
         $post_list = $this->model('post')->order('publish_time ASC')->select();
+
 
         $this->assign('posts',$post_list);
 

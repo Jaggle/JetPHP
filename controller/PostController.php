@@ -21,11 +21,14 @@ class PostController extends CommonController
         require_once(JET.'/common/functions.php');
     }
 
-
+    /**
+     * @param $id 需要展示的文章的ID
+     *
+     */
     public function index($id)
     {
 
-        $data = $this->model('post')->where("id = '$id'")->select();
+        $data = $this->model('post')->where("id = '$id'")->get();
 
         $this->assign('title', "夜色空凝");
         $this->assign('id',$id);
@@ -34,6 +37,7 @@ class PostController extends CommonController
         $this->render();
 
     }
+
 
     /**
      * 发布文章功能
@@ -82,6 +86,33 @@ class PostController extends CommonController
                 die('添加失败！');
         }
     }
+
+
+    /**
+     * 修改操作
+     *
+     */
+    public function modify()
+    {
+
+    }
+
+
+    /**
+     * 删除文章
+     * @return bool 删除成功返回真，否则返回假
+     */
+    public function delete()
+    {
+        $id = jet_Get('id');
+
+        $flag = $this->model('post')->where($id)->delete();
+        if($flag)
+            $this->redirect('删除成功!',"R:home_page");
+        else
+            $this->redirect('删除失败!',"R:home_page");
+    }
+
     /**
      * @note urlencode只接受字符串变量
      */
@@ -99,4 +130,6 @@ class PostController extends CommonController
         $data = json_encode($data);
         echo urldecode($data);
     }
+
+
 }

@@ -19,15 +19,14 @@ class CommonController
      */
     function __construct(){
 
-        $this->config = include(ROOT.'/config.php');
+        $this->config = include(CONFIG . '/common.config.php');
 
         $this->cookie_prefix = $this->config['cookie_prefix'];
 
+        $this->router = include(CONFIG .'/router.config.php');
 
-        $this->router = include(ROOT.'/router.config.php');
-
-
-        $this->assign('front',$this->config['temp_path']);
+        $this->assign('front',$this->config['temp_url']);
+        $this->assign('router',$this->router);
     }
 
     /**
@@ -56,11 +55,13 @@ class CommonController
             $ctrl  = substr($trace[1]['class'],0,-10);
             $smarty->display($ctrl.'/'.$method.'.html');
 
+
         }else{
             if(strstr($temp,'.html') == false)
             $temp .= '.html';
             $smarty->display($temp);
         }
+        exit();//终止后续操作
 
     }
 
@@ -69,6 +70,17 @@ class CommonController
      */
     public function display($temp = null){
         self::render($temp);
+    }
+
+    /**
+     * excute函数
+     */
+    public function excute($flag,$prefix = '操作',$red = "R:home_page")
+    {
+        if($flag)
+            $this->redirect($prefix."成功！",$red);
+        else
+            $this->redirect($prefix."失败！",$red);
     }
 
     /**
@@ -240,22 +252,21 @@ class CommonController
 
         }
 
-        $identity = $this->model('user')->where("user = '".$user."'")->find('identity');
+        $identity = $this->model('user')->where("user = '$user'")->find('identity');
 
         if($this->get_cookie('user') != $identity)
-        {
-
             return false;
-        }
-        if($this->get_session($user))
+        else
+            return true;
+
+
+
+        //todo 应该有更好的验证用户当前登录状态的方法，而不是通过session，因为他在关闭浏览器会过期
+        /*if($this->get_session($user))
         {
             return true;
-        }
-        else
-        {
-           // dump($this->get_session($user));
-            return false;
-        }
+        }*/
+
 
     }
 
@@ -267,7 +278,9 @@ class CommonController
     {
         $identity = $this->get_cookie('user');
         $user_name = $this->model('user')->where("identity = '$identity'")->find('user');
-        return $user_name;
+
+
+        return $user_name;      //比如 admin
     }
 
 

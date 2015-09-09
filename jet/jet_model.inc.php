@@ -32,11 +32,11 @@ class JET_MODEL
      */
     public function __construct($table)
     {
-        $this->_db = require(JET.'/config/db.php');
+        $this->_db = require(CONFIG . '/db.config.php');
         $db = $this->_db;
         $this->mysqli = new mysqli($db['host'], $db['user'], $db['pswd'], $db['name']);
         $this->mysqli->set_charset("utf8");
-        $this->option['table'] = $table;
+        $this->option['table'] = $db['prefix'].$table;
     }
 
     public function model($model)
@@ -82,76 +82,15 @@ class JET_MODEL
     }
 
     /**
-     * 查询一个字段，返回string
-     */
-//    public function get_field($table,$field,$key,$val)
-//    {
-//        $query = "SELECT $field FROM $table where $key = '".$val."'";
-//
-//        $result = $this->mysqli->query($query);
-//        //dump($query,0);
-//
-//        if ($result)
-//        {
-//            if($result->num_rows>0)
-//            {
-//                while($row =$result->fetch_array() ){                        //循环输出结果集中的记录
-//                    $v = $row[0];
-//                    //dump($v);
-//                    return $v;
-//
-//                }
-//            }
-//        }
-//
-//
-//    }
-
-    public function get_page($table, $where = null, $order = null, $page = null, $limit = 10)
-    {
-        if (!$page) {
-            $page = 1;
-        }
-
-        if ($where) {
-            $where .= 'WHERE ';
-        } else {
-            $where = '';
-        }
-
-        if ($order) {
-            $order .= ' ORDER BY ';
-        } else {
-            $order = '';
-        }
-        //首先获得除了page之外的所有结果集
-        $query = "SELECT * FROM $table";
-        $result = $this->mysqli->query($query);
-        $v = array();
-        if ($result) {
-            if ($result->num_rows > 0) {
-                //一个row就是一行记录
-                while ($row = $result->fetch_array()) {
-                    $v[] = $row;
-                }
-            }
-        }
-
-        //dump($this->mysqli);
-        $start_row = ($page - 1) * $limit + 1;
-
-        $v = array_slice($v, $start_row, $limit);
-
-        return $v;
-    }
-
-    /**
      * where子句
      * 使支持直接通过系统model获得数据
      */
     public function where($s)
     {
-        $this->option['where'] = $s;
+        if(is_numeric($s))
+            $this->option['where'] = " where id = $s";
+        else
+            $this->option['where'] = " where $s ";
         return $this;
 
     }
@@ -161,7 +100,7 @@ class JET_MODEL
      */
     public function order($order)
     {
-        $this->option['order'] = $order;
+        $this->option['order'] = ' order by '.$order;
         return $this;
     }
 
@@ -171,9 +110,15 @@ class JET_MODEL
      */
     public function limit($limit)
     {
-        $this->option['limit'] = $limit;
+        $this->option['limit'] = ' limit '.$limit;
         return $this;
     }
+
+    /**
+     * field 字句
+     */
+
+    /******************************    CURD    ******************************/
 
     /**
      * find 子句
@@ -201,6 +146,7 @@ class JET_MODEL
         }
     }
 
+
     /**
      * select子句
      * select子句之后不应该有其他子句
@@ -209,6 +155,7 @@ class JET_MODEL
     public function select()
     {
         $sql = $this->make_sql();
+
         $result = $this->mysqli->query($sql);
         $r =array();
 
@@ -228,8 +175,53 @@ class JET_MODEL
         }
 
     }
+
+    /**
+     * 只获取一行记录，返回一个一维数组
+     *
+     */
+    public function get()
+    {
+        $data = $this->select();
+        if(is_array($data))
+        {
+            return $data[0];
+        }else
+            return false;
+    }
+
+    /**
+     * getfield
+     */
+    public function field($f)
+    {
+        $data = $this->get();
+        if(is_array($data))
+        {
+            return $data[$f];
+        }else
+        {
+            return false;
+        }
+    }
+
+    /**
+     * 得到记录的条数
+     */
+    public function num()
+    {
+        $data = $this->select();
+        if(is_array($data))
+            return sizeof($data);
+        else
+            return false;
+    }
+
+
     /**
      * insert操作,插入一条数据到数据库中
+     * @param $data
+     * @return bool
      */
     public function insert($data)
     {
@@ -243,6 +235,8 @@ class JET_MODEL
         }
 
         $values =  implode(',',$data);
+
+        str_replace('\'','\'\'',$values);   //将一个引号换成两个引号，以方便插入到数据库中
 
         $sql = "insert into ".$this->option['table']."(".$columns.")"." values "."(".$values.")";
 
@@ -262,9 +256,51 @@ class JET_MODEL
     /**
      * update子句
      */
-    public function update()
+    public function update($data)
     {
+        if(is_array($data))
+        {
+            $field = '';
+            foreach($data as $key => $value)
+            {
+                $value = str_replace('\'','\'\'',$value);   //将一个引号换成两个引号，以方便插入到数据库中
 
+                $field .= $key."='".$value."', ";
+            }
+            $field = trim($field);
+            $field = substr($field,0,-1); //去掉最后的逗号
+            $field = ' ' . $field . ' ';
+
+            //自己写sql语句
+            $sql = "update ". $this->option['table']." set " . $field.$this->option['where'];
+            //dump($sql);die;
+
+            //使用make_sql
+            //$sql = $this->make_sql('u');
+            //str_replace('##',$data,$sql);
+
+            $result = $this->mysqli->query($sql);
+
+            if($result)
+                return true;
+            else
+                return false;
+
+        }else
+            return false;
+    }
+
+    /**
+     * @return bool 删除操作，
+     */
+    public function delete()
+    {
+        $sql = $this->make_sql('d');
+        $result = $this->mysqli->query($sql);
+        if($result)
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -287,41 +323,53 @@ class JET_MODEL
     /**
      * make_sql()
      * 创建$sql查询字符串
+     * 参数说明：
+     *      - 默认值 select
+     *      - d delete
+     *      - f find
+     *      - u update
+     *      - i insert
+     *      - s select
      */
-    public function make_sql()
+    public function make_sql($a = '')
     {
-        if(empty($this->option['field']))
-        {
-            $this->sql = "SELECT * ";
-        }
-        else
-        {
-            $this->sql = "select ".$this->option['field'];
-        }
-        if(empty($this->option['table']))
-        {
-            die('没有选择数据表');
-        }
-        else
-        {
-            $this->sql .= ' from '.$this->option['table'];
-        }
-        if(!empty($this->option['where']))
-        {
-            $this->sql .= ' where '.$this->option['where'];
-        }
-        if(!empty($this->option['order']))
-        {
-            $this->sql .= ' order by '.$this->option['order'];
-        }
-        if(!empty($this->option['limit']))
-        {
-            $this->sql .= ' limit '.$this->option['limit'];
-        }
-
-        return $this->sql;
 
 
+        //select
+        if($a == 's' or $a == '')
+        {
+            if($this->option['where'] != '')
+                $this->sql = "select * from ".$this->option['table'].$this->option['where'];
+            else
+                $this->sql = "select * from ".$this->option['table'];
+            if($this->option['order'] != '')
+                $this->sql .= $this->option['order'];
+            if($this->option['limit'] != '')
+                $this->sql .= $this->option['limit'];
+            return $this->sql;
+
+        }
+
+        //delete
+        if($a  == 'd')
+        {
+            if($this->option['where'] != '')
+                $this->sql = "delete from ".$this->option['table'].$this->option['where'];
+            else
+                die('你正在尝试删除表'.$this->option['table'].'中的所有数据，已经被程序阻止');
+            return $this->sql;
+
+        }
+
+        //update
+        if($a == 'u')
+        {
+            if($this->option['where'] != '')
+                $this->sql = "update ".$this->option['table']." set "." ## ".$this->option['where'];
+            else
+                die('你正在尝试修改表'.$this->option['table'].'中的所有数据，已经被程序阻止');
+            return $this->sql;
+        }
     }
 
 

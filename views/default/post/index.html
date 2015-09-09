@@ -8,14 +8,13 @@
 </head>
 <body>
 
-{{foreach from=$post item=pt}}
-<h1>{{$pt.title}}</h1>
-<p>作者：{{$pt.author}} | 时间:{{$pt.publish_time}}</p>
-<p>摘要：{{$pt.summary}}</p>
+
+<h1>{{$post.title}}</h1>
+<p>作者：{{$post.author}} | 时间:{{$post.publish_time}}</p>
+<p>摘要：{{$post.summary}}</p>
 <div class="content">
-    {{$pt.content}}
+    {{$post.content}}
 </div>
 
-{{/foreach}}
 </body>
 </html>

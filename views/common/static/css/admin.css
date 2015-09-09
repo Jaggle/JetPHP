@@ -1,0 +1,9 @@
+#frm-post .page-header h1 input{
+    font-size: 25px;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+}
+input[name='post[summary]']{
+    width: 100%;
+}
