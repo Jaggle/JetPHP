@@ -1,20 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{$title}}</title>
+{{extends file = "../layout.html"}}
 
-    <link rel="stylesheet" href="{{$front}}/static/css/common.css">
-</head>
-<body>
+{{block name = head}}
+{{$smarty.block.parent}}
+<link rel="stylesheet" href="{{__STATIC__}}/css/common.css" />
+{{/block}}
 
+{{block name = location}}
+<ul class="breadcrumb">
+    <li>
+        <i class="icon-home home-icon"></i>
+        <a href="/">首页</a>
+    </li>
+    <li>
+        <i class="icon-home home-icon"></i>
+        <a href="#">文章</a>
+    </li>
+    <li>
+        <i class="icon-home home-icon"></i>
+        <a href="#">{{$it.title}}</a>
+    </li>
+</ul><!-- .breadcrumb -->
+{{/block}}
 
-<h1>{{$post.title}}</h1>
-<p>作者：{{$post.author}} | 时间:{{$post.publish_time}}</p>
-<p>摘要：{{$post.summary}}</p>
-<div class="content">
-    {{$post.content}}
+{{block name = content}}
+
+<div class="post-wrap">
+    <h2>{{$it.title}}</h2>
+    <div class="content">
+        <p class="post-meta">作者：{{$it.author}} | 时间：{{$it.publish_time}} | 评论：{{$it.comment_num}} | 点击：{{$it.views}}  | 分类：{{$it.category}} {{if $u_type eq 'admin'}}| <a
+                href="/admin?p=post&a=modify&id={{$it.id}}">编辑</a>{{/if}}</p>
+        <p class="summary">{{$it.summary}}</p>
+        <div class="content-inner">
+            {{$it.content}}
+        </div>
+    </div>
 </div>
 
-</body>
-</html>
+{{/block}}

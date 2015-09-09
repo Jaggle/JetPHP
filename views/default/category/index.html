@@ -13,11 +13,19 @@
 		<i class="icon-home home-icon"></i>
 		<a href="/">首页</a>
 	</li>
+	<li>
+		<i class="icon-home home-icon"></i>
+		<a href="">分类</a>
+	</li>
+	<li>
+		<i class="icon-home home-icon"></i>
+		<a href="">{{$cate_name}}</a>
+	</li>
 </ul><!-- .breadcrumb -->
 {{/block}}
 
 {{block name = content}}
-	{{foreach from = $posts item = it}}
+	{{foreach from = $list item = it}}
 		<div class="post-wrap">
 			<h2><a href="/post/{{$it.id}}">{{$it.title}}</a></h2>
 			<div class="content">

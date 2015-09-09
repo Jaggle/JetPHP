@@ -25,16 +25,29 @@ class PostController extends CommonController
      * @param $id 需要展示的文章的ID
      *
      */
-    public function index($id)
+    public function index($id = null)
     {
+        if($id)
+        {
 
-        $data = $this->model('post')->where("id = '$id'")->get();
+            $data = $this->model('post')->where($id)->get();
+            if($data)
+            {
+                $this->assign('title', "夜色空凝");
+                $f = $this->model('post')->where($id)->increase('views','1');
+                $this->assign('id',$id);
+                $this->assign('it',$data);
+                $this->render();
+            }else
+            {
+                $this->redirect('不存在此文章！','R:home_page');
+            }
 
-        $this->assign('title', "夜色空凝");
-        $this->assign('id',$id);
-        $this->assign('post',$data);
-        $this->assign('cookie',$_COOKIE);
-        $this->render();
+        }
+        else
+        {
+            $this->redirect('不存在此页面！','R:home_page');
+        }
 
     }
 

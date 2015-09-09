@@ -307,9 +307,9 @@ class JET_MODEL
      * 字段加1
      * @return true or false
      */
-    public function increase($field)
+    public function increase($field,$num)
     {
-        $sql = "update $this->option['table'] set '$field' = '$field'+1 ";
+        $sql = "update ".$this->option['table']." set $field = $field+$num";
 
         $this->mysqli->query($sql);
 

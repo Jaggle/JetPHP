@@ -257,10 +257,18 @@
                         <li class="divider"></li>
 
                         <li>
+                            {{if $status eq false}}
+                            <a href="/account/login/">
+                                <i class="icon-off"></i>
+                                登录
+                            </a>
+                            {{else}}
                             <a href="/account/logout/">
                                 <i class="icon-off"></i>
                                 退出
                             </a>
+                            {{/if}}
+
                         </li>
                     </ul>
                 </li>

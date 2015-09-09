@@ -27,6 +27,29 @@ class CommonController
 
         $this->assign('front',$this->config['temp_url']);
         $this->assign('router',$this->router);
+
+        //分类
+        $category = $this->model('category')->select();
+        $this->assign('category',$category);
+
+        //用户类型
+        $c_identity = $this->get_cookie('user');
+        $c_id = $this->model('user')->where("identity = '$c_identity'")->field('id');
+        $u_type = $this->model('user')->where($c_id)->field('type');
+        if($u_type)
+            $this->assign('u_type',$u_type);
+        else
+            $this->assign('u_type',false);
+
+        //用户
+        $user = $this->current_user();
+
+        //登录状态
+        $c_user = $this->current_user();
+        $this->assign('status',$this->is_login($c_user));
+
+        $this->assign('user',$user);
+
     }
 
     /**
@@ -277,6 +300,8 @@ class CommonController
     public function current_user()
     {
         $identity = $this->get_cookie('user');
+        if(!$identity)
+            return false;
         $user_name = $this->model('user')->where("identity = '$identity'")->find('user');
 
 

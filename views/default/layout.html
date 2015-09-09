@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{block name=head}}
+    {{include file= "../block/head.html"}}
+    {{/block}}
+</head>
+
+<body>
+    {{block name=topnav}}
+        {{include file= "../block/topnav.html"}}
+    {{/block}}
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+       {{block name = sidebar}}
+            {{include file = "../block/sidebar.html"}}
+        {{/block}}
+
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                </script>
+
+               {{block name = location}}
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="icon-home home-icon"></i>
+                        <a href="#">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Other Pages</a>
+                    </li>
+                    <li class="active">Blank Page</li>
+                </ul><!-- .breadcrumb -->
+                {{/block}}
+
+                <div class="nav-search" id="nav-search">
+                    <form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+                    </form>
+                </div><!-- #nav-search -->
+            </div>
+            {{* 网页的正文内容 *}}
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- 这个block起到一个占位的作用-->
+                        {{block name = content}}
+                        {{/block}}
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+
+       {{include file = "../block/settings.html"}}
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+
+{{block name = foot}}
+        {{include file = "../block/foot.html"}}
+    {{/block}}
+</body>
+</html>

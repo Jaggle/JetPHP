@@ -243,6 +243,11 @@ class AdminController extends CommonController
         $this->render();
     }
 
+    public function calendar()
+    {
+        $this->render();
+    }
+
 
 
 
