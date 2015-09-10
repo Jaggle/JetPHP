@@ -61,8 +61,8 @@ function jet_Upload($name = 'random',$type = 'image')
 }
 
 /**
- * ��дvar_dump����
- * �����޸�����Ϊdump����
+ *
+ *
  *
  */
 function dump($var,$flag = 0){
