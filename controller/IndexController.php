@@ -17,8 +17,6 @@ class IndexController extends CommonController
     public function index()
     {
 
-        $this->assign('title', "Jetstar首页");
-
         //文章列表
         $posts = $this->model('post')->order('publish_time DESC')->select();
 
@@ -33,6 +31,13 @@ class IndexController extends CommonController
 
 
         $this->assign('posts',$posts);
+
+	    $this->assign('variables',
+		    array(
+			    'user' => 'jake',
+
+		    )
+	    );
 
         $this->render();
     }
@@ -71,6 +76,11 @@ class IndexController extends CommonController
         echo "这是search方法";
     }
 
+
+	/**
+	 * 文件上传测试
+	 *
+	 */
     public function up()
     {
         if ( @$_POST['action'] != 'upload') {
@@ -84,4 +94,14 @@ class IndexController extends CommonController
 
         }
     }
+
+	/**
+	 * 百度ueditor测试
+	 */
+	public function ueditor()
+	{
+		$this->render();
+	}
+
+
 }

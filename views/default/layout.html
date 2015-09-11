@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>{{block name = title}}首页{{/block}}</title>
     {{block name=head}}
-    {{include file= "../block/head.html"}}
+        {{include file= "./block/head.html"}}
+
     {{/block}}
+
 </head>
 
 <body>
     {{block name=topnav}}
-        {{include file= "../block/topnav.html"}}
+        {{include file= "./block/topnav.html"}}
     {{/block}}
 
 <div class="main-container" id="main-container">
@@ -22,7 +25,7 @@
         </a>
 
        {{block name = sidebar}}
-            {{include file = "../block/sidebar.html"}}
+            {{include file = "./block/sidebar.html"}}
         {{/block}}
 
         <div class="main-content">
@@ -65,8 +68,9 @@
                 </div><!-- /.row -->
             </div><!-- /.page-content -->
         </div><!-- /.main-content -->
-
-       {{include file = "../block/settings.html"}}
+        {{block name = settings}}
+            {{include file = "./block/settings.html"}}
+        {{/block}}
     </div><!-- /.main-container-inner -->
 
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
@@ -76,7 +80,7 @@
 
 
 {{block name = foot}}
-        {{include file = "../block/foot.html"}}
+        {{include file = "./block/foot.html"}}
     {{/block}}
 </body>
 </html>

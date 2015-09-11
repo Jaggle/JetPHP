@@ -73,7 +73,7 @@ class PostController extends CommonController
         }
         if(jet_Post('action') !== 'do_publish')
         {
-            $this->render();
+            $this->render('index/ueditor');
             exit();
         }
         else

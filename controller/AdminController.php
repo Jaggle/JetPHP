@@ -132,7 +132,12 @@ class AdminController extends CommonController
 
             }else
             {
-                $this->render('admin/post/publish');
+	            $category = $this->model('category')->where("type != 'first'")->select();
+	            $this->assign('category',$category);
+	            $this->assign('action','do_publish');
+	            $c = array('category' => '');
+	            $this->assign('post',$c);
+                $this->render('admin/post/editor');
             }
         }
 
@@ -168,7 +173,9 @@ class AdminController extends CommonController
                     $post[0]['summary'] = strip_tags($post[0]['summary']);
                     $this->assign('post',$post[0]);
                     $this->assign('action','do_modify');
-                    $this->render('admin/post/modify');
+	                $category = $this->model('category')->where("type != 'first'")->select();
+	                $this->assign('category',$category);
+                    $this->render('admin/post/editor');
                 }else{
                     $data = jet_Post('post');
                     if($data['summary'] == false)
@@ -248,6 +255,10 @@ class AdminController extends CommonController
         $this->render();
     }
 
+    public function widgets()
+    {
+        $this->render();
+    }
 
 
 

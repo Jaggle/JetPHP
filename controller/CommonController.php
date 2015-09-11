@@ -26,6 +26,10 @@ class CommonController
         $this->router = include(CONFIG .'/router.config.php');
 
         $this->assign('front',$this->config['temp_url']);
+
+	    $this->assign('ab_front',ROOT.$this->config['temp_url']);
+
+
         $this->assign('router',$this->router);
 
         //分类
@@ -42,13 +46,17 @@ class CommonController
             $this->assign('u_type',false);
 
         //用户
-        $user = $this->current_user();
+	    $user = $this->current_user();
+        if($user);
+		    $this->assign('user',$user);
 
         //登录状态
         $c_user = $this->current_user();
         $this->assign('status',$this->is_login($c_user));
 
-        $this->assign('user',$user);
+
+
+	  
 
     }
 

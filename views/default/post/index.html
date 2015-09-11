@@ -25,7 +25,10 @@
 {{block name = content}}
 
 <div class="post-wrap">
-    <h2>{{$it.title}}</h2>
+    <div class="page-header">
+        <h1>{{$it.title}}</h1>
+    </div>
+
     <div class="content">
         <p class="post-meta">作者：{{$it.author}} | 时间：{{$it.publish_time}} | 评论：{{$it.comment_num}} | 点击：{{$it.views}}  | 分类：{{$it.category}} {{if $u_type eq 'admin'}}| <a
                 href="/admin?p=post&a=modify&id={{$it.id}}">编辑</a>{{/if}}</p>
