@@ -21,6 +21,7 @@ class IndexController extends CommonController
 
         //文章列表
         $posts = $this->model('post')->order('publish_time DESC')->select();
+
         foreach($posts as $key =>$value)
         {
             foreach($value as $k => $v)
