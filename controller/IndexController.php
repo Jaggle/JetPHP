@@ -103,5 +103,66 @@ class IndexController extends CommonController
 		$this->render();
 	}
 
+    /**
+     * code_generate
+     */
+    public function code_generate()
+    {
+        $_vc = new ValidateCode();  //实例化一个对象
+        $_vc->doimg();
+        $_SESSION['authnum_session'] = $_vc->getCode();//验证码保存到SESSION中
+    }
+
+    /**
+     * validate code
+     */
+    public function validate()
+    {
+
+        $this->render();
+    }
+
+    /**
+     * phpmailer
+     */
+    public function mailer()
+    {
+       // require 'PHPMailerAutoload.php';
+
+        $mail = new PHPMailer;
+
+        //$mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.qq.com;smtp2.example.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'singviy@qq.com';                 // SMTP username
+        $mail->Password = 'mycaihong';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to
+
+        $mail->From = 'singviy@qq.com';
+        $mail->FromName = 'Jet';
+        $mail->addAddress('singviy@qq.com', 'Joe User');     // Add a recipient
+        //$mail->addAddress('singviy@qq.com');               // Name is optional
+        //$mail->addReplyTo('isingviy@qq.com', 'Information');
+        //$mail->addCC('cc@example.com');
+        //$mail->addBCC('bcc@example.com');
+
+        //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+        $mail->isHTML(true);                                  // Set email format to HTML
+
+        $mail->Subject = 'Here is the subject';
+        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        if(!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'Message has been sent';
+        }
+    }
 
 }

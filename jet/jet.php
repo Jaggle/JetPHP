@@ -30,7 +30,8 @@ class jet
         }
         $route['method'] = str_replace('-','_',$route['method']);
 
-        if (file_exists(CTL . $route['contrl']) . 'Controller.class.php') {
+
+        if (file_exists(CTL .DIRECTORY_SEPARATOR. $route['contrl'] . 'Controller.php')) {
             $ctlName = $route['contrl'] . 'Controller';
             $contrl = new $ctlName;
 
@@ -47,10 +48,13 @@ class jet
                 $contrl->$route['method']();
             } else {
 
-                die('控制器'.$route['contrl'].'的方法不存在'.$route['method']);
+                $contrl = new NoticeController();       //渲染404页面
+                $contrl->error_404();
             }
         } else {
-            die('控制器不存在');
+            dump(CTL .DIRECTORY_SEPARATOR. $route['contrl'] . 'Controller.php',1);
+            $contrl = new NoticeController();       //渲染404页面
+            $contrl->error_404();
         }
     }
     /*

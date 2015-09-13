@@ -319,10 +319,11 @@ class JET_MODEL
      */
     public function increase($field,$num)
     {
-        $sql = "update ".$this->option['table']." set $field = $field+$num";
-
+        $sql = "update ".$this->option['table']." set $field = $field+$num ".$this->option['where'];
+        //dump($sql);
         $this->mysqli->query($sql);
-
+        //dump(debug_backtrace());
+        //dump($this->mysqli->errno);
         if($this->mysqli->errno == 0)
             return true;
         else

@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{block name = title}}首页{{/block}}</title>
-    {{block name=head}}
-        {{include file= "./block/head.html"}}
-
-    {{/block}}
+    <title>{{block name = title}}jetstar{{/block}}</title>{{block name=head}}
+    {{include file= "./block/head.html"}}{{/block}}
 
 </head>
 
@@ -81,6 +78,12 @@
 
 {{block name = foot}}
         {{include file = "./block/foot.html"}}
+
+    <style>
+        .edui-editor-iframeholder.edui-default{
+            height: 500px !important;
+        }
+    </style>
     {{/block}}
 </body>
 </html>

@@ -1,0 +1,70 @@
+{{extends file = "../layout.html"}}
+
+{{block name = "content"}}
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+
+        <div class="error-container">
+            <div class="well">
+                <h1 class="grey lighter smaller">
+											<span class="blue bigger-125">
+												<i class="icon-sitemap"></i>
+												404
+											</span>
+                    Page Not Found
+                </h1>
+
+                <hr />
+                <h3 class="lighter smaller">这个页面在地球上不存在~</h3>
+
+                <div>
+                    <form class="form-search">
+												<span class="input-icon align-middle">
+													<i class="icon-search"></i>
+
+													<input type="text" class="search-query" placeholder="你可以搜索看看..." />
+												</span>
+                        <button class="btn btn-sm" onclick="return false;">Go!</button>
+                    </form>
+
+                    <div class="space"></div>
+                    <h4 class="smaller">下面是你可以执行的操作:</h4>
+
+                    <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                        <li>
+                            <i class="icon-hand-right blue"></i>
+                           仔细检查你的url链接
+                        </li>
+
+                        <li>
+                            <i class="icon-hand-right blue"></i>
+                            阅读网站帮助说明
+                        </li>
+
+                        <li>
+                            <i class="icon-hand-right blue"></i>
+                           跟Jake反馈你遇到的问题，我会第一时间解决的~
+                        </li>
+                    </ul>
+                </div>
+
+                <hr />
+                <div class="space"></div>
+
+                <div class="center">
+                    <a href="#" class="btn btn-grey">
+                        <i class="icon-arrow-left"></i>
+                       返回
+                    </a>
+
+                    <a href="#" class="btn btn-primary">
+                        <i class="icon-dashboard"></i>
+                        首页
+                    </a>
+                </div>
+            </div>
+        </div><!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+{{/block}}

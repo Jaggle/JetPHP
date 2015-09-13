@@ -1,12 +1,9 @@
 {{extends file = "../layout.html"}}
-
 {{block name = title}}jetstar - 首页{{/block}}
-
 {{block name = head}}
-	{{$smarty.block.parent}}
+{{$smarty.block.parent}}
 <link rel="stylesheet" href="{{__STATIC__}}/css/common.css" />
 {{/block}}
-
 {{block name = location}}
 <ul class="breadcrumb">
 	<li>
@@ -22,9 +19,9 @@
 			<h2><a href="/post/{{$it.id}}">{{$it.title}}</a></h2>
 			<div class="content">
 				<p class="summary">{{$it.summary}}</p>
-				<div class="content-inner">
+				<!--<div class="content-inner">
 					{{$it.content}}
-				</div>
+				</div>-->
 			</div>
 		</div>
 	{{/foreach}}

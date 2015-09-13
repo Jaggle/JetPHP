@@ -16,7 +16,7 @@ class AdminController extends CommonController
     function __construct(){
         parent::__construct();
         if($this->is_login() == false){
-            $this->redirect('请先登录','R:home_page');
+            $this->redirect('请先登录','R:home_page','1');
         }
 
         $this->p = jet_Get('p') ;
@@ -38,9 +38,16 @@ class AdminController extends CommonController
             $c_u = $this->current_user();
             $comment_num = $this->model('comment')->num();  //评论数
             $fans_num    = $this->model('user')->where("user = '$c_u'")->find('fans_num');
+            $post_num    = $this->model('post')->num();
+            $site_view   = $this->model('site')->where(" `key` = 'views'")->field('value');
 
-            $this->assign('fans_num',$fans_num);
-            $this->assign('comment_num',$comment_num);
+            $this->assign(array(
+                'fans_num'      => $fans_num,
+                'comment_num'   => $comment_num,
+                'post_num'      => $post_num,
+                'site_view'     => $site_view,
+            ),'');
+
             $this->render('');
         }
 

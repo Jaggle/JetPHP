@@ -12,7 +12,7 @@ define('URL','http://jetstar.dev');
 define('DEBUG',true);
 
 //smarty路径
-define('SMARTY_DIR', JET . '/vendor/smarty/');
+define('SMARTY_DIR', JET . '/vendor/smarty-/');
 
 //默认模板名称，对应views目录下的路径
 define("TEMPLATE",'default');

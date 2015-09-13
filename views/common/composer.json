@@ -1,0 +1,17 @@
+{
+  "repositories": [
+    {
+      "packagist": false
+    },
+    {
+      "type": "composer",
+      "url": "http://packagist.cn"
+    }
+  ],
+
+  "require": {
+    "twitter/bootstrap": "*"
+
+
+  }
+}

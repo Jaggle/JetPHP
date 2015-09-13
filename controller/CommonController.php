@@ -19,6 +19,9 @@ class CommonController
      */
     function __construct(){
 
+        //浏览次数+1
+        $this->model('site')->where("`key` = 'views'")->increase('value',1) ;
+
         $this->config = include(CONFIG . '/common.config.php');
 
         $this->cookie_prefix = $this->config['cookie_prefix'];
@@ -67,7 +70,17 @@ class CommonController
      */
     public function assign($vname,$varible){
         global $smarty;
-        $smarty->assign($vname,$varible);
+        if(is_array($vname))
+        {
+
+
+            foreach($vname as $key => $value)
+            {
+                $smarty->assign($key,$value);
+            }
+        }else
+            //dump($vname,1);
+            $smarty->assign($vname,$varible);
     }
 
 
@@ -146,7 +159,7 @@ class CommonController
      * todo
      * 用R:来区分正常路径和路由,
      */
-    public function redirect($msg,$router)
+    public function redirect($msg,$router,$time = 3)
     {
         $this->assign('msg',$msg);
         $router = trim($router);  //首先去掉前后多余字符
@@ -173,6 +186,7 @@ class CommonController
 
 
         $this->assign('url',$url);
+        $this->assign('time',$time);
         $this->render('notice/redirect.html');
         exit();
     }

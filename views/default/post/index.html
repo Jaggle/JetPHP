@@ -1,5 +1,7 @@
 {{extends file = "../layout.html"}}
 
+{{block name = title}}{{$it.title}} - {{$smarty.block.parent}}{{/block}}
+
 {{block name = head}}
 {{$smarty.block.parent}}
 <link rel="stylesheet" href="{{__STATIC__}}/css/common.css" />
@@ -37,20 +39,7 @@
             {{$it.content}}
         </div>
 
-        <!--打分版，用户可以对当前新闻、游戏或者应用等进行1-5级的评分-->
-        <div id="SOHUCS"></div>
-        <script charset="utf-8" type="text/javascript" src="{{__STATIC__}}/js/changyan.js" ></script>
-        <script type="text/javascript">
-            window._config = { showScore: true };
-            window.changyan.api.config({
-                appid: 'cyrY6q62s',
-                conf: 'prod_c28d0fc9244c1bdbde2858bf2264ced8'
-            });
-        </script>
 
-        <style>
-            #powerby_sohu a{font-size:0!important;line-height:0!important}
-        </style>
 
     </div>
 </div>

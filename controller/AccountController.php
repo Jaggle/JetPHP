@@ -29,14 +29,27 @@ class AccountController extends CommonController
         //渲染模板
         if(jet_Post('action') != 'do_login')
         {
-            $this->render('admin/login');
+            $this->render('account/login');
         }
         //提交登录
         else
         {
-            $user = $_POST['user'];
-            $pswd = $_POST['pswd'];
+            $user = jet_Post('user');
+            $pswd =jet_Post('pswd');
             $pswd = md5($pswd);
+            $code = jet_Post('validate');
+            if(isset($code))
+            {
+                if($code == $this->get_session('authnum_session'))
+                {
+
+                }else
+                {
+                    $this->redirect('验证码有误！','R:login','1');
+                }
+            }else{
+                $this->redirect('验证码有误！','R:login','1');
+            }
 
 
             if($pswd == $this->model('user')->where("user = '$user'")->find('pswd'))
@@ -58,7 +71,7 @@ class AccountController extends CommonController
                     $refer = 'R:home_page';
 
                 if($f1 and $f2)
-                    $this->redirect('登录成功！',$refer);
+                    $this->redirect('登录成功！',$refer,'1');
             }else
             {
                 dump($this->model('user')->get_pswdByUserName($user));
@@ -81,11 +94,11 @@ class AccountController extends CommonController
         }
         if($this->let_cookie('user'))
         {
-            $this->redirect('退出成功！','R:home_page');
+            $this->redirect('退出成功！','R:home_page','2');
         }
         else
         {
-            $this->redirect('退出失败！','R:home_page');
+            $this->redirect('退出失败！','R:home_page',2);
         }
     }
 
