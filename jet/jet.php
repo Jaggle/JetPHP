@@ -31,7 +31,8 @@ class jet
         $route['method'] = str_replace('-','_',$route['method']);
 
 
-        if (file_exists(CTL .DIRECTORY_SEPARATOR. $route['contrl'] . 'Controller.php')) {
+        if (file_exists(CTL .'/'. $route['contrl'] . 'Controller.php'))
+        {
             $ctlName = $route['contrl'] . 'Controller';
             $contrl = new $ctlName;
 
@@ -43,17 +44,30 @@ class jet
                 return;
             }
             //dump($route);
-            if (method_exists($contrl, $route['method'])) {
-
-                $contrl->$route['method']();
-            } else {
-
-                $contrl = new NoticeController();       //渲染404页面
-                $contrl->error_404();
+            if (method_exists($contrl, $route['method']))
+            {
+				//判断更多参数的情况
+                if(isset($route[2]))
+                {
+	                $contrl->$route['method']($route[2]);
+                }
+	            elseif(isset($route[3]))
+	            {
+		            $contrl->$route['method']($route[2],$route[3]);
+	            }
+	            else
+		            $contrl->$route['method']();
             }
-        } else {
-            dump(CTL .DIRECTORY_SEPARATOR. $route['contrl'] . 'Controller.php',1);
-            $contrl = new NoticeController();       //渲染404页面
+            //存在控制器文件但是不存在控制器的方法,那么将方法当作参数传给控制器的index方法
+            else
+            {
+
+	            $contrl->index($route['method']);
+            }
+        }
+        else
+        {
+	        $contrl = new CommonController();       //渲染404页面
             $contrl->error_404();
         }
     }

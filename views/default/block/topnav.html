@@ -12,7 +12,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="icon-leaf"></i>
-                    jetstar 博客框架
+                    jetstar
                 </small>
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
@@ -246,6 +246,14 @@
                                 设置
                             </a>
                         </li>
+                        {{if $status eq true}}
+                        <li>
+                            <a href="/account/{{$user}}">
+                                <i class="icon-user"></i>
+                                个人主页
+                            </a>
+                        </li>
+                        {{/if}}
 
                         <li>
                             <a href="#">

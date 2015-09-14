@@ -34,9 +34,17 @@ class PostController extends CommonController
             if($data)
             {
                 $this->assign('title', "夜色空凝");
-                $f = $this->model('post')->where($id)->increase('views','1');
+                $this->model('post')->where($id)->increase('views','1');        //浏览次数+1
+
+
                 $this->assign('id',$id);
                 $this->assign('it',$data);
+
+                //取得评论
+	            $comment = $this->model('comment')->where("(attach = $id and type = 'post')")->select();      //
+	           //dump($comment,1);
+	            $this->assign('comment',$comment);
+
                 $this->render();
             }else
             {

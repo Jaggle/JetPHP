@@ -14,7 +14,7 @@ class PhotoController extends CommonController
 
         $f = jet_Upload('','txt');
 
-        dump($f);
+
 
     }
 }

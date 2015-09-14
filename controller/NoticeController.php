@@ -9,7 +9,7 @@
 
 class NoticeController extends  CommonController
 {
-    public function error_404()
+    public function error_404_d()
     {
         $this->render('notice/404');
     }

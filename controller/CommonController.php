@@ -48,9 +48,13 @@ class CommonController
         else
             $this->assign('u_type',false);
 
+
         //用户
 	    $user = $this->current_user();
+
         if($user);
+
+
 		    $this->assign('user',$user);
 
         //登录状态
@@ -72,7 +76,6 @@ class CommonController
         global $smarty;
         if(is_array($vname))
         {
-
 
             foreach($vname as $key => $value)
             {
@@ -159,29 +162,16 @@ class CommonController
      * todo
      * 用R:来区分正常路径和路由,
      */
-    public function redirect($msg,$router,$time = 3)
+    public function redirect($msg,$router,$time = 2)
     {
+	    $url = $this->get_url($router);
+
+	    if($time == 0)
+	    {
+		    header("Location:$url");
+	    }
         $this->assign('msg',$msg);
-        $router = trim($router);  //首先去掉前后多余字符
-        //路由
-        if(strstr($router,':'))
-        {
 
-            $router = substr($router,1); //去掉开头的R
-            $router = str_replace(':','',$router);//去掉冒号
-            $router = trim($router);//再次去掉多余的空格
-            $url = $this->router[$router];
-        }
-        //直接相对网址，相对域名而言
-        else
-        {
-            if(substr($router,0,1) != '/')
-
-                $url = URL.'/'.$router;
-            else
-                $url = URL.$router;
-
-        }
 
 
 
@@ -189,6 +179,15 @@ class CommonController
         $this->assign('time',$time);
         $this->render('notice/redirect.html');
         exit();
+    }
+
+    public function refresh($msg,$time = 2)
+    {
+	    $this->assign('url',URL.'/'.$_SERVER['REQUEST_URI']);
+	    $this->assign('msg',$msg);
+	    $this->assign('time',$time);
+	    $this->render('notice/redirect.html');
+
     }
 
     /**
@@ -289,15 +288,15 @@ class CommonController
         if($user == null)
         {
             $identity = $this->get_cookie('user');
-            $user = $this->model('user')->where("identity = '".$identity."'")->find('user');
-            if($user)
+            $flag = $this->model('user')->where("identity = '".$identity."'")->num();
+            if($flag)
                 return true;
             else
                 return false;
 
         }
 
-        $identity = $this->model('user')->where("user = '$user'")->find('identity');
+        $identity = $this->model('user')->where("user = '$user'")->field('identity');
 
         if($this->get_cookie('user') != $identity)
             return false;
@@ -324,11 +323,45 @@ class CommonController
         $identity = $this->get_cookie('user');
         if(!$identity)
             return false;
-        $user_name = $this->model('user')->where("identity = '$identity'")->find('user');
+        $user_name = $this->model('user')->where("identity = '$identity'")->field('user');
 
 
         return $user_name;      //比如 admin
     }
+
+
+	public function get_url($route)
+	{
+		$router = trim($route);  //首先去掉前后多余字符
+		//路由
+		if(strstr($router,'R:'))
+		{
+
+			$router = substr($router,1); //去掉开头的R
+			$router = str_replace(':','',$router);//去掉冒号
+			$router = trim($router);//再次去掉多余的空格
+			$url = $this->router[$router];
+		}
+
+		//直接相对网址，相对域名而言
+		else
+		{
+			if(substr($router,0,1) != '/')
+
+				$url = URL.'/'.$router;
+			else
+				$url = URL.$router;
+
+		}
+
+		return $url;
+	}
+
+	public function error_404($msg = '该页面不存在！')
+	{
+		$this->assign('msg',$msg);
+		$this->render('notice/404');
+	}
 
 
 

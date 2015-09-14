@@ -8,11 +8,10 @@
 
 
 /**
- *
- *
+ * @param $arr
+ * @param null $ele
+ * @return mixed
  */
-
-
 function array_rid($arr, $ele = null)
 {
     foreach ($arr as $k => $v) {
@@ -23,9 +22,10 @@ function array_rid($arr, $ele = null)
     return $arr;
 }
 
-/*
- *
- * */
+/**
+ * @param int $len
+ * @return string
+ */
 function jetRandString($len = 8)
 {
     $rand_string = '';
@@ -36,17 +36,20 @@ function jetRandString($len = 8)
 }
 
 
-/*
- * 获取文件的后缀
- * */
+/**
+ * @param $file
+ * @return mixed
+ */
 function get_extension($file)
 {
     return end(explode('.', $file));
 }
 
-/*
- * jet 系列函数之文件上传
- * */
+/**
+ * @param string $name
+ * @param string $type
+ * @return bool
+ */
 function jet_Upload($name = 'random',$type = 'image')
 {
     if($type and !file_exists(ROOT.'/uploads/'.$type)){
@@ -61,9 +64,8 @@ function jet_Upload($name = 'random',$type = 'image')
 }
 
 /**
- *
- *
- *
+ * @param $var
+ * @param int $flag
  */
 function dump($var,$flag = 0){
     echo "<pre>";
@@ -76,12 +78,8 @@ function dump($var,$flag = 0){
 }
 
 /**
- * ������⣬��ʵ�������������
- * ·����jet��ʼ�㣬����ѭ Zend Freamework ·����ʾ�������»��� _ ȡ�� / , �� core_config ��ʾ jet/core/config.php
- *
- * @param string
- * @return object
- * @note ��������ʹ�����µķֽڷ� ��
+ * @param $class
+ * @return mixed
  */
 function &load_class($class){
     static $_classes = array();
@@ -107,7 +105,7 @@ function &load_class($class){
 }
 
 /**
- * debug
+ * @param bool|false $flag
  */
 function debug($flag = false){
     $numargs = func_num_args();
@@ -123,9 +121,8 @@ function debug($flag = false){
     }
 }
 
-/**
- * debug 升级版
- * 默认终止运行
+/***
+ * @param bool|true $flag
  */
 function jet_Debug($flag = true)
 {
@@ -143,9 +140,8 @@ function jet_Debug($flag = true)
 }
 
 /**
- * jet系列函数 之 原创加密函数
- * string - 需要加密的函数
- * $key   - 加密码，可以保存在config配置文件当中，或者自定义一个key
+ * @param $string
+ * @param $key
  */
 function jet_Encrypt($string,$key)
 {
@@ -157,7 +153,8 @@ function jet_Encrypt($string,$key)
 }
 
 /**
- * jet系列函数 之 原创解密函数
+ * @param $string
+ * @return mixed
  */
 function jet_Decrypt($string)
 {
@@ -167,9 +164,8 @@ function jet_Decrypt($string)
 }
 
 /**
- * jet系列函数
- * jet_get() 得到整个$_GET[]数组
- * s string 需要取得的元素的键名
+ * @param $s
+ * @return mixed
  */
 function jet_Get($s)
 {
@@ -178,15 +174,14 @@ function jet_Get($s)
 }
 
 /**
- * jet 系列函数
- * jet_Post() 得到post值
- * s string 需要取得的元素的键名
+ * @param $variable     //是一个数组页可能是一个变量
+ * @return array|string 返回具体数据
  */
-function jet_Post($s)
+function jet_Post($variable)
 {
-    if(isset($_POST[$s]))
+    if(isset($_POST[$variable]))
     {
-        $p = $_POST[$s];
+        $p = $_POST[$variable];
 
         //字符串
         if(is_string($p))
@@ -207,6 +202,7 @@ function jet_Post($s)
 
 /**
  * jet 系列函数后
+ * @param   $s  //全局FILES数组
  * jet_File() 获得$_FILES数组
  */
 function jet_Files($s = null)
@@ -219,9 +215,8 @@ function jet_Files($s = null)
 }
 
 /**
- * jet 系列函数
- * jet_config($s)
- * 获得一个config
+ * @param $s
+ * @return mixed
  */
 function jet_config($s)
 {
@@ -230,8 +225,12 @@ function jet_config($s)
 }
 
 /**
- * jet 系列函数
- * jet_cookie 设置或者取得cookie值
+ * @param $name
+ * @param null $value
+ * @param null $expire
+ * @param null $path
+ * @param null $domain
+ * @return mixed
  */
 function jet_cookie($name,$value = null,$expire = null,$path = null, $domain = null)
 {

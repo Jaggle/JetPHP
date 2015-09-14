@@ -205,38 +205,39 @@
                                     <div class="space-6"></div>
                                     <p> 请输入以下内容: </p>
 
-                                    <form action="/acount/login" method="post">
+                                    <form action="/account/register" method="post">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="邮箱" />
+															<input type="email" class="form-control" placeholder="邮箱" name="reg[mail]" />
 															<i class="icon-envelope"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="帐号" />
+															<input type="text" class="form-control" placeholder="帐号" name="reg[user]" />
 															<i class="icon-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" />
+															<input type="password" class="form-control" placeholder="密码" name="reg[pswd]" />
 															<i class="icon-lock"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="确认密码" />
+															<input type="password" class="form-control" placeholder="确认密码" name="reg[pswd]" />
 															<i class="icon-retweet"></i>
 														</span>
                                             </label>
 
                                             <label class="block">
                                                 <input type="checkbox" class="ace" />
+                                                <input type="hidden" name="action" value="do_register" />
 														<span class="lbl">
 															我接受
 															<a href="#">jetstar用户协议</a>
@@ -251,7 +252,7 @@
                                                     重置
                                                 </button>
 
-                                                <button type="button" class="width-65 pull-right btn btn-sm btn-success">
+                                                <button type="submit" class="width-65 pull-right btn btn-sm btn-success">
                                                     ok,注册
                                                     <i class="icon-arrow-right icon-on-right"></i>
                                                 </button>

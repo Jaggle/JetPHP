@@ -114,37 +114,6 @@ class JET_MODEL
         return $this;
     }
 
-    /**
-     * field 字句
-     */
-
-    /******************************    CURD    ******************************/
-
-    /**
-     * find 子句
-     * find子句之后不应该有其他子句
-     * find子句用于返回符合查询结果的一个字段，
-     * @return string;
-     */
-    public function find($field)
-    {
-        $sql = $this->make_sql();
-        $result = $this->mysqli->query($sql);
-        $r =array();
-        if ($result) {
-            if ($result->num_rows > 0) {
-                //一个row就是一行记录
-                while ($row = $result->fetch_array()) {
-                    return $row[$field];
-                }
-
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
-    }
 
 
     /**
@@ -159,6 +128,7 @@ class JET_MODEL
         $result = $this->mysqli->query($sql);
         $r =array();
 
+
         //dump($result->fetch_array());die;
         if ($result) {
             if ($result->num_rows > 0) {
@@ -168,9 +138,11 @@ class JET_MODEL
                 }
                 return $r;
             }else{
+	            //dump(debug_backtrace());
                 return false;
             }
         }else{
+
             return false;
         }
 
@@ -178,7 +150,7 @@ class JET_MODEL
 
     /**
      * 只获取一行记录，返回一个一维数组
-     *
+     * @return array|bool
      */
     public function get()
     {
@@ -191,7 +163,9 @@ class JET_MODEL
     }
 
     /**
-     * getfield
+     * 返回一个字段，并弃用find函数
+     * @param   $f    //需要取得的字段的名称
+     * @return  string|bool
      */
     public function field($f)
     {
@@ -242,18 +216,31 @@ class JET_MODEL
 
 
 
-        $result = $this->mysqli->query($sql);
+        $this->mysqli->query($sql);
 
 
 
         if($this->mysqli->errno == 0)
-            return true;
+            return $this->mysqli->insert_id;
         else
             return false;
 
     }
 
     //------------------------------------------------------------------------------------------------------------------
+
+    public function setField($field,$value)
+    {
+	    $sql = "update ". $this->option['table']." set  $field = '$value' ".$this->option['where'];
+	    $this->mysqli->query($sql);
+	   // dump($sql);
+	   // dump(debug_backtrace());
+	   // dump($this->mysqli->errno);
+	    if($this->mysqli->errno == 0)
+		    return true;
+	    else
+		    return false;
+    }
 
     /**
      * 更新数据库中的数据

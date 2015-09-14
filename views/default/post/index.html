@@ -32,7 +32,7 @@
     </div>
 
     <div class="content">
-        <p class="post-meta">作者：{{$it.author}} | 时间：{{$it.publish_time}} | 评论：{{$it.comment_num}} | 点击：{{$it.views}}  | 分类：{{$it.category}} {{if $u_type eq 'admin'}}| <a
+        <p class="post-meta">作者：<a href="/account/{{$it.author}}">{{$it.author}}</a> | 时间：{{$it.publish_time}} | 评论：{{$it.comment_num}} | 点击：{{$it.views}}  | 分类：{{$it.category}} {{if $u_type eq 'admin'}}| <a
                 href="/admin?p=post&a=modify&id={{$it.id}}">编辑</a>{{/if}}</p>
         <p class="summary">{{$it.summary}}</p>
         <div class="content-inner">
@@ -40,6 +40,35 @@
         </div>
 
 
+
+    </div>
+    <div class="comment-wrap">
+        <form action="/comment/post?id={{$it.id}}" method="post" id="frm-com">
+            <div>
+                <label for="tta"><h3>评论</h3></label>
+
+                <textarea class="form-control" id="tta" placeholder="请输入评论" name="comment[content]"></textarea>
+            </div>
+            <br>
+            <input type="hidden" name="backurl" value="" id="backurl">
+            <button class="btn-comment btn-info" type="button">
+                <i class="icon-ok bigger-110"></i>
+                发表评论
+            </button>
+        </form>
+
+
+        <div class="comment-list">
+            <ol> {{if $comment eq true}}
+                {{foreach from = $comment item = cm}}
+                <li class="text-primary">
+                    {{$cm.author}} - {{$cm.publish_time}} <br/>
+                    {{$cm.content}}
+                </li>
+                {{/foreach}}
+                {{/if}}
+            </ol>
+        </div>
 
     </div>
 </div>
@@ -51,7 +80,36 @@
 
 <script>
     $(function(){
-       $("#powerby_sohu").html('dsds');
+       $(".btn-comment").click(function(){
+
+           $.post(
+                   "/comment/post?id={{$it.id}}",
+                   {
+                       content:$("#tta").val()
+                   },
+           function(data,status) {
+               alert('发布成功！');
+
+               alert("Data: " + data + "\nStatus: " + status);
+               var data = $.parseJSON(data);
+               $(".comment-list ol").append(' <li class="text-primary">' + data.author + ' - ' + data.publish_time + ' <br/>' + data.content + '</li>')
+           }
+
+           );
+
+
+
+
+
+
+
+
+         /*  $("#backurl").val('post/{{$it.id}}');
+           //alert("评论成功！");
+           $(".comment-list ol").append(' <li class="text-primary">{{$cm.author}} - {{$cm.publish_time}} <br/>{{$cm.content}}</li>');
+           return;
+           //$("#frm-com").submit();*/
+       })
     })
 
 </script>

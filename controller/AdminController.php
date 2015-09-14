@@ -37,7 +37,7 @@ class AdminController extends CommonController
         {
             $c_u = $this->current_user();
             $comment_num = $this->model('comment')->num();  //评论数
-            $fans_num    = $this->model('user')->where("user = '$c_u'")->find('fans_num');
+            $fans_num    = $this->model('user')->where("user = '$c_u'")->field('fans_num');
             $post_num    = $this->model('post')->num();
             $site_view   = $this->model('site')->where(" `key` = 'views'")->field('value');
 
@@ -86,10 +86,7 @@ class AdminController extends CommonController
         $this->render();
 
     }
-    public function error_404()
-    {
-        $this->render('admin/error-404');
-    }
+
 
     /**
      * 文章管理
@@ -127,7 +124,9 @@ class AdminController extends CommonController
                     $data['summary'] = substr(strip_tags($data['content']),0,jet_config('summary_length'));
                 }
 
-                $data['publish_time'] = time();
+                //$data['publish_time'] = time();
+
+                $data['views'] = mt_rand(19,45);
 
                 $data['author'] = $this->current_user();
 
