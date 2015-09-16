@@ -1,0 +1,574 @@
+{{extends file = "../layout.html"}}
+
+
+{{block name = content}}
+<!-- 轮播 -->
+<div class="c-home-head">
+
+    <div class="share-more">
+
+        <div class="head-carousel">
+            <div id="carousel-example-captions" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-captions" data-slide-to="1" class=""></li>
+                    <li data-target="#carousel-example-captions" data-slide-to="2" class=""></li>
+                    <li data-target="#carousel-example-captions" data-slide-to="3" class=""></li>
+                    <li data-target="#carousel-example-captions" data-slide-to="4" class="active"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <a href="http://www.jetstar.com/blog/single/id/768.html" target="_blank" class="item">
+                        <img src="{{__TEMPLATE__}}/static/images/20150715164202_55a61cda49aa5.png"
+                             data-holder-rendered="true">
+
+                        <div class="carousel-caption">
+                            <p>Hbuilder移动APP解决方案</p>
+                        </div>
+                    </a> <a href="http://www.jetstar.com/blog/single/id/710.html" target="_blank" class="item">
+                    <img src="{{__TEMPLATE__}}/static/images/20141204151816_54800ab8a6506.png"
+                         data-holder-rendered="true">
+
+                    <div class="carousel-caption">
+                        <p>tower简单，好用的团队协作工具</p>
+                    </div>
+                </a> <a href="http://www.jetstar.com/blog/single/id/709.html" target="_blank" class="item">
+                    <img src="{{__TEMPLATE__}}/static/images/20141204150155_548006e37ad8f.png"
+                         data-holder-rendered="true">
+
+                    <div class="carousel-caption">
+                        <p>百度脑图</p>
+                    </div>
+                </a> <a href="http://www.jetstar.com/blog/single/id/700.html" target="_blank" class="item active">
+                    <img src="{{__TEMPLATE__}}/static/images/20141117121016_546975287bdd4.png"
+                         data-holder-rendered="true">
+
+                    <div class="carousel-caption">
+                        <p>jquery自定义网页滚动条样式</p>
+                    </div>
+                </a></div>
+                <a class="left carousel-control" href="http://www.jetstar.com/#carousel-example-captions" role="button"
+                   data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="http://www.jetstar.com/#carousel-example-captions" role="button"
+                   data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="c-home-bar head-new">
+            <div class="c-home-title">最新文章 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</div>
+            {{foreach from = $posts item = pt}}
+            <a href="/post/{{$pt.id}}" target="_blank">
+                <img class="img-circle" src="{{__TEMPLATE__}}/static/images/20141202214431_547dc23f0b44d.jpeg">
+                {{$pt.title}} </a>
+            {{/foreach}}
+        </div>
+
+        <div class="c-home-bar">
+            <div class="c-home-title">热门文章 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</div>
+            {{foreach from = $hots item = pt}}
+            <a href="/post/{{$pt.id}}" target="_blank">
+                <img class="img-circle"  src="{{__TEMPLATE__}}/static/images/20150126154829_54c5f14dee806.jpg">
+              {{$pt.title}} </a>
+            {{/foreach}}
+        </div>
+    </div>
+
+</div>
+
+<div class="c-home-usr">
+    <div class="share-more">
+        <div class="s-home-usr">
+            <div class="c-home-title">推荐用户 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</div>
+            <div class="c-home-info s-usr">
+                <div class="uitem fl">
+                    <div class="fl left-info">
+                        <a href="http://www.jetstar.com/User/home/id/1.html">
+                            <img src="{{__TEMPLATE__}}/static/images/1">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="nice">jetstar</div>
+                        <div class="desc">望着那一丝海线，若隐若现。落日下的海霞，数不尽的美，看不完的醉</div>
+                    </div>
+                </div>
+                <div class="uitem fl">
+                    <div class="fl left-info">
+                        <a href="http://www.jetstar.com/User/home/id/3.html">
+                            <img src="{{__TEMPLATE__}}/static/images/3.jpg">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="nice">mydeer</div>
+                        <div class="desc">就像我们从来没有来过这里，但这种感觉似曾相识。</div>
+                    </div>
+                </div>
+                <div class="uitem fl">
+                    <div class="fl left-info">
+                        <a href="http://www.jetstar.com/User/home/id/8.html">
+                            <img src="{{__TEMPLATE__}}/static/images/8.jpg">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="nice">就让我</div>
+                        <div class="desc">她不在这里，她无处追寻，可她在我心里 -- 挥之不去</div>
+                    </div>
+                </div>
+                <div class="uitem fl">
+                    <div class="fl left-info">
+                        <a href="http://www.jetstar.com/User/home/id/12.html">
+                            <img src="{{__TEMPLATE__}}/static/images/12">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="nice">WEB设计爱好者</div>
+                        <div class="desc">喜欢简单，干净的生活，喜欢简洁，漂亮的设计。</div>
+                    </div>
+                </div>
+                <div class="uitem fl">
+                    <div class="fl left-info">
+                        <a href="http://www.jetstar.com/User/home/id/14.html">
+                            <img src="{{__TEMPLATE__}}/static/images/20150126154829_54c5f14dee806.jpg">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="nice">独行漫步者</div>
+                        <div class="desc">我自独行，漫步天下</div>
+                    </div>
+                </div>
+                <div class="uitem fl">
+                    <div class="fl left-info">
+                        <a href="http://www.jetstar.com/User/home/id/15.html">
+                            <img src="{{__TEMPLATE__}}/static/images/20141202214431_547dc23f0b44d.jpeg">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="nice">叫我大侠</div>
+                        <div class="desc">人可以失败，但不可以被击败</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-home-bar share-sidebar blog-sidebar">
+            <div class="c-home-title">活跃用户 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</div>
+            <ul class="topusr">
+                <li>
+                    <div class="fl">
+                        <span class="$k"></span>
+                    </div>
+                    <div class="fl img">
+                        <a href="http://www.jetstar.com/User/home/id/1">
+                            <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/1">
+                        </a>
+                    </div>
+                    <div class="name">
+                        <a href="http://www.jetstar.com/User/home/id/1">jetstar</a>
+                    </div>
+                    <div class="info">
+                        <span class="icon-edit"></span> 文章 201 &nbsp;&nbsp;&nbsp;
+                        <span class="icon-magic"></span> 访客 10494
+                    </div>
+                </li>
+                <li>
+                    <div class="fl">
+                        <span class="$k"></span>
+                    </div>
+                    <div class="fl img">
+                        <a href="http://www.jetstar.com/User/home/id/8">
+                            <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/8.jpg">
+                        </a>
+                    </div>
+                    <div class="name">
+                        <a href="http://www.jetstar.com/User/home/id/8">就让我</a>
+                    </div>
+                    <div class="info">
+                        <span class="icon-edit"></span> 文章 26 &nbsp;&nbsp;&nbsp;
+                        <span class="icon-magic"></span> 访客 3186
+                    </div>
+                </li>
+                <li>
+                    <div class="fl">
+                        <span class="$k"></span>
+                    </div>
+                    <div class="fl img">
+                        <a href="http://www.jetstar.com/User/home/id/15">
+                            <img class="img-rounded"
+                                 src="{{__TEMPLATE__}}/static/images/20141202214431_547dc23f0b44d.jpeg">
+                        </a>
+                    </div>
+                    <div class="name">
+                        <a href="http://www.jetstar.com/User/home/id/15">叫我大侠</a>
+                    </div>
+                    <div class="info">
+                        <span class="icon-edit"></span> 文章 28 &nbsp;&nbsp;&nbsp;
+                        <span class="icon-magic"></span> 访客 2073
+                    </div>
+                </li>
+                <li>
+                    <div class="fl">
+                        <span class="$k"></span>
+                    </div>
+                    <div class="fl img">
+                        <a href="http://www.jetstar.com/User/home/id/3">
+                            <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/3.jpg">
+                        </a>
+                    </div>
+                    <div class="name">
+                        <a href="http://www.jetstar.com/User/home/id/3">mydeer</a>
+                    </div>
+                    <div class="info">
+                        <span class="icon-edit"></span> 文章 14 &nbsp;&nbsp;&nbsp;
+                        <span class="icon-magic"></span> 访客 1448
+                    </div>
+                </li>
+                <li>
+                    <div class="fl">
+                        <span class="$k"></span>
+                    </div>
+                    <div class="fl img">
+                        <a href="http://www.jetstar.com/User/home/id/14">
+                            <img class="img-rounded"
+                                 src="{{__TEMPLATE__}}/static/images/20150126154829_54c5f14dee806.jpg">
+                        </a>
+                    </div>
+                    <div class="name">
+                        <a href="http://www.jetstar.com/User/home/id/14">独行漫步者</a>
+                    </div>
+                    <div class="info">
+                        <span class="icon-edit"></span> 文章 5 &nbsp;&nbsp;&nbsp;
+                        <span class="icon-magic"></span> 访客 1184
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <!-- share-body END -->
+
+
+    <div class="share-more baidu-ads-home">
+        <script type="text/javascript">
+            /*jetstar首页纯图片1*/
+            var cpro_id = "u1839532";
+        </script>
+        <script src="{{__TEMPLATE__}}/static/images/c.js" type="text/javascript"></script>
+    </div>
+</div>
+<!-- END -->
+
+
+<div class="c-home-tag c-home-book">
+    <div class="share-more">
+        <div class="s-home-tag s-home-book">
+            <div class="c-home-title">推荐博书 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</div>
+            <div class="c-home-info">
+
+                <div class="l">
+                    <div class="head fl">
+                        <img src="{{__TEMPLATE__}}/static/images/php.png">
+                        <br>
+                        <a class="name" href=""> php </a>
+
+                        <div class="author"> jetstar ・ 编</div>
+                        <!-- <a class="btn btn-default btn-xs more"> <i class="icon-plus"></i>  订阅 </a> -->
+                    </div>
+                    <div class="body fl">
+                        <a href="http://www.jetstar.com/blog/single/id/785.html" class="no-wrap">PHP扩展开发 -- 创建一个类
+                            Class</a><a href="http://www.jetstar.com/blog/single/id/782.html" class="no-wrap">PHP中
+                        empty()
+                        ,isset(), is_null() 区别实例测试</a><a href="http://www.jetstar.com/blog/single/id/779.html"
+                                                         class="no-wrap">PHP中关于for 和 foreach 遍历数组的性能对比</a><a
+                            href="http://www.jetstar.com/blog/single/id/778.html" class="no-wrap">使用PHP引用时需注意的陷阱 --
+                        foreach</a><a href="http://www.jetstar.com/blog/single/id/777.html" class="no-wrap">PHP扩展之 --
+                        返回数组</a></div>
+                </div>
+                <div class="l">
+                    <div class="head fl">
+                        <img src="{{__TEMPLATE__}}/static/images/php.png">
+                        <br>
+                        <a class="name" href=""> linux </a>
+
+                        <div class="author"> jetstar ・ 编</div>
+                        <!-- <a class="btn btn-default btn-xs more"> <i class="icon-plus"></i>  订阅 </a> -->
+                    </div>
+                    <div class="body fl">
+                        <a href="http://www.jetstar.com/blog/single/id/790.html" class="no-wrap">Linux
+                            下C语言多线程编程的实例</a><a
+                            href="http://www.jetstar.com/blog/single/id/789.html" class="no-wrap">使用Linux
+                        c语言编写简单的web服务器</a><a href="http://www.jetstar.com/blog/single/id/784.html" class="no-wrap">Linux虚拟内存</a><a
+                            href="http://www.jetstar.com/blog/single/id/722.html" class="no-wrap">linux下ssh无密码登录</a><a
+                            href="http://www.jetstar.com/blog/single/id/697.html" class="no-wrap">linux搭建网站服务器</a></div>
+                </div>
+                <div class="l">
+                    <div class="head fl">
+                        <img src="{{__TEMPLATE__}}/static/images/php.png">
+                        <br>
+                        <a class="name" href=""> Mongo </a>
+
+                        <div class="author"> jetstar ・ 编</div>
+                        <!-- <a class="btn btn-default btn-xs more"> <i class="icon-plus"></i>  订阅 </a> -->
+                    </div>
+                    <div class="body fl">
+                        <a href="http://www.jetstar.com/blog/single/id/750.html" class="no-wrap">mongodb升级到3.0.2（2.6.9到3.0.2）</a><a
+                            href="http://www.jetstar.com/blog/single/id/743.html"
+                            class="no-wrap">php使用mongo存储图片，gridfs</a><a
+                            href="http://www.jetstar.com/blog/single/id/742.html" class="no-wrap">mongo健壮集群搭建，分片sharding加复制集replica</a><a
+                            href="http://www.jetstar.com/blog/single/id/741.html"
+                            class="no-wrap">mongo分片搭建Sharding</a><a
+                            href="http://www.jetstar.com/blog/single/id/740.html" class="no-wrap">mongo复制集搭建Replica
+                        Set</a></div>
+                </div>
+                <div class="l">
+                    <div class="head fl">
+                        <img src="{{__TEMPLATE__}}/static/images/php.png">
+                        <br>
+                        <a class="name" href=""> c </a>
+
+                        <div class="author"> jetstar ・ 编</div>
+                        <!-- <a class="btn btn-default btn-xs more"> <i class="icon-plus"></i>  订阅 </a> -->
+                    </div>
+                    <div class="body fl">
+                        <a href="http://www.jetstar.com/blog/single/id/792.html" class="no-wrap">C语言register关键字--寄存器</a><a
+                            href="http://www.jetstar.com/blog/single/id/790.html" class="no-wrap">Linux 下C语言多线程编程的实例</a><a
+                            href="http://www.jetstar.com/blog/single/id/789.html" class="no-wrap">使用Linux
+                        c语言编写简单的web服务器</a><a href="http://www.jetstar.com/blog/single/id/775.html" class="no-wrap">PHP
+                        扩展开发 之 var_dump</a><a href="http://www.jetstar.com/blog/single/id/773.html" class="no-wrap">快排的原理和实现
+                        -- C语言</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-home-bar">
+            <div class="c-home-title">推荐文章 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</div>
+            <a href="http://www.jetstar.com/blog/single/id/767.html"> <img class="img-circle"
+                                                                           src="{{__TEMPLATE__}}/static/images/1">
+                千万 PV，百万PV什么意思？</a><a href="http://www.jetstar.com/blog/single/id/705.html"> <img class="img-circle"
+                                                                                                  src="{{__TEMPLATE__}}/static/images/20150126154829_54c5f14dee806.jpg">
+            d3js树状图tree</a><a href="http://www.jetstar.com/blog/single/id/698.html"> <img class="img-circle"
+                                                                                          src="{{__TEMPLATE__}}/static/images/20150126154829_54c5f14dee806.jpg">
+            gojs快速且轻量级的流程图控件</a><a href="http://www.jetstar.com/blog/single/id/690.html"> <img class="img-circle"
+                                                                                               src="{{__TEMPLATE__}}/static/images/1">
+            php模拟http报文，调用webservice</a><a href="http://www.jetstar.com/blog/single/id/517.html"> <img
+                class="img-circle"
+                src="{{__TEMPLATE__}}/static/images/1">
+            高效网站的6个组成部分</a><a href="http://www.jetstar.com/blog/single/id/386.html"> <img class="img-circle"
+                                                                                          src="{{__TEMPLATE__}}/static/images/1">
+            JS在web客户端保存cookie信息</a><a href="http://www.jetstar.com/blog/single/id/306.html"> <img class="img-circle"
+                                                                                                  src="{{__TEMPLATE__}}/static/images/1">
+            mysql缓存解读</a></div>
+
+    </div>
+    <!-- share-body END -->
+
+    <div class="share-more">
+        <div class="c-home-title mt20">最新用户 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</div>
+        <ul class="new-usr">
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/20.html" title="悟空">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/default.jpg">
+
+                    <div class="no-wrap">悟空</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/19.html" title="fuzhaohui">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/default.jpg">
+
+                    <div class="no-wrap">fuzhaohui</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/18.html" title="算法帝国">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/20150129173832_54c9ff98aa9ee.jpg">
+
+                    <div class="no-wrap">算法帝国</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/17.html" title="scimes">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/default.jpg">
+
+                    <div class="no-wrap">scimes</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/16.html" title="Bootstrap Coder">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/20141202214406_547dc226bb20d.jpeg">
+
+                    <div class="no-wrap">Bootstrap Coder</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/15.html" title="叫我大侠">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/20141202214431_547dc23f0b44d.jpeg">
+
+                    <div class="no-wrap">叫我大侠</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/14.html" title="独行漫步者">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/20150126154829_54c5f14dee806.jpg">
+
+                    <div class="no-wrap">独行漫步者</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/13.html" title="架构之美">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/13">
+
+                    <div class="no-wrap">架构之美</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/12.html" title="WEB设计爱好者">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/12">
+
+                    <div class="no-wrap">WEB设计爱好者</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/11.html" title="Channely">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/20141202214307_547dc1ebba1a9.png">
+
+                    <div class="no-wrap">Channely</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/10.html" title="谁主沉浮">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/default.jpg">
+
+                    <div class="no-wrap">谁主沉浮</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.jetstar.com/User/home/id/9.html" title="叫我路飞">
+                    <img class="img-rounded" src="{{__TEMPLATE__}}/static/images/20141202214528_547dc278ecb00.jpg">
+
+                    <div class="no-wrap">叫我路飞</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+<!-- c-head END -->
+
+
+<div class="c-home-tag">
+    <div class="share-more">
+        <div class="s-home-tag">
+            <div class="c-home-title">热门标签 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</div>
+            <div class="c-home-info tag-body">
+
+                <div class="l">
+                    <div class="head fl">
+                        <img src="{{__TEMPLATE__}}/static/images/php(1).png" class="img-rounded">
+                        <br>
+                        <a href=""> php </a>
+                    </div>
+                    <div class="body fl">
+                        <a href="http://www.jetstar.com/blog/single/id/785.html" class="no-wrap">PHP扩展开发 -- 创建一个类
+                            Class</a><a href="http://www.jetstar.com/blog/single/id/782.html" class="no-wrap">PHP中
+                        empty()
+                        ,isset(), is_null() 区别实例测试</a><a href="http://www.jetstar.com/blog/single/id/779.html"
+                                                         class="no-wrap">PHP中关于for 和 foreach 遍历数组的性能对比</a><a
+                            href="http://www.jetstar.com/blog/single/id/778.html" class="no-wrap">使用PHP引用时需注意的陷阱 --
+                        foreach</a><a href="http://www.jetstar.com/blog/single/id/777.html" class="no-wrap">PHP扩展之 --
+                        返回数组</a></div>
+                </div>
+                <div class="l">
+                    <div class="head fl">
+                        <img src="{{__TEMPLATE__}}/static/images/default.png" class="img-rounded">
+                        <br>
+                        <a href=""> linux </a>
+                    </div>
+                    <div class="body fl">
+                        <a href="http://www.jetstar.com/blog/single/id/790.html" class="no-wrap">Linux
+                            下C语言多线程编程的实例</a><a
+                            href="http://www.jetstar.com/blog/single/id/789.html" class="no-wrap">使用Linux
+                        c语言编写简单的web服务器</a><a href="http://www.jetstar.com/blog/single/id/784.html" class="no-wrap">Linux虚拟内存</a><a
+                            href="http://www.jetstar.com/blog/single/id/722.html" class="no-wrap">linux下ssh无密码登录</a><a
+                            href="http://www.jetstar.com/blog/single/id/697.html" class="no-wrap">linux搭建网站服务器</a></div>
+                </div>
+                <div class="l">
+                    <div class="head fl">
+                        <img src="{{__TEMPLATE__}}/static/images/default.png" class="img-rounded">
+                        <br>
+                        <a href=""> Mongo </a>
+                    </div>
+                    <div class="body fl">
+                        <a href="http://www.jetstar.com/blog/single/id/750.html" class="no-wrap">mongodb升级到3.0.2（2.6.9到3.0.2）</a><a
+                            href="http://www.jetstar.com/blog/single/id/743.html"
+                            class="no-wrap">php使用mongo存储图片，gridfs</a><a
+                            href="http://www.jetstar.com/blog/single/id/742.html" class="no-wrap">mongo健壮集群搭建，分片sharding加复制集replica</a><a
+                            href="http://www.jetstar.com/blog/single/id/741.html"
+                            class="no-wrap">mongo分片搭建Sharding</a><a
+                            href="http://www.jetstar.com/blog/single/id/740.html" class="no-wrap">mongo复制集搭建Replica
+                        Set</a></div>
+                </div>
+                <div class="l">
+                    <div class="head fl">
+                        <img src="{{__TEMPLATE__}}/static/images/default.png" class="img-rounded">
+                        <br>
+                        <a href=""> c </a>
+                    </div>
+                    <div class="body fl">
+                        <a href="http://www.jetstar.com/blog/single/id/792.html" class="no-wrap">C语言register关键字--寄存器</a><a
+                            href="http://www.jetstar.com/blog/single/id/790.html" class="no-wrap">Linux 下C语言多线程编程的实例</a><a
+                            href="http://www.jetstar.com/blog/single/id/789.html" class="no-wrap">使用Linux
+                        c语言编写简单的web服务器</a><a href="http://www.jetstar.com/blog/single/id/775.html" class="no-wrap">PHP
+                        扩展开发 之 var_dump</a><a href="http://www.jetstar.com/blog/single/id/773.html" class="no-wrap">快排的原理和实现
+                        -- C语言</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-home-bar">
+            <div class="c-home-title">热门博书 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</div>
+            <a href=""> <img class="img-circle" src="{{__TEMPLATE__}}/static/images/20150126154829_54c5f14dee806.jpg">
+                gojs快速且轻量级的流程图控件</a><a href=""> <img class="img-circle"
+                                                     src="{{__TEMPLATE__}}/static/images/20141202214431_547dc23f0b44d.jpeg">
+            linux建立软链</a><a href=""> <img class="img-circle" src="{{__TEMPLATE__}}/static/images/8.jpg">
+            mongodb升级到3.0.2（2.6.9到3.0.2）</a><a href=""> <img class="img-circle"
+                                                             src="{{__TEMPLATE__}}/static/images/20150126154829_54c5f14dee806.jpg">
+            jquery自定义网页滚动条样式</a><a href=""> <img class="img-circle" src="{{__TEMPLATE__}}/static/images/1">
+            thinkphp中session写入数据库</a><a href=""> <img class="img-circle" src="{{__TEMPLATE__}}/static/images/8.jpg">
+            PHP截取汉字乱码</a>
+        </div>
+    </div>
+    <!-- share-body END -->
+
+    <div class="share-more baidu-ads-home">
+        <script type="text/javascript">
+            /*jetstar首页纯图片2*/
+            var cpro_id = "u1839558";
+        </script>
+        <script src="{{__TEMPLATE__}}/static/js/c.js" type="text/javascript"></script>
+    </div>
+</div>
+<!-- c-head END -->
+
+<div class="c-home-friend">
+    <div class="share-more">
+        <div class="c-home-title">友链 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</div>
+        <div>
+            <a href="http://www.xiaodeworld.com/" target="_blank">小德世界</a>
+            <a href="http://www.chenglin.name/" target="_blank">Chenglin博客</a>
+            <a href="http://www.sharehave.com/" target="_blank">ShareHave分享趣味</a>
+            <a href="http://www.leixuesong.cn/" target="_blank">PHP程序员-雷雪松</a>
+            <a href="http://www.laruence.com/" target="_blank">Laruence鸟哥</a>
+            <a href="http://yanjiadong.net/" target="_blank">苏州php</a>
+            <a href="http://www.94will.com/" target="_blank">Will的博客</a>
+
+        </div>
+    </div>
+</div>
+<!-- share-body END -->
+
+
+{{/block}}

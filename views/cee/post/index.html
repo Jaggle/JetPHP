@@ -1,0 +1,87 @@
+{{extends file = "../layout.html"}}
+
+{{block name = content}}
+
+<div class="share-blog-head">
+    <div class="share-more s-usr">
+        <ul class="fr right-info">
+            <li><span class="fa fa-star-o"></span> 粉丝 2 </li>
+            <li> <a class="btn btn-success btn-xs ajax-follow-add" tid="15"><span class="icon-check"></span> 关注 </a> </li>
+        </ul>
+
+        <div class="fl left-info">
+            <a href="/User/home/id/15.html">
+                <img class="img-rounded" src="/Public/image/user/20141202214431_547dc23f0b44d.jpeg">
+            </a>
+        </div>
+
+        <div class="content">
+            <div class="nice">叫我大侠</div>
+            <div class="desc">人可以失败，但不可以被击败</div>
+        </div>
+
+    </div>
+    <!-- <div class="share-more">
+        <ul class="user-menu">
+            <li><a href="http://www.cleey.com/user/home/id/15.html"> 博客 </a></li>
+            <li><a href="http://www.cleey.com/user/book/id/15.html"> 分类 </a></li>
+            <li><a href="http://www.cleey.com/user/home/id/15.html"> 关注 </a></li>
+        </ul>
+    </div> -->
+</div>
+
+<div class="share-body">
+    <div class="share-content">
+        <article class="single-article">
+            <input type="hidden" id="post_pid" value="793">
+            <header class="single-head">
+                <div class="single-title">
+                   {{$it.title}}
+                </div>
+
+            </header>
+            <div class="single-content">
+                {{$it.content}}
+              	</div>
+        </article>
+        <div class="baidu-ads-blog1">
+            <script type="text/javascript">
+                /*cleey 文章底部1*/
+                var cpro_id = "u2136621";
+            </script>
+            <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+        </div>
+
+        <div class="article-more">
+            <a title="C语言register关键字--寄存器" href="http://www.cleey.com/blog/single/id/792.html">&lt;&lt; 上一篇 C语言register关键字--寄存器</a>					</div>
+
+
+
+    </div>
+
+
+    <div class="share-sidebar">
+
+
+        <div class="single-count">
+            <a class="ajax_collect" aim="793">
+                <span><i class="icon-star-empty"></i> 浏览</span>
+                <span>{{$it.views}}</span>
+            </a>
+            <a>
+                <span><i class="icon-thumbs-up"></i> 赞</span>
+                <span>10</span>
+            </a>
+        </div>
+
+        <div class="title"> 文章标签 </div>
+        <a href="/blog/tag?t=mysql" class="post-tag">mysql</a><a href="/blog/tag?t=limit" class="post-tag">limit</a><a href="/blog/tag?t=性能优化" class="post-tag">性能优化</a>
+        <div class="baidu-ads-side1">
+            <script type="text/javascript">
+                /*cleey侧边栏*/
+                var cpro_id = "u2119044";
+            </script>
+            <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+        </div>	</div>
+</div>
+{{/block}}

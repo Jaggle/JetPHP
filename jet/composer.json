@@ -11,7 +11,9 @@
 
   "require": {
     "phpmailer/phpmailer": "~5.2",
-    "smarty/smarty":"*"
+    "smarty/smarty":"*",
+    //"mjaschen/phpgeo":"*"
+    "twig/twig":"*"
 
 
 

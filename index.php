@@ -13,7 +13,7 @@ define('DEBUG',true);
 
 
 //默认模板名称，对应views目录下的路径
-define("TEMPLATE",'default');
+define("TEMPLATE",'cee');
 
 //初始化运行环境
 require_once(JET.'/init.php');

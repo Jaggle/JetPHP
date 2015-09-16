@@ -18,7 +18,7 @@ class IndexController extends CommonController
     {
 
         //文章列表
-        $posts = $this->model('post')->order('publish_time DESC')->select();
+        $posts = $this->model('post')->order('publish_time DESC')->limit(6)->select();
 
         foreach($posts as $key =>$value)
         {
@@ -29,6 +29,11 @@ class IndexController extends CommonController
             }
         }
 
+
+        //热门文章
+	    $hots = $this->model('post')->order('views DESC')->limit(6)->select();
+
+	    $this->assign('hots',$hots);
 
         $this->assign('posts',$posts);
 

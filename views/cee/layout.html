@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+
+    <meta name="robots" content="all">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+    <meta name="Copyright" content="Copyright jetstar.com All Rights Reserved.">
+    <meta name="author" content="clin">
+    <meta name="generator" content="jetstar">
+
+    <title>{{block name = "title"}}jetstar{{/block}}</title>
+
+
+    {{block name = "css_head"}}
+    <link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/static/css/prettify.css">
+    <link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/static/css/bootstrap/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/static/css/clincommon.css">
+    <link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/static/css/home.css">
+    {{/block}}
+    {{block name = "js_head"}}
+    <script type="text/javascript" src="{{__TEMPLATE__}}/static/js/jquery.min.js"></script>
+    {{/block}}
+</head>
+<body>
+{{include file = "../header.html"}}
+
+{{block name = content}}
+{{/block}}
+
+{{block name = foot}}
+{{include file="./foot.html"}}
+{{/block}}
+</body>
+
+
+</html>

@@ -1,0 +1,178 @@
+.no-wrap{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.btn:focus { outline: none; }
+.of{ overflow: hidden; }
+.floatR{ float: right; }
+.floatL{ float: left; }
+.textarea-auto{
+	overflow: hidden;
+	font-family: Verdana,Arial;
+	font-style: normal;
+	font-size: 13px;
+	line-height: normal;
+}
+.ccc{
+	cursor: pointer;
+}
+.no-select{
+	-moz-user-select: none; /*火狐*/
+	-webkit-user-select: none;  /*webkit浏览器*/
+	-ms-user-select: none;   /*IE10*/
+	-khtml-user-select: none; /*早期浏览器*/
+	user-select: none;
+}
+.hover-div{
+	display: none;
+}
+.hover-div .hover-layer{
+	top: 0;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 100000;
+	left: 0;
+	text-align: center;
+	opacity: 0.6;
+	background: #fff;
+}
+.hover-div .hover-info{
+	position: fixed;
+	z-index: 100001;
+	top: 40%;
+	left: 50%;
+	margin-left: -90px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.hover-div i{
+	margin-right: 10px;
+	font-size: 18px;
+}
+
+th.textL,
+td.textL{
+	text-align: left;
+}
+th.textR,
+td.textR{
+	text-align: right;
+}
+th.textC,
+td.textC{
+	text-align: center;
+}
+
+.fixed-tb{ table-layout: fixed; }
+table.fixed-tb td, div.fixed, span.fixed, label.fixed, a.fixed, li.fixed{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}	
+
+.mb10{ margin-bottom: 10px; }
+.mb20{ margin-bottom: 20px; }
+.mb0{ margin-bottom: 0px; }
+
+
+.mt20{ margin-top: 20px;}
+
+.f12{font-size: 12px;}
+.f13{font-size: 13px;}
+
+.pd0{ padding: 0;}
+/*a, a:before, a:after {
+	-webkit-transition-property: background color;
+	-webkit-transition-duration: 0.2s;
+	-webkit-transition-timing-function: ease;
+	-moz-transition-property: background color;
+	-moz-transition-duration: 0.2s;
+	-moz-transition-timing-function: ease;
+	-o-transition-property: background color;
+	-o-transition-duration: 0.2s;
+	-o-transition-timing-function: ease;
+	transition-property: background color;
+	transition-duration: 0.2s;
+	transition-timing-function: ease;
+}*/
+
+.ccc{
+	cursor: pointer;
+}
+
+/* 透明modal */
+.modal-open, .modal{
+	outline: none;
+}
+.basic.modal{
+	color: #fff;
+	background-color: rgba(0,0,0,.85);
+
+}
+.basic.modal:focus{
+	border: 0;
+	outline: none;
+}
+.basic.modal .modal-dialog{
+	width: 660px;
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	margin-left: -330px;
+}
+.basic.modal .modal-header{
+	background:transparent; border: 0; 
+	margin: 0;
+	padding: 1.5rem 2rem;
+}
+.basic.modal .modal-header .close{ opacity: 1; color: #fff; margin-top: 0; padding: 5px 10px;}
+.basic.modal .modal-header .modal-title{
+	font-size: 22px;
+	font-weight: bold;
+}
+.basic.modal .modal-content{ background: transparent; box-shadow: none;	border: 0;}
+.basic.modal .modal-footer{ margin:0;background:transparent; border: 0; }
+.basic.modal .modal-body{ 
+	display: table;
+	width: 100%;
+}
+.basic.modal .modal-body .l i{ font-size: 8em; opacity: .75;}
+.basic.modal .modal-body .l{
+	display: table-cell;
+	padding-right: 1.5%;
+	width: 50%;
+}
+.basic.modal .modal-body .r{
+	display: table-cell;
+	padding: 10px 0;
+	vertical-align: top;
+	width: 50%;
+}
+.basic.modal .modal-body .r .input-group{
+	margin-bottom: 20px;
+}
+.basic.modal .btn-group-justified{
+	padding: 20px;
+}
+.basic.modal .btn-group-justified button:first-child i{
+	margin-right: 10px;
+}
+.basic.modal .btn-group-justified button:last-child i{
+	margin-left: 10px;
+}
+@media only screen and (max-width: 660px) {
+	.basic.modal .modal-dialog{
+		width: auto;
+		left: 0;
+		margin: 0;
+	}
+	.basic.modal .modal-body .l{
+		display: none;
+	}
+	.basic.modal .modal-body .r{
+		width: 100%;
+	}
+}
+
