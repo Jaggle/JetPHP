@@ -1,0 +1,25 @@
+{{extends file = "../layout.html"}}
+
+{{block name = content}}
+第一个：<input type="checkbox" name="id[]" class='goods' id="id-{$vo.goods_id}" value='{$vo.goods_id}'>
+第二个：<input type="checkbox" name="id[]" class='goods' id="id-{$vo.goods_id}" value='{$vo.goods_id}'>
+第三个：<input type="checkbox" name="id[]" class='goods' id="id-{$vo.goods_id}" value='{$vo.goods_id}'>
+
+<button class="btn"> 删除</button>
+
+<script>
+    $(function(){
+        $(".btn").click(function(){
+            alert($(".goods").length);
+            for(var i=0;i<$(".goods").length;i++)
+            {
+                if($(".goods").eq(i).is(":checked")){
+                    alert(i);
+                }
+
+            }
+        })
+    })
+
+</script>
+{{/block}}
