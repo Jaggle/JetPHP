@@ -170,4 +170,45 @@ class IndexController extends CommonController
         }
     }
 
+    /**
+     * 长轮询测试
+     */
+	public function polling()
+	{
+		if(jet_Post('id'))
+		{
+			$id = jet_Post('id');
+			$list = $this->model('post')->where("id > $id")->get();
+			if($list){
+				//$list = array_slice($list,0,2);
+				$list['has'] = true;
+				foreach($list as $key => $value){
+					$list[$key] = str_replace('"','\'',$value);       //替换双引号
+					$list[$key] = str_replace(':','|=|',$list[$key]);             //替换冒号
+				}
+
+				echo jet_JSON($list);
+				return;
+			}
+			else
+			{
+				$list['has'] = false;
+				echo jet_JSON($list);
+				return;
+			}
+		}
+		else
+		{
+			$this->render();
+		}
+	}
+
+	/**
+	 * 模态框
+	 */
+	public function modal()
+	{
+		$this->render();
+	}
+
 }

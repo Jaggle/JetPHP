@@ -41,9 +41,7 @@ class AccountController extends CommonController
 
 			$user = intval($user);
 
-
 			$user = $this->model('user')->where($user)->get();        //得到一行记录
-
 
 			$this->assign(array(
 				'user' => $user['user'],
@@ -89,22 +87,34 @@ class AccountController extends CommonController
 		        $this->set_cookie('v_user',$user);
 		        $this->render('notice/verifying');
 	        }
-            if(isset($code))
+            if(isset($code) and !empty($code))
             {
                 if($code == $this->get_session('authnum_session'))
                 {
 
                 }else
                 {
-                    $this->redirect('验证码有误！','R:login','1');
+	                echo jet_JSON(array('msg' => '验证码有误！','status'=>0));
+	                return 0;
                 }
             }else{
-                $this->redirect('验证码有误！','R:login','1');
+	            echo jet_JSON(array('msg' => '请填写验证码！','status'=>0));
+	            return 0;
             }
+
+
+	        if($this->model('user')->where("user = '$user'")->num() == 0)
+	        {
+		        echo jet_JSON(array('msg' => '不存在该用户！','status'=>0));
+		        return 0;
+	        }
 
 
             if($pswd == $this->model('user')->where("user = '$user'")->field('pswd'))
             {
+
+
+
                 //创建cookie
                 //用户名加盐处理
 
@@ -113,26 +123,24 @@ class AccountController extends CommonController
 
                 $f1 = $this->set_cookie('user',$identity);
 
-
-
                 $f2 = $this->set_session($user,'1');
 
-                $refer = jet_Post('backurl');
-
-
-                if(empty($refer))
-                    $refer = 'R:home_page';
-
                 if($f1 and $f2)
-                    $this->redirect('登录成功！',$refer,'1');
+	                echo jet_JSON(array('msg' => '登录成功！','status'=>1));
+	                return 1;
             }else
             {
 
-               die('登录失败！');
+	            echo jet_JSON(array('msg' => '密码有误！','status'=>0));
+	            return 0;
             }
         }
 
     }
+	public function dologin()
+	{
+		echo "hello";
+	}
 
     /**
      * 退出操作

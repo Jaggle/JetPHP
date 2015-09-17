@@ -117,7 +117,9 @@ class AdminController extends CommonController
         {
             if(jet_Post('action') == 'do_publish')
             {
-                $data = jet_Post('post');
+                $data['title'] = jet_Post('title');
+	            $data['summary'] = jet_Post('summary');
+	            $data['content'] = jet_Post('content');
 
                 if($data['summary'] == false)
                 {
@@ -134,7 +136,17 @@ class AdminController extends CommonController
 
                 $flag = $this->model('post')->insert($data);
 
-                $this->excute($flag,'添加文章','/admin/post');
+                if($flag)
+                {
+	                echo jet_JSON(array('msg' => '发布成功！','has' => true,'id'=>$flag));
+	                return;
+                }
+                else
+                {
+	                echo jet_JSON(array('msg' => '发布失败！','has' => false));
+	                return;
+
+                }
 
             }else
             {
@@ -151,15 +163,30 @@ class AdminController extends CommonController
         //删除文章
         if($this->a == 'delete' or $this->a == 'd')
         {
+	        $data = array(
+		        'msg' => false,
+	        );
 
-            $id = jet_Get('id');
+            $id = jet_Post('id');
             if(is_numeric($id))
             {
                 $f = $this->model('post')->where($id)->delete();
-                if($f)
-                    $this->redirect('删除成功','/admin/post');
-                else
-                    $this->redirect('删除失败','/admin/post');
+                if($f){
+					$data['msg'] = true;
+	                foreach($data as $key => $value){
+		                $data[$key] = urlencode($value);
+	                }
+	                $data = json_encode($data);
+	                echo urldecode($data);
+                }
+                else{
+	                $data['msg'] = false;
+	                foreach($data as $key => $value){
+		                $data[$key] = urlencode($value);
+	                }
+	                $data = json_encode($data);
+	                echo urldecode($data);
+                }
             }
 
         }
@@ -203,6 +230,7 @@ class AdminController extends CommonController
      */
     public function comment()
     {
+	    //评论列表
         if($this->a == '' or $this->a == 'index' or $this->a == 'list')
         {
             $list = $this->model('comment')->select();
@@ -214,13 +242,30 @@ class AdminController extends CommonController
 
                     $list[$key]['attach_title'] = $this->model('post')->where($attach)->field('title');
 
-                    $list[$key]['content'] = strip_tags($v);  //去掉html标签
+                    if($k == 'content')     //content字段
+                    {
+	                    $list[$key]['content'] = strip_tags($v);  //去掉html标签v
+                    }
                 }
             }
 
             $this->assign('list',$list);
             $this->render('admin/comment/index');
         }
+	    //删除操作
+	    if($this->a == 'd' or $this->a == 'delete')
+	    {
+		    $id = jet_Post('id');
+		    if(strpos($id,',')){
+			    $flag = $this->model('comment')->delete(trim($id,','));     //移除前后的字符,
+		    }else
+			    $flag = $this->model('comment')->where($id)->delete();
+		    if($flag){
+			    echo  jet_JSON(array('msg' => true));
+		    }else{
+			   echo jet_JSON(array('msg' => false));
+		    }
+	    }
     }
     public function form_elements()
     {
