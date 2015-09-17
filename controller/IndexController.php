@@ -13,6 +13,11 @@ class IndexController extends CommonController
     {
         die('指定的方法不存在');
     }
+    public function test()
+    {
+        $this->render();
+    }
+
 
     public function index()
     {

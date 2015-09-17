@@ -8,7 +8,7 @@
 
 class CommentController extends  CommonController
 {
-	//文章的评论
+	//锟斤拷锟铰碉拷锟斤拷锟斤拷
 	public function post()
 	{
 		$id = jet_Get('id');
@@ -26,9 +26,9 @@ class CommentController extends  CommonController
 
 		$data['content'] = strip_tags(jet_Post('content'));
 
-		$in_id = $this->model('comment')->insert($data);     //insert成功应该返回当前的id
+		$in_id = $this->model('comment')->insert($data);     //insert鎿嶄綔
 
-		//取得时间 todo 应该有更好的办法
+		//todo 搴旇鏈夋洿濂界殑鍙戝竷鏃堕棿
 
 		$data['publish_time'] = $this->model('comment')->where($in_id)->field('publish_time');
 
