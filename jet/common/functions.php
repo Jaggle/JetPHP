@@ -254,3 +254,23 @@ function jet_cookie($name,$value = null,$expire = null,$path = null, $domain = n
 
     }
 }
+
+function jet_JSON($var)
+{
+    //数组        暂时只接受一维数组
+    if(is_array($var))
+    {
+        foreach($var as $key => $value)
+        {
+            $var[$key] = str_replace('"','\'',urlencode($value));       //替换双引号
+	        $var[$key] = str_replace(':','|=|',$var[$key]);             //替换冒号
+        }
+        $var = json_encode($var);
+        return urldecode($var);
+    }
+	//字符串
+	if(is_string($var))
+	{
+		return 	urldecode(json_encode(urlencode($var)));
+	}
+}

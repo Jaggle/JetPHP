@@ -290,10 +290,18 @@ class JET_MODEL
     /**
      * @return bool 删除操作，
      */
-    public function delete()
+    public function delete($where = null)
     {
-        $sql = $this->make_sql('d');
+	    //通过id批量删除
+	    if($where != null and strpos($where,','))
+	    {
+		    $sql =  "delete from ".$this->option['table']." where id in (".$where.")";
+	    }else
+	    {
+		    $sql = $this->make_sql('d');
+	    }
         $result = $this->mysqli->query($sql);
+	    //dump(debug_backtrace());
         if($result)
             return true;
         else

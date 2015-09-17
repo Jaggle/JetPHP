@@ -34,7 +34,7 @@
                 <tbody>
 
                 {{foreach from=$list item=ls}}
-                <tr>
+                <tr class="post-{{$ls.id}}">
                     <td class="center">
                         <label>
                             <input type="checkbox" class="ace" />
@@ -76,7 +76,7 @@
                             <div class="inline position-relative">
                                 <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
                                     <i class="icon-caret-down icon-only bigger-120"></i>
-                                </button>
+                                </but   ton>
 
                                 <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                     <li>
@@ -115,13 +115,28 @@
                         $("a.a-delete").click(function(){
                             var flag = confirm('确定删除吗?');
                             var id = $(this).attr('data-id');
-                            if(flag)
-                                window.location.href = "/admin/index?p=post&a=delete&id="+id+"&backurl="+window.location.href;
-                            else
+                            if(flag){       //发送ajax请求
+                                $.ajax({
+                                    type    : 'post',
+                                    url     : "/admin/index?p=post&a=delete",
+                                    data    : {id : id},
+                                    success : function(data){
+                                        if(data.msg == 'false'){
+                                            alert('删除失败！');
+                                        }else{
+                                            alert("删除成功！");
+                                            $(".post-"+id).remove();        //动态删除网站内容
+
+                                        }
+                                    },
+                                    error   : function(){
+                                        alert("发生错误！");
+                                    }
+                                });
+
+                            } else
                                 return;
                         });
-
-                        $
                     })
                 </script>
 

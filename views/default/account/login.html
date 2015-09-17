@@ -68,7 +68,7 @@
 
                                     <div class="space-6"></div>
 
-                                    <form action="/account/login" method="post" id="lg-form">
+                                    <form action="" method="post" id="lg-form">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -318,7 +318,30 @@
 <script>
     $(function(){
         $(".btn-login").click(function(){
-            $("#lg-form").submit();
+            $.ajax({
+                type    : 'post',
+                url     : "/account/login",
+                data    : {
+                    user    : $("input[name='user']").val(),
+                    pswd    : $("input[name='pswd']").val(),
+                    action  : 'do_login',
+                    validate: $("input[name='validate']").val()
+                },
+                success : function(data,status){
+                    data = $.parseJSON(data);
+                    if(data.status == 1){               //登录成功
+                        alert(data.msg);
+                        window.location.href="/admin/";
+
+                    }else{
+                        alert(data.msg);
+                    }
+                },
+                error   : function(){
+                    alert("发送请求失败！");
+                }
+
+            });
         });
     })
 </script>
