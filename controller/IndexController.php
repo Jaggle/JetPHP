@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2015/8/11
- * Time: 13:14
- */
+
 class IndexController extends CommonController
 {
 
@@ -13,6 +8,7 @@ class IndexController extends CommonController
     {
         die('指定的方法不存在');
     }
+
     public function test()
     {
         $this->render();
@@ -21,61 +17,30 @@ class IndexController extends CommonController
 
     public function index()
     {
-
         //文章列表
         $posts = $this->model('post')->order('publish_time DESC')->limit(6)->select();
-
-        foreach($posts as $key =>$value)
-        {
-            foreach($value as $k => $v)
-            {
+        foreach ($posts as $key => $value) {
+            foreach ($value as $k => $v) {
                 $posts[$key]['summary'] = strip_tags($posts[$key]['summary']);
                 $posts[$key]['content'] = strip_tags($posts[$key]['content']);
             }
         }
 
-
         //热门文章
-	    $hots = $this->model('post')->order('views DESC')->limit(6)->select();
+        $hots = $this->model('post')->order('views DESC')->limit(6)->select();
+        $this->assign('hots', $hots);
+        $this->assign('posts', $posts);
+        $this->assign('variables',
+            array(
+                'user' => 'sb',
 
-	    $this->assign('hots',$hots);
-
-        $this->assign('posts',$posts);
-
-	    $this->assign('variables',
-		    array(
-			    'user' => 'jake',
-
-		    )
-	    );
+            )
+        );
 
         $this->render();
-    }
-
-    /**
-     * 文章详细页面，但是要传一个id的值确定是哪一篇文章
-     * @author Jake
-     *
-     */
-    public function post(){
-        //没有指定文章的id
-        if(!isset($_GET['id'])){
-            //提示错误页面并且跳转到首页
-            $this->error('你请求的页面不存在,因为你没有具体指定文章的ID','index');
-            return;
-        }
-        //不是数字
-        else if(!is_numeric($_GET['id']) or $_GET['id'] < 1){
-            $this->error('这不是有效的文章ID','index');
-            return;
-        }
-        else{
-            die('dsd');
-        }
-
-
 
     }
+
     public function explore()
     {
         echo "欢迎来到发现页面！";
@@ -86,14 +51,13 @@ class IndexController extends CommonController
         echo "这是search方法";
     }
 
-
-	/**
-	 * 文件上传测试
-	 *
-	 */
+    /**
+     * 文件上传测试
+     *
+     */
     public function up()
     {
-        if ( @$_POST['action'] != 'upload') {
+        if (@$_POST['action'] != 'upload') {
             $this->render();
         } else {
             if ($_FILES['img']['error'] > 0) {
@@ -105,13 +69,13 @@ class IndexController extends CommonController
         }
     }
 
-	/**
-	 * 百度ueditor测试
-	 */
-	public function ueditor()
-	{
-		$this->render();
-	}
+    /**
+     * 百度ueditor测试
+     */
+    public function ueditor()
+    {
+        $this->render();
+    }
 
     /**
      * code_generate
@@ -137,7 +101,7 @@ class IndexController extends CommonController
      */
     public function mailer()
     {
-       // require 'PHPMailerAutoload.php';
+        // require 'PHPMailerAutoload.php';
 
         $mail = new PHPMailer;
 
@@ -164,10 +128,10 @@ class IndexController extends CommonController
         $mail->isHTML(true);                                  // Set email format to HTML
 
         $mail->Subject = 'Here is the subject';
-        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+        $mail->Body = 'This is the HTML message body <b>in bold!</b>';
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-        if(!$mail->send()) {
+        if (!$mail->send()) {
             echo 'Message could not be sent.';
             echo 'Mailer Error: ' . $mail->ErrorInfo;
         } else {
@@ -178,42 +142,99 @@ class IndexController extends CommonController
     /**
      * 长轮询测试
      */
-	public function polling()
-	{
-		if(jet_Post('id'))
-		{
-			$id = jet_Post('id');
-			$list = $this->model('post')->where("id > $id")->get();
-			if($list){
-				//$list = array_slice($list,0,2);
-				$list['has'] = true;
-				foreach($list as $key => $value){
-					$list[$key] = str_replace('"','\'',$value);       //替换双引号
-					$list[$key] = str_replace(':','|=|',$list[$key]);             //替换冒号
-				}
+    public function polling()
+    {
+        if (jet_Post('id')) {
+            $id = jet_Post('id');
+            $list = $this->model('post')->where("id > $id")->get();
+            if ($list) {
+                //$list = array_slice($list,0,2);
+                $list['has'] = true;
+                foreach ($list as $key => $value) {
+                    $list[$key] = str_replace('"', '\'', $value);       //替换双引号
+                    $list[$key] = str_replace(':', '|=|', $list[$key]);             //替换冒号
+                }
 
-				echo jet_JSON($list);
-				return;
-			}
-			else
-			{
-				$list['has'] = false;
-				echo jet_JSON($list);
-				return;
-			}
-		}
-		else
-		{
-			$this->render();
-		}
-	}
+                echo jet_JSON($list);
+                return;
+            } else {
+                $list['has'] = false;
+                echo jet_JSON($list);
+                return;
+            }
+        } else {
+            $this->render();
+        }
+    }
 
-	/**
-	 * 模态框
-	 */
-	public function modal()
-	{
-		$this->render();
-	}
+    /**
+     * 模态框
+     */
+    public function modal()
+    {
+        $this->render();
+    }
+
+    public function twig()
+    {
+
+        $this->assign('name', '现在全面支持twig');
+        $this->render();
+    }
+
+    public function rypt()
+    {
+        echo "加密的字符串是：" . "jakesoft" . PHP_EOL;
+        $cr = new Crypt();
+        $cr_string = $cr->encrypt('jakesoft', 'a key', 5);
+        echo "加密后的字符串是:" . $cr_string . PHP_EOL;
+        $de = $cr->decrypt($cr_string, 'a key');
+        echo "解密后的字符串是：" . $de . PHP_EOL;
+
+    }
+
+    public function img()
+    {
+        $image = new Image();
+        $image->open(UPLOADS . '/post/d.png')->crop(100, 100, 0, 0, 50, 50)->save(UPLOADS . '/post/d2.png');
+    }
+
+    public function upyun()
+    {
+        ignore_user_abort(true);
+        set_time_limit(0);
+        $cfg_up = require(CONFIG . '/upyun.config.php');
+        $upyun = new UpYun($cfg_up['bucket'], $cfg_up['user'], $cfg_up['pswd'], UpYun::ED_TELECOM);
+        $opts = array(
+            UpYun::X_GMKERL_THUMBNAIL => 'square' //创建缩略图,该参数仅适用于图片空间
+        );
+
+        $lo_file = UPLOADS . '/post/14.jpg';
+        $up_file = '/dddd/ok/6duplodaddd.jpg';
+        $fh = fopen($lo_file, 'r');
+        $upyun->writeFile($up_file, $fh, true, $opts);
+        $up_url = "http://" . $cfg_up['bucket'] . '.b0.upaiyun.com' . $up_file;
+        fclose($fh);
+    }
+
+    public function qiniu()
+    {
+
+        $accessKey = 'SFq5DgIU7IzesR-xs6JvwLOs7cZyDde3baLdu1Oj';
+        $secretKey = 'gu--J_yaqKjdgNrfpmsUiE2nnEvza6TiIFyEGG2U';
+        $auth = new Qiniu\Auth($accessKey, $secretKey);
+        $bucket = 'jetstar';
+        $token = $auth->uploadToken($bucket);
+        $filePath = UPLOADS . '/post/d.png';
+        $key = 'her-php-logo.png';
+        $uploadMgr = new Qiniu\Storage\UploadManager();
+        list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
+        if ($err !== null) {
+            dump($err);
+        } else {
+            dump($ret);
+        }
+    }
+
 
 }
