@@ -38,3 +38,54 @@
 <script src="{{$front}}/admin/assets/js/ace.min.js"></script>
 
 <!-- inline scripts related to this page -->
+
+<script>
+    $(function(){
+        $(".jet_message li").click(function(){
+            //alert('hello！');
+            $.ajax({
+                type    : 'post',
+                url     : '/notification/setread',
+                data    : {
+                        id  : $(this).attr("data-id")
+                },
+                success : function (data){
+                    data = $.parseJSON(data);
+                    if(data.has){
+                        alert(data.message);
+
+                    }else{
+                        alert(data.message);
+                    }
+                },
+                error   : function(){
+                    alert('连接服务器失败！');
+                }
+            })
+        })
+
+        //每4秒polling通知信息
+        setInterval(function(){
+            $.ajax({
+                type    : 'post',
+                url     : '/notification/get',
+                data    : {
+                    id  : $(this).attr("data-id")
+                },
+                success : function (data){
+                    data = $.parseJSON(data);
+                    if(data.has){
+                        alert(data.message);
+
+                    }else{
+                        alert(data.message);
+                    }
+                },
+                error   : function(){
+                    alert('连接服务器失败！');
+                }
+            })
+        },4000);
+
+    })
+</script>

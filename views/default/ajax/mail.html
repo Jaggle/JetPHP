@@ -1,0 +1,48 @@
+{{extends file = "../layout.html"}}
+
+{{block name = content}}
+<div class="option">
+
+        <input type="email" name="to" id="to" placeholder="singviy@qq.com">
+        <textarea name="content" cols="30" rows="10" id="content" placeholder="hello~~~~~~~~~~~~~~"></textarea>
+        <input type="submit" value="发送">
+
+</div>
+<div class="console">
+
+</div>
+
+<script>
+    $(function () {
+        $("input[type='submit']").click(function () {
+            setInterval(function(){
+                $.ajax({
+                    type: 'post',
+                    url: window.location.href,
+                    data: {
+                        content: $("#content").val(),
+                        to: $("#to").val(),
+                        action: 'do_mailer'
+                    },
+                    success: function (data) {
+                        data = $.parseJSON(data);
+
+                        if (data.has == true) {
+
+                            $(".console").append(data.message + "<br/>");
+                        } else {
+                            $(".console").append(data.message + "<br/>");
+                        }
+                    },
+                    error: function () {
+                        $(".console").append("连接服务器失败<br/>");
+                    }
+                })
+            },4000);
+
+
+        })
+    })
+</script>
+
+{{/block}}

@@ -4,81 +4,71 @@
 
 class jet
 {
-    private static $config;//这tm是一个对象,我不说你萌知道么？
     private static $models = array();
     public static function start()
     {
 
         $route = self::URL_parse();
-        $route['contrl'] = @trim(ucfirst($route[0])) ? @trim(ucfirst($route[0])) : "index";
+        $route['control'] = @trim(ucfirst($route[0])) ? @trim(ucfirst($route[0])) : "index";
         $route['method'] = @trim($route[1]) ? @trim($route[1]) : 'index';
-        if(strstr($route['method'],'.html') or strstr($route['method'],'.htm'))
-        {   $m =  $route['method'];
-            $tm = '';
-            for($i=0;$i<strlen($m);$i++)
-            {
-                if(substr($m,$i,1) != '.')
-                {
-                    $tm = substr($m,0,$i+1);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            $route['method'] = $tm;
+        $flag = strstr($route['method'],'.html') || strstr($route['method'],'.htm') || strstr($route['method'],'.php');
+        $flag2 = $flag || strstr($route['method'],'.jsp');
+        if($flag2)
+        {
+            $pattern = '/(.*?)\.(.*?)/';
+            preg_match($pattern,$route['method'],$match);
+            $route['method'] = $match[1];
         }
         $route['method'] = str_replace('-','_',$route['method']);
 
-
-        if (file_exists(CTL .'/'. $route['contrl'] . 'Controller.php'))
+        if (file_exists(CTL .'/'. $route['control'] . 'Controller.php'))
         {
-            $ctlName = $route['contrl'] . 'Controller';
-            $contrl = new $ctlName;
+            $ctlName = $route['control'] . 'Controller';
+            $control = new $ctlName;
 
             //第二个参数为数字的情况
             if(is_numeric($route['method'])){
                 //调用index方法并且得到id
-                $contrl->index($route['method']);
-                //$contrl->test();
+                $control->index($route['method']);
                 return;
             }
             //dump($route);
-            if (method_exists($contrl, $route['method']))
+            if (method_exists($control, $route['method']))
             {
 				//判断更多参数的情况
                 if(isset($route[2]))
                 {
-	                $contrl->$route['method']($route[2]);
+	                $control->$route['method']($route[2]);
                 }
 	            elseif(isset($route[3]))
 	            {
-		            $contrl->$route['method']($route[2],$route[3]);
+		            $control->$route['method']($route[2],$route[3]);
 	            }
 	            else
-		            $contrl->$route['method']();
+		            $control->$route['method']();
             }
             //存在控制器文件但是不存在控制器的方法,那么将方法当作参数传给控制器的index方法
             else
             {
-
-	            $contrl->index($route['method']);
+                dump($route,1);
+                $control = new CommonController();       //渲染404页面
+                $control->error_404('此方法不存在');
             }
         }
         else
         {
-	        $contrl = new CommonController();       //渲染404页面
-            $contrl->error_404();
+	        $control = new CommonController();       //渲染404页面
+            $control->error_404('控制器不存在');
         }
     }
-    /*
+
+    /**
+     *解析当前的url链接
      *
-     *
-     * @return
-     * */
-    protected  static function URL_parse($url= null)
+     * @return mixed
+     */
+    protected  static function URL_parse()
     {
-        $query_string = $_SERVER['QUERY_STRING'];
         $php_self = $_SERVER['PHP_SELF'];
         $arr = explode('/', $php_self);
         $arr = array_rid($arr, $ele = '');
@@ -109,23 +99,6 @@ class jet
             self::$models[$model_class] = new $model_class();
         }
         return self::$models[$model_class];
-    }
-
-    /**
-     * 系统初始化
-     */
-    private static function init(){
-        self::$config = load_class('core_config');
-    }
-
-    /**
-     * 获取系统配置
-     * 调用core/config.php
-     * @access public
-     * @return object
-     */
-    public static function config(){
-        return self::$config;
     }
 
 

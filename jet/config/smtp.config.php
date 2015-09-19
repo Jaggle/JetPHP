@@ -7,8 +7,7 @@ return array(
 	'Username'  => 'singviy@qq.com',
 	'Password'  => 'mycaihong',
 	'SMTPSecure'=> 'tls',
-	'Port'      => 587,
-	'From'      => 'singviy@qq.com',
-	'FromName'  => 'Jet',
-	'isHTML'    => 'true',
+	'Port'      =>  587,
+	'From'      => 'admin@yeskn.com',
+	'FromName'  => 'Jet Email System',
 );

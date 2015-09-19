@@ -1,9 +1,10 @@
 <?php
-//ÅäÖÃËùÓÐµÄÂ·ÓÉ£¬ÓÃÓÚ¿ìËÙÉú³Éurl,Ê¹ÓÃÊ±ÇëÇ°Ãæ¼ÓÉÏ[R:]
+//è·¯ç”±é…ç½®æ–‡ä»¶,ä½¿ç”¨æ­¤è·¯ç”±éœ€è¦åœ¨å‰é¢æ·»åŠ R:,æ¯”å¦‚R:home_page
+//ç”Ÿæˆçš„éƒ½æ˜¯ç»å¯¹è·¯ç”±
 return [
-    'home_page' => URL,
-    'login'     => URL.'/account/login',
-    'post'      => '/post',
-    'admin'     => '/admin',
-    'publish_post' => '/admin/index?p=post&a=publish',
+    'home_page'     => URL,
+    'login'         => URL . '/account/login',
+    'post'          => URL . '/post',
+    'admin'         => URL . '/admin',
+    'publish_post'  => URL . '/admin/index?p=post&a=publish',
 ];

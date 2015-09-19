@@ -156,75 +156,44 @@
                     </ul>
                 </li>
 
-                <li class="green">
+                <li class="green ">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="icon-envelope icon-animated-vertical"></i>
-                        <span class="badge badge-success">5</span>
+                        <span class="badge badge-success">{{$notiNum}}</span>
                     </a>
 
-                    <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                    <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close jet_message">
                         <li class="dropdown-header">
                             <i class="icon-envelope-alt"></i>
-                            5条消息
+                            {{$notiNum}}条系统消息
                         </li>
-
-                        <li>
+                        {{if $notiNum neq 0}}{{foreach from = $noti item = nt}}
+                        <li data-id="{{$nt.id}}">
                             <a href="#">
                                 <img src="{{$front}}/admin/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
 										<span class="msg-body">
+
 											<span class="msg-title">
-												<span class="blue">Alex:</span>
-												不知道写啥 ...
+												<span class="blue">{{$nt.sender}}</span>
+												{{$nt.content}}
 											</span>
 
-											<span class="msg-time">
-												<i class="icon-time"></i>
-												<span>1分钟以前</span>
-											</span>
+
+
 										</span>
                             </a>
                         </li>
-
-                        <li>
-                            <a href="#">
-                                <img src="{{$front}}/admin/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
-										<span class="msg-body">
-											<span class="msg-title">
-												<span class="blue">Susan:</span>
-												不知道翻译...
-											</span>
-
-											<span class="msg-time">
-												<i class="icon-time"></i>
-												<span>20分钟以前</span>
-											</span>
-										</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <img src="{{$front}}/admin/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
-										<span class="msg-body">
-											<span class="msg-title">
-												<span class="blue">Bob:</span>
-												到底是不是英文 ...
-											</span>
-
-											<span class="msg-time">
-												<i class="icon-time"></i>
-												<span>下午3:15</span>
-											</span>
-										</span>
-                            </a>
-                        </li>
-
+                        {{/foreach}}{{/if}}
+                        {{if $notiNum neq 0}}
                         <li>
                             <a href="inbox.html">
-                                查看所有消息
+                               查看所有通知
                                 <i class="icon-arrow-right"></i>
                             </a>
                         </li>
+                        {{/if}}
+
+
                     </ul>
                 </li>
 
