@@ -1,19 +1,22 @@
 <?php
 
 
-class IndexController extends CommonController
+namespace Jet\Controller;
+
+use Jet\Core\Controller;
+use Jet\Core\Image;
+use Jet\Core\ValidateCode;
+use Jet\Core\Crypt;
+use PHPMailer;
+
+class IndexController extends Controller
 {
 
     function __call($name, $args)
     {
-        die('指定的方法不存在');
-    }
+        $this->error_404();
 
-    public function test()
-    {
-        $this->render();
     }
-
 
     public function index()
     {
@@ -63,7 +66,7 @@ class IndexController extends CommonController
             if ($_FILES['img']['error'] > 0) {
                 die("ERROR :" . $_FILES["file"]["error"]);
             }
-            echo jetUpload('', 'image') ? '上传成功！' : "上传失败！";
+            echo jet_Upload('', 'image') ? '上传成功！' : "上传失败！";
 
 
         }
@@ -82,7 +85,7 @@ class IndexController extends CommonController
      */
     public function code_generate()
     {
-        $_vc = new ValidateCode();  //实例化一个对象
+        $_vc = new ValidateCode();//实例化一个对象
         $_vc->doimg();
         $_SESSION['authnum_session'] = $_vc->getCode();//验证码保存到SESSION中
     }
@@ -204,9 +207,9 @@ class IndexController extends CommonController
         ignore_user_abort(true);
         set_time_limit(0);
         $cfg_up = require(CONFIG . '/upyun.config.php');
-        $upyun = new UpYun($cfg_up['bucket'], $cfg_up['user'], $cfg_up['pswd'], UpYun::ED_TELECOM);
+        $upyun = new \UpYun($cfg_up['bucket'], $cfg_up['user'], $cfg_up['pswd'], \UpYun::ED_TELECOM);
         $opts = array(
-            UpYun::X_GMKERL_THUMBNAIL => 'square' //创建缩略图,该参数仅适用于图片空间
+            \UpYun::X_GMKERL_THUMBNAIL => 'square' //创建缩略图,该参数仅适用于图片空间
         );
 
         $lo_file = UPLOADS . '/post/14.jpg';
@@ -222,12 +225,12 @@ class IndexController extends CommonController
 
         $accessKey = 'SFq5DgIU7IzesR-xs6JvwLOs7cZyDde3baLdu1Oj';
         $secretKey = 'gu--J_yaqKjdgNrfpmsUiE2nnEvza6TiIFyEGG2U';
-        $auth = new Qiniu\Auth($accessKey, $secretKey);
+        $auth = new \Qiniu\Auth($accessKey, $secretKey);
         $bucket = 'jetstar';
         $token = $auth->uploadToken($bucket);
         $filePath = UPLOADS . '/post/d.png';
         $key = 'her-php-logo.png';
-        $uploadMgr = new Qiniu\Storage\UploadManager();
+        $uploadMgr = new \Qiniu\Storage\UploadManager();
         list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
         if ($err !== null) {
             dump($err);

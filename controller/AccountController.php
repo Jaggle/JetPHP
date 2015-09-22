@@ -1,13 +1,14 @@
 <?php
-// +----------------------------------------------------------------------
-// | Jakesoft Studio [ Anything can be done by Js will be done by Js. ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2015 http://www.yeskn.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: Jake <singviy@qq.com>
-// +----------------------------------------------------------------------
 
-class AccountController extends CommonController
+/**
+ * Class AccountController
+ * 账户管理控制器
+ */
+
+namespace Jet\Controller;
+use Jet\Core\Controller;
+
+class AccountController extends Controller
 {
     function __call($name, $args)
     {
@@ -22,15 +23,13 @@ class AccountController extends CommonController
     public function index($user)
     {
         $p_user = "#[1-9]*[0-9]+#";
-
         if (preg_match($p_user, $user) == false)      //字符串
         {
-            //dump($user,1);
+
             $user = $this->model('user')->where("user = '$user'")->get();        //得到一行记录
             if (!$user) {
                 $this->error_404('该用户不存在!');
             }
-
             $this->assign(array(
                 'user' => $user['user'],
             ), 1);

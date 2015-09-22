@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jake
- * Date: 2015/8/30
- * Time: 17:42
- */
-//use Controller\CommonController;
-//namespace Controller\MemberController;
 
 
-class MemberController extends CommonController
+namespace Jet\Controller;
+use Jet\Core\Controller;
+
+class MemberController extends Controller
 {
     public function  index(){
         $this->display('member/index.html');
