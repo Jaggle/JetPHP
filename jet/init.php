@@ -19,19 +19,34 @@ switch (jet_Config('template_engine')) {
         apply_config($TE, 'smarty');
 }
 
-//$smarty = new Smarty;
-//apply_config($smarty, 'smarty');
-
 function autoload($class)
 {
-    if (strstr($class, 'Controller'))
-        require_once(CTL . '/' . $class . '.php');
 
-    elseif (strstr($class, '_MODEL'))
-        require_once JET . '/jet_model.inc.php';
+	$_list = explode('\\',$class);
+	switch($_list[1])
+	{
+		case 'Agent' :
+			require_once JET . "/agent/".$_list[2].'.php';
+			return;
+			break;
+		case 'Model':
+			require_once JET . "/".$_list[0].'/'.$_list[1].'.php';
+			return;
+			break;
+		case 'Core':
+			require_once JET . "/core/".$_list[2].'.class.php';
+			return;
+			break;
+		case 'Jet':
+			require_once JET . "/".$_list[0].'/'.$_list[1].'.php';
+			return;
+			break;
+		case 'Controller' :
+			require_once CTL. "/".$_list[2].'.php';
+			return;
+			break;
 
-    elseif( ! strstr($class,'/') || !strstr($class,'\\'))
-        require_once(JET . '/libs/' . $class . '.class.php');  //调用第三方类
+	}
 
 }
 
@@ -43,16 +58,16 @@ spl_autoload_register('autoload');
  */
 if (DEBUG == true) {
     error_reporting(E_ALL);
-    //$smarty->caching = false;//是否使用缓存
+	/*$whoops = new \Whoops\Run;
+	$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+	$whoops->register();*/
+	    //$smarty->caching = false;//是否使用缓存
 } else {
     error_reporting(0);
-    //$smarty->caching = true;
 
 }
 
-$whoops = new \Whoops\Run;
-$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-$whoops->register();
+
 
 
 $log = new Monolog\Logger('USER');

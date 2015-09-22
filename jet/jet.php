@@ -1,6 +1,7 @@
 <?php
 
-
+use Jet\Core;
+use Jet\Controller;
 
 class jet
 {
@@ -10,9 +11,13 @@ class jet
 
         $route = self::URL_parse();
         $route['control'] = @trim(ucfirst($route[0])) ? @trim(ucfirst($route[0])) : "index";
+	    $route[0] = $route['control'];
         $route['method'] = @trim($route[1]) ? @trim($route[1]) : 'index';
+	    $route[1] = $route['method'];
         $flag = strstr($route['method'],'.html') || strstr($route['method'],'.htm') || strstr($route['method'],'.php');
         $flag2 = $flag || strstr($route['method'],'.jsp');
+
+	    //去掉后缀
         if($flag2)
         {
             $pattern = '/(.*?)\.(.*?)/';
@@ -20,17 +25,33 @@ class jet
             $route['method'] = $match[1];
         }
         $route['method'] = str_replace('-','_',$route['method']);
+		//dump($route,1);
+	    //是否转入agent
+	    if($route[0] == 'Agent' && !empty($route[1]) )        //代理模式
+	    {
+
+		    if(file_exists(JET.'/agent/'.$route[1].'Agent.php'))
+		    {
+			    $agent_space = 'Jet\\Agent\\'.$route[1]."Agent";
+				$agent = new $agent_space();
+			    return $agent->$route[2]();
+		    }
+		    else
+		    {
+			    throw new Whoops\Exception\ErrorException('不存在该代理');
+		    }
+	    }
 
         if (file_exists(CTL .'/'. $route['control'] . 'Controller.php'))
         {
-            $ctlName = $route['control'] . 'Controller';
-            $control = new $ctlName;
+	        $control_space = 'Jet\\Controller\\'.$route[0].'Controller';
+            $control = new $control_space;
 
             //第二个参数为数字的情况
             if(is_numeric($route['method'])){
                 //调用index方法并且得到id
                 $control->index($route['method']);
-                return;
+                return 0;
             }
             //dump($route);
             if (method_exists($control, $route['method']))
@@ -47,17 +68,15 @@ class jet
 	            else
 		            $control->$route['method']();
             }
-            //存在控制器文件但是不存在控制器的方法,那么将方法当作参数传给控制器的index方法
+
             else
             {
-                dump($route,1);
-                $control = new CommonController();       //渲染404页面
-                $control->error_404('此方法不存在');
+	            $control->index($route['method']);            //将路由数据传给index
             }
         }
         else
         {
-	        $control = new CommonController();       //渲染404页面
+	        $control = new Jet\Core\Controller;       //渲染404页面
             $control->error_404('控制器不存在');
         }
     }
