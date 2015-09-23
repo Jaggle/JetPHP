@@ -10,7 +10,7 @@
 
 namespace Jet\Core;
 
-class Controller
+class Controller extends Jet
 {
     public $router;
     public $config;
@@ -99,7 +99,7 @@ class Controller
     /**
      * 模板渲染函数，重写smarty的display函数
      *
-     * @param $temp 模板名
+     * @param $temp string  模板名
      * FIXME 如何知道是什么函数调用了当前函数,实现的功能是如果没有指定模板文件，则调用一个以父函数方法命名的模板文件。
      */
 
@@ -142,7 +142,7 @@ class Controller
 
     /**
      * render函数的同名函数
-     *
+     * @param   string  $temp   模板名字
      */
     public function display($temp = null)
     {
@@ -222,7 +222,6 @@ class Controller
      */
     public function get_cookie($name)
     {
-
         return @$_COOKIE[$this->cookie_prefix.$name];
     }
 
@@ -239,7 +238,6 @@ class Controller
      */
     public function set_cookie($name,$value,$expire = null,$path = null, $domain = null)
     {
-
         if($expire == null) {
             $expire = time()+3600*24*7;
         }

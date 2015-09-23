@@ -9,6 +9,7 @@
 
 
 namespace Jet\Agent;
+use PHPMailer;
 
 class MailAgent extends CommonAgent
 {
@@ -18,12 +19,7 @@ class MailAgent extends CommonAgent
 
 	}
 
-	/**
-	 * ·¢ËÍÓÊ¼ş
-	 */
-	public function send()
-	{
-		echo "hello";
-	}
+
+
 
 }

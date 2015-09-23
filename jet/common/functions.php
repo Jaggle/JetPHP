@@ -156,8 +156,8 @@ function jet_Get($s)
 }
 
 /**
- * @param $variable     //是一个数组也可能是一个变量
- * @return array|string 返回具体数据
+ * @param   $variable   string or array     是一个数组也可能是一个变量
+ * @return  array or string                 返回具体数据
  */
 function jet_Post($variable)
 {
@@ -171,7 +171,7 @@ function jet_Post($variable)
 
         //字符串
         if(is_string($p))
-            $p = trim($p);
+            $p = trim($p,"' :：,，");
 
         //数组
         else if( is_array($p) )

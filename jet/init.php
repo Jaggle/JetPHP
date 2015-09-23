@@ -21,7 +21,6 @@ switch (jet_Config('template_engine')) {
 
 function autoload($class)
 {
-
 	$_list = explode('\\',$class);
 	switch($_list[1])
 	{
@@ -45,7 +44,6 @@ function autoload($class)
 			require_once CTL. "/".$_list[2].'.php';
 			return;
 			break;
-
 	}
 
 }
@@ -58,9 +56,9 @@ spl_autoload_register('autoload');
  */
 if (DEBUG == true) {
     error_reporting(E_ALL);
-	/*$whoops = new \Whoops\Run;
+	$whoops = new \Whoops\Run;
 	$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-	$whoops->register();*/
+	$whoops->register();
 	    //$smarty->caching = false;//是否使用缓存
 } else {
     error_reporting(0);

@@ -11,7 +11,7 @@ define('CONFIG',JET.'/config');
 define('URL','http://jetstar.dev');
 
 //开发者模式
-define('DEBUG',true);
+define('DEBUG',false);
 
 //默认模板名称，对应views目录下的路径
 define("TEMPLATE",'default');
@@ -19,5 +19,5 @@ define("TEMPLATE",'default');
 //初始化运行环境
 require_once(JET.'/init.php');
 
-//everythis is ready, let's go !
+//everything is ready, let's go !
 jet::start();

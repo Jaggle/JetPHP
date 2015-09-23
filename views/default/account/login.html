@@ -1,43 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>登录</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- basic styles -->
-
-    <link href="{{$front}}/admin/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{$front}}/admin/assets/css/font-awesome.min.css" />
-
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="{{$front}}/admin/assets/css/font-awesome-ie7.min.css" />
-    <![endif]-->
-
-    <!-- page specific plugin styles -->
-
-    <!-- fonts -->
-
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
-
-    <!-- ace styles -->
-
-    <link rel="stylesheet" href="{{$front}}/admin/assets/css/ace.min.css" />
-    <link rel="stylesheet" href="{{$front}}/admin/assets/css/ace-rtl.min.css" />
-
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="{{$front}}/admin/assets/css/ace-ie.min.css" />
-    <![endif]-->
-
-    <!-- inline styles related to this page -->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-    <!--[if lt IE 9]>
-    <script src="{{$front}}/admin/assets/js/html5shiv.js"></script>
-    <script src="{{$front}}/admin/assets/js/respond.min.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="{{$front}}/admin/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{$front}}/admin/assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300"/>
+    <link rel="stylesheet" href="{{$front}}/admin/assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="{{$front}}/admin/assets/css/ace-rtl.min.css"/>
 </head>
 
 <body class="login-layout">
@@ -63,7 +34,7 @@
                                 <div class="widget-main">
                                     <h4 class="header blue lighter bigger">
                                         <i class="icon-coffee green"></i>
-                                       请输入验证信息
+                                        请输入验证信息
                                     </h4>
 
                                     <div class="space-6"></div>
@@ -72,25 +43,29 @@
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" name="user" />
+															<input type="text" class="form-control"
+                                                                   placeholder="Username" name="user"/>
 															<i class="icon-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" name="pswd" />
+															<input type="password" class="form-control"
+                                                                   placeholder="Password" name="pswd"/>
 															<i class="icon-lock"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="验证码" name="validate" />
+															<input type="text" class="form-control" placeholder="验证码"
+                                                                   name="validate"/>
 
 														</span>
                                                 <span>
-                                                    <img  title="点击刷新" src="/index/code_generate" align="absbottom" onclick="this.src='/index/code_generate?'+Math.random();">
+                                                    <img title="点击刷新" src="/index/code_generate" align="absbottom"
+                                                         onclick="this.src='/index/code_generate?'+Math.random();">
                                                 </span>
 
                                             </label>
@@ -99,13 +74,14 @@
 
                                             <div class="clearfix">
                                                 <label class="inline">
-                                                    <input type="checkbox" class="ace" />
+                                                    <input type="checkbox" class="ace"/>
                                                     <span class="lbl"> 记住我</span>
                                                 </label>
 
-                                                <input type="hidden" name="action" value="do_login" />
+                                                <input type="hidden" name="action" value="do_login"/>
                                                 <input type="hidden" name="backurl" value="/admin/">
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary btn-login">
+                                                <button type="button"
+                                                        class="width-35 pull-right btn btn-sm btn-primary btn-login">
                                                     <i class="icon-key"></i>
                                                     登录
                                                 </button>
@@ -133,25 +109,30 @@
                                             <i class="icon-google-plus"></i>
                                         </a>
                                     </div>
-                                </div><!-- /widget-main -->
+                                </div>
+                                <!-- /widget-main -->
 
                                 <div class="toolbar clearfix">
                                     <div>
-                                        <a href="#" onclick="show_box('forgot-box'); return false;" class="forgot-password-link">
+                                        <a href="#" onclick="show_box('forgot-box'); return false;"
+                                           class="forgot-password-link">
                                             <i class="icon-arrow-left"></i>
                                             忘记密码？
                                         </a>
                                     </div>
 
                                     <div>
-                                        <a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
+                                        <a href="#" onclick="show_box('signup-box'); return false;"
+                                           class="user-signup-link">
                                             我要注册
                                             <i class="icon-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
-                            </div><!-- /widget-body -->
-                        </div><!-- /login-box -->
+                            </div>
+                            <!-- /widget-body -->
+                        </div>
+                        <!-- /login-box -->
 
                         <div id="forgot-box" class="forgot-box widget-box no-border">
                             <div class="widget-body">
@@ -163,14 +144,15 @@
 
                                     <div class="space-6"></div>
                                     <p>
-                                       请输入你的注册邮箱接收我们发送的操作说明
+                                        请输入你的注册邮箱接收我们发送的操作说明
                                     </p>
 
                                     <form>
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
+															<input type="email" class="form-control"
+                                                                   placeholder="Email"/>
 															<i class="icon-envelope"></i>
 														</span>
                                             </label>
@@ -183,16 +165,20 @@
                                             </div>
                                         </fieldset>
                                     </form>
-                                </div><!-- /widget-main -->
+                                </div>
+                                <!-- /widget-main -->
 
                                 <div class="toolbar center">
-                                    <a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
+                                    <a href="#" onclick="show_box('login-box'); return false;"
+                                       class="back-to-login-link">
                                         返回登录
                                         <i class="icon-arrow-right"></i>
                                     </a>
                                 </div>
-                            </div><!-- /widget-body -->
-                        </div><!-- /forgot-box -->
+                            </div>
+                            <!-- /widget-body -->
+                        </div>
+                        <!-- /forgot-box -->
 
                         <div id="signup-box" class="signup-box widget-box no-border">
                             <div class="widget-body">
@@ -205,43 +191,40 @@
                                     <div class="space-6"></div>
                                     <p> 请输入以下内容: </p>
 
-                                    <form action="/account/register" method="post">
+                                    <form action="" method="" id="frm-register">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="邮箱" name="reg[mail]" />
+															<input type="email" class="form-control" placeholder="邮箱"  name="reg[mail]" id="mail" required/>
 															<i class="icon-envelope"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="帐号" name="reg[user]" />
+															<input type="text" class="form-control" placeholder="帐号"  name="reg[user]" required/>
 															<i class="icon-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" name="reg[pswd]" />
+															<input type="password" class="form-control" placeholder="密码"  name="reg[pswd]" id="password" required/>
 															<i class="icon-lock"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="确认密码" name="reg[pswd]" />
+															<input type="password" class="form-control" placeholder="确认密码" name="reg[pswd]" id="ps2" required/>
 															<i class="icon-retweet"></i>
 														</span>
                                             </label>
 
                                             <label class="block">
-                                                <input type="checkbox" class="ace" />
-                                                <input type="hidden" name="action" value="do_register" />
-														<span class="lbl">
-															我接受
-															<a href="#">jetstar用户协议</a>
-														</span>
+                                                <input type="checkbox" class="ace"/>
+                                                <input type="hidden" name="action" value="do_register"/>
+														<span class="lbl"> 我接受 <a href="#">jetstar用户协议</a> </span>
                                             </label>
 
                                             <div class="space-24"></div>
@@ -252,8 +235,7 @@
                                                     重置
                                                 </button>
 
-                                                <button type="submit" class="width-65 pull-right btn btn-sm btn-success">
-                                                    ok,注册
+                                                <button type="submit" class="width-65 pull-right btn btn-sm btn-success btn-register">  ok,注册
                                                     <i class="icon-arrow-right icon-on-right"></i>
                                                 </button>
                                             </div>
@@ -262,87 +244,120 @@
                                 </div>
 
                                 <div class="toolbar center">
-                                    <a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
+                                    <a href="#" onclick="show_box('login-box'); return false;"
+                                       class="back-to-login-link">
                                         <i class="icon-arrow-left"></i>
-                                       返回登录
+                                        返回登录
                                     </a>
                                 </div>
-                            </div><!-- /widget-body -->
-                        </div><!-- /signup-box -->
-                    </div><!-- /position-relative -->
+                            </div>
+                            <!-- /widget-body -->
+                        </div>
+                        <!-- /signup-box -->
+                    </div>
+                    <!-- /position-relative -->
                 </div>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
     </div>
-</div><!-- /.main-container -->
+</div>
 
-<!-- basic scripts -->
 
-<!--[if !IE]> -->
+<script src="{{__PUBLIC__}}/static/js/jquery.js"></script>
+<script src="{{__PUBLIC__}}/static/js/jquery.validate.min.js"></script>
 
-<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-
-<!-- <![endif]-->
-
-<!--[if IE]>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<![endif]-->
-
-<!--[if !IE]> -->
-
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-</script>
-
-<!-- <![endif]-->
-
-<!--[if IE]>
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
-
-<script type="text/javascript">
-    if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-</script>
-
-<!-- inline scripts related to this page -->
 
 <script type="text/javascript">
     function show_box(id) {
         jQuery('.widget-box.visible').removeClass('visible');
-        jQuery('#'+id).addClass('visible');
+        jQuery('#' + id).addClass('visible');
     }
 </script>
 
 <script>
-    $(function(){
-        $(".btn-login").click(function(){
+
+    $(function () {
+        jQuery.extend(jQuery.validator.messages, {
+            required: "必选字段",
+            remote: "请修正该字段",
+            email: "请输入正确格式的电子邮件",
+            url: "请输入合法的网址",
+            date: "请输入合法的日期",
+            dateISO: "请输入合法的日期 (ISO).",
+            number: "请输入合法的数字",
+            digits: "只能输入整数",
+            creditcard: "请输入合法的信用卡号",
+            equalTo: "请再次输入相同的值",
+            accept: "请输入拥有合法后缀名的字符串",
+            maxlength: jQuery.validator.format("请输入一个 长度最多是 {0} 的字符串"),
+            minlength: jQuery.validator.format("请输入一个 长度最少是 {0} 的字符串"),
+            rangelength: jQuery.validator.format("请输入 一个长度介于 {0} 和 {1} 之间的字符串"),
+            range: jQuery.validator.format("请输入一个介于 {0} 和 {1} 之间的值"),
+            max: jQuery.validator.format("请输入一个最大为{0} 的值"),
+            min: jQuery.validator.format("请输入一个最小为{0} 的值")
+        });
+
+
+        $("#frm-register").validate({
+            rules: {
+                mail: {
+                    required: "请输入Email地址",
+                    email: true,
+                    minlength: 5
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                }
+            },
+
+            confirm_password: {
+                required: true,
+                minlength: 5,
+                equalTo: "#password"
+            }
+        });
+
+        $(".btn-login").click(function () {
             $.ajax({
-                type    : 'post',
-                url     : "/account/login",
-                data    : {
-                    user    : $("input[name='user']").val(),
-                    pswd    : $("input[name='pswd']").val(),
-                    action  : 'do_login',
+                type: 'post',
+                url: "/account/login",
+                data: {
+                    user: $("input[name='user']").val(),
+                    pswd: $("input[name='pswd']").val(),
+                    action: 'do_login',
                     validate: $("input[name='validate']").val()
                 },
-                success : function(data,status){
+                success: function (data, status) {
                     data = $.parseJSON(data);
-                    if(data.status == 1){               //登录成功
-                        alert(data.msg);
-                        window.location.href="/admin/";
+                    if (data.status == 1) {               //登录成功
+                        window.location.href = "/admin/";
 
-                    }else{
+                    } else {
                         alert(data.msg);
                     }
                 },
-                error   : function(){
+                error: function () {
                     alert("发送请求失败！");
                 }
 
             });
         });
+
+        //注册
+        $(".btn-register").click(function(){
+            if($("#password").val() != $("#ps2").val()){
+                alert('两次输入的密码不一致');
+                return;
+            }
+            $.ajax({
+                type    : 'post',
+                url     : '/account/register',
+
+            })
+        })
     })
 </script>
 

@@ -9,7 +9,8 @@ define('VENDOR', JET . '/vendor');                  //第三方插件目录
 
 
 //地址-用于网页访问
-define('__STATIC__', '/views/common/static');      //静态资源
-define('__LIBS__', '/views/common/libs');      //libs
+define('__STATIC__', '/public/static');      //静态资源
+define('__PUBLIC__', '/public');      //public
+define('__LIBS__', '/public/libs');      //libs
 define('__TEMPLATE__', '/views/' . TEMPLATE);      //模板路径
 

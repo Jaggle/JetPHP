@@ -106,10 +106,9 @@
                         category : $("#post-category").val(),
                         summary : $("#post-summary").val(),
                         content : $("input[name='content']").val(),
-                        action  : 'do_publish',
+                        action  : 'do_publish'
                     },
                     success : function(data){
-                        //alert(data);
                         data = $.parseJSON(data);
                         if(data.has == true){      //发布成功
                             alert(data.msg);

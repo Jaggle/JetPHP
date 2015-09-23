@@ -7,7 +7,6 @@
  * @link        http://www.yeskn.com
  */
 namespace Jet\Agent;
-
 use Jet\Core\Model;
 use Whoops\Exception\ErrorException;
 
@@ -43,6 +42,11 @@ class CommonAgent
 				'message'   => 'Failed',
 				'data'      => $data
 			);
+
+	}
+
+	protected function mailer()
+	{
 
 	}
 
