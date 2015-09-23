@@ -8,7 +8,7 @@ class AjaxController extends Controller
 
     function __call($name, $args)
     {
-        die('指定的方法不存在');
+        $this->error_404('THINGS NOT FOUND');
     }
     public function test()
     {

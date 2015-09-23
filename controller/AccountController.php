@@ -7,6 +7,7 @@
 
 namespace Jet\Controller;
 
+use Jet\Agent\MailAgent;
 use Jet\Core\Controller;
 use PHPMailer;
 use Whoops\Exception;
@@ -25,15 +26,18 @@ class AccountController extends Controller
 	 */
 	public function index($user)
 	{
+		$name = $user;
 		$p_user = "#[1-9]*[0-9]+#";
 		if (preg_match($p_user, $user) == false)      //字符串
 		{
 			$user = $this->model('user')->where("user = '$user'")->get();        //得到一行记录
-			if (!$user) {
+			if (!$user)
 				$this->error_404('该用户不存在!');
-			}
+
+			$posts = $this->model('post')->where("author = '$name'")->order("publish_time DESC")->select();
 			$this->assign(array(
-				'user' => $user['user'],
+				'user'  => $user['user'],
+				'posts' => $posts
 			), 1);
 			$this->render();
 		}
@@ -41,11 +45,13 @@ class AccountController extends Controller
 		{
 
 			$user = intval($user);
-
 			$user = $this->model('user')->where($user)->get();        //得到一行记录
-
+			if (!$user)
+				$this->error_404('该用户不存在!');
+			$posts = $this->model('post')->where($name)->order("publish_time DESC")->select();
 			$this->assign(array(
-				'user' => $user['user'],
+				'user'  => $user['user'],
+				'posts' => $posts
 			), 1);
 			$this->render();
 		}
@@ -75,27 +81,22 @@ class AccountController extends Controller
 			//判断用户状态 ，有 verifying,ok,frozen
 			$account_status = $this->model('user')->where("user = '$user'")->field('status');
 			if ('frozen' === $account_status) {
-				$this->redirect('你的账号已经被冻结！', 'R:home_page');
+				echo jet_JSON(array('msg' => '你的账号已经被冻结！', 'status' => 0)) and die();
 			}
 			//尚未验证
 			if ('verifying' === $account_status) {
-				$this->set_cookie('v_user', $user);
-				$this->render('notice/verifying');
+				echo jet_JSON(array('msg' => '您的账号尚未验证邮箱！', 'status' => 0)) and die();
 			}
 			if (isset($code) and !empty($code)) {
 				if ($code == $this->get_session('authnum_session')) {
-
 				} else {
-					echo jet_JSON(array('msg' => '验证码有误！', 'status' => 0));
-					return 0;
+					echo jet_JSON(array('msg' => '验证码有误！', 'status' => 0)) and die();
 				}
 			} else {
-				echo jet_JSON(array('msg' => '请填写验证码！', 'status' => 0));
-				return 0;
+				echo jet_JSON(array('msg' => '请填写验证码！', 'status' => 0)) and die();
 			}
 			if ($this->model('user')->where("user = '$user'")->num() == 0) {
-				echo jet_JSON(array('msg' => '不存在该用户！', 'status' => 0));
-				return 0;
+				echo jet_JSON(array('msg' => '不存在该用户！', 'status' => 0)) and die();
 			}
 			if ($pswd == $this->model('user')->where("user = '$user'")->field('pswd')) {
 				//创建cookie
@@ -104,11 +105,9 @@ class AccountController extends Controller
 				$f1 = $this->set_cookie('user', $identity);
 				$f2 = $this->set_session($user, '1');
 				if ($f1 and $f2)
-					echo jet_JSON(array('msg' => '登录成功！', 'status' => 1));
-				return 1;
+					echo jet_JSON(array('msg' => '登录成功！', 'status' => 1)) and die();
 			} else {
-				echo jet_JSON(array('msg' => '密码有误！', 'status' => 0));
-				return 0;
+				echo jet_JSON(array('msg' => '密码有误！', 'status' => 0)) and die();
 			}
 		}
 
@@ -121,23 +120,22 @@ class AccountController extends Controller
 	public function logout()
 	{
 		//接受ajax请求
-		if(jet_Get('r') == 'ajax'){
+		if (jet_Get('r') == 'ajax') {
 			$_SERVER['REQUEST_METHOD'] == 'POST' or die('welcome to jet');
 			if (!$this->get_cookie('user')) {
 				$array = array(
-					'msg'   => '您尚未登录',
-					'has'   => false
+					'msg' => '您尚未登录',
+					'has' => false
 				);
-			}
-			elseif($this->let_cookie('user')){
+			} elseif ($this->let_cookie('user')) {
 				$array = array(
-					'msg'   => '退出成功',
-					'has'   => true
+					'msg' => '退出成功',
+					'has' => true
 				);
-			}else{
+			} else {
 				$array = array(
-					'msg'   => '退出失败',
-					'has'   => 'false'
+					'msg' => '退出失败',
+					'has' => 'false'
 				);
 			}
 			echo jet_JSON($array);
@@ -157,60 +155,78 @@ class AccountController extends Controller
 	}
 
 	/**
-	 *
+	 * 注册功能
 	 */
 	public function register()
 	{
 
 		if (jet_Post('action') === 'do_register') {
-			$reg = jet_Post('reg');
+			$mail = jet_Post('mail');
+			$user = jet_Post('user');
+			$pswd = jet_Post('pswd');
 			$p_mail = '/^[\w]+(\.[\w+])*@[\w-]+(\.[\w-]+)+$/i';
 			$p_user = "#^[A-Za-z0-9\\-_]{3,20}#";
-			$p_pswd = "#^[A-Za-z0-9\\-_]{8,20}#";
-			//dump($reg,1);
-
-			if (preg_match($p_mail, $reg['mail'])) {
-
-			} else {
-				$this->refresh('请输入正确的邮箱', 2);
-			}
-			if (preg_match($p_pswd, $reg['pswd'])) {
-
-			} else {
-				$this->refresh('请输入正确格式的密码', 2);
-			}
-			if (preg_match($p_user, $reg['user'])) {
+			$p_pswd = "#^[A-Za-z0-9\\-_]{3,20}#";
+			if (!preg_match($p_mail, $mail)) {
+				echo jet_JSON(array(
+					'msg' => '请输入正确的邮箱格式',
+					'has' => false
+				));
+				return;
+			} elseif (!preg_match($p_pswd, $pswd)) {
+				echo jet_JSON(array(
+					'msg' => '请输入正确的密码，长度在3-20之间',
+					'has' => false
+				));
+				return;
+			} elseif (preg_match($p_user, $user)) {
 				//判断是否有相同账号
-				if ($this->model('user')->where("user = '" . $reg['user'] . "'")->num()) {
-					$this->redirect('已经存在相同名字的账号，请更换用户名！', 'R:login');
-				}
-
+				if ($this->model('user')->where("user = '" . $user . "'")->num()) {
+					echo jet_JSON(array(
+						'msg' => '已经存在相同用户，请修改您的名字',
+						'has' => false
+					));
+					return;
+				} else {
+				};//everything is ok
 			} else {
-				$this->refresh('请输入正确格式的用户名', 2);
+				echo jet_JSON(array(
+					'msg' => '用户名格式不正确，请不要输入字符，长度在3-20之间',
+					'has' => false
+				));
+				return;
 			}
-
-			$salt = $this->config['jet_identity'];
-			$reg['identity'] = md5($salt . $reg['user']);
-			$reg['pswd'] = md5($reg['pswd']);
+			$salt = jet_Config('jet_identity');
+			$reg['identity'] = md5($salt . $user);  //识别码加密
+			$reg['pswd'] = md5($pswd);              //密码MD5加密
+			$reg['user'] = $user;
+			$reg['mail'] = $mail;
+			$reg['fans'] = jet_Config('register_fans');
+			$reg['type'] = jet_Config('register_type');
+			$reg['register_time'] = date('Y-m-d h:i:s', time());
+			$reg['status'] = jet_Config('register_status');
 
 			//向数据库插入数据
 			$flag = $this->model('user')->insert($reg);
 			if ($flag) {
-				//注册成功，发送验证码邮件，并显示验证页面
 				$flag = $this->sendVerifyMail($reg);
 				if ($flag)
-					echo 'Message has been sent';
-				else {
-					echo 'Message could not be sent.';
-					echo 'Mailer Error: ' . $flag;
-				}
-
-			} else
-				$this->redirect('注册失败！', 'R:login');
-
-		} else {
-			$this->redirect('nothing to do ', 'R:login', 0);
-		}
+					echo jet_JSON(array(
+						'msg' => '注册成功！',
+						'has' => true
+					));
+				else echo jet_JSON(array(
+						'msg' => '程序出现错误，希望你能将这个错误反馈给我们！错误代码:ERROR_REG_01',
+						'has' => false
+					));
+			} else echo jet_JSON(array(
+					'msg' => '程序出现错误，希望你能将这个错误反馈给我们！错误代码:ERROR_REG_02',
+					'has' => false
+				));
+		} else echo jet_JSON(array(
+				'msg' => '程序出现错误，希望你能将这个错误反馈给我们！错误代码:ERROR_REG_03',
+				'has' => false
+			));
 	}
 
 	/**
@@ -237,24 +253,13 @@ class AccountController extends Controller
 	 */
 	public function sendVerifyMail($reg)
 	{
-		$mail = new PHPMailer;
-		$smtp_config = require(CONFIG . '/smtp.config.php');
-		foreach ($smtp_config as $key => $value) {
-			$mail->$key = $value;
-		}
-		$mail->isSMTP();
-		$mail->SMTPAuth = true;
-		$mail->isHTML(true);
-		$mail->Subject = "请确认您在Jet上的邮箱";
-		$mail->Body = "欢迎来到Jet<br/><br/>";
-		$mail->Body .= "点击下面的链接来确认和激活你的新帐号：<br/><br/>";
-		$mail->Body .= URL . "/account/activate/" . $reg['identity'] . "<br/>";
-		$mail->Body .= "如果上面的链接无法点击，请拷贝该链接并粘贴到你的浏览器的地址栏里。";
-		$mail->addAddress($reg['mail'], $reg['user']);     // Add a recipient
-		if ($mail->send())
-			return true;
-		else
-			return $mail->ErrorInfo;
+		$subject = "请确认您在Jet上的邮箱";
+		$content = "欢迎来到Jet" . "<br/><br/>";
+		$content .= "点击下面的链接来确认和激活你的新帐号：" . "<br/><br/>";
+		$content .= URL . "/account/activate/" . $reg['identity'] . "<br/>";
+		$content .= "如果上面的链接无法点击，请拷贝该链接并粘贴到你的浏览器的地址栏里。";
+		$has = MailAgent::send($reg['mail'], $reg['user'], $subject, $content, 'Jet');
+		return $has;
 	}
 
 	public function do_sendVerifyMail()
