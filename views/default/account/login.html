@@ -4,11 +4,11 @@
     <meta charset="utf-8"/>
     <title>登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="{{$front}}/admin/assets/css/bootstrap.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{$front}}/admin/assets/css/font-awesome.min.css"/>
+    <link href="{{__PUBLIC__}}/assets/ace/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{__PUBLIC__}}/assets/ace/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300"/>
-    <link rel="stylesheet" href="{{$front}}/admin/assets/css/ace.min.css"/>
-    <link rel="stylesheet" href="{{$front}}/admin/assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="{{__PUBLIC__}}/assets/ace/css/ace.min.css"/>
+    <link rel="stylesheet" href="{{__PUBLIC__}}/assets/ace/css/ace-rtl.min.css"/>
 </head>
 
 <body class="login-layout">
@@ -195,28 +195,28 @@
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="邮箱"  name="reg[mail]" id="mail" required/>
+															<input type="email" class="form-control" placeholder="邮箱"  name="r_mail" id="mail" required/>
 															<i class="icon-envelope"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="帐号"  name="reg[user]" required/>
+															<input type="text" class="form-control" placeholder="帐号"  name="r_user" required/>
 															<i class="icon-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码"  name="reg[pswd]" id="password" required/>
+															<input type="password" class="form-control" placeholder="密码"  name="r_password" id="password" required/>
 															<i class="icon-lock"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="确认密码" name="reg[pswd]" id="ps2" required/>
+															<input type="password" class="form-control" placeholder="确认密码" name="r_password" id="ps2" required/>
 															<i class="icon-retweet"></i>
 														</span>
                                             </label>
@@ -235,7 +235,7 @@
                                                     重置
                                                 </button>
 
-                                                <button type="submit" class="width-65 pull-right btn btn-sm btn-success btn-register">  ok,注册
+                                                <button type="button" class="width-65 pull-right btn btn-sm btn-success btn-register">  ok,注册
                                                     <i class="icon-arrow-right icon-on-right"></i>
                                                 </button>
                                             </div>
@@ -305,21 +305,21 @@
                 mail: {
                     required: "请输入Email地址",
                     email: true,
-                    minlength: 5
+                    minlength: 4
                 },
                 password: {
                     required: true,
-                    minlength: 5
+                    minlength: 4
                 }
             },
 
             confirm_password: {
                 required: true,
-                minlength: 5,
+                minlength: 4,
                 equalTo: "#password"
             }
         });
-
+        //登录
         $(".btn-login").click(function () {
             $.ajax({
                 type: 'post',
@@ -340,6 +340,7 @@
                     }
                 },
                 error: function () {
+
                     alert("发送请求失败！");
                 }
 
@@ -348,13 +349,32 @@
 
         //注册
         $(".btn-register").click(function(){
+
             if($("#password").val() != $("#ps2").val()){
                 alert('两次输入的密码不一致');
                 return;
             }
+
             $.ajax({
                 type    : 'post',
                 url     : '/account/register',
+                data    :{
+                    mail    : $("input[name='r_mail']").val(),
+                    user    : $("input[name='r_user']").val(),
+                    pswd    : $("input[name='r_password']").val(),
+                    action  : 'do_register'
+                },
+                success     : function(data,status){
+                    data = $.parseJSON(data);
+                    if(data.has){
+                        alert('注册成功,请到你的邮箱查看验证邮件');
+                    }else{
+                        alert(data.msg);
+                    }
+                },
+                error       :function(){
+                    alert('出现错误!');
+                }
 
             })
         })

@@ -1,13 +1,7 @@
+<div class="navbar navbar-default navbar-fixed-top" id="navbar">
 
-<div class="navbar navbar-default" id="navbar">
-    <script type="text/javascript">
-        try{
-            ace.settings.check('navbar' , 'fixed')
-        }catch(e)
-        {}
-    </script>
 
-    <div class="navbar-container" id="navbar-container">
+    <div class="navbar-container container" id="navbar-container">
         <div class="navbar-header pull-left">
             <a href="#" class="navbar-brand">
                 <small>
@@ -170,7 +164,7 @@
                         {{if $notiNum neq 0}}{{foreach from = $noti item = nt}}
                         <li data-id="{{$nt.id}}">
                             <a href="#">
-                                <img src="{{$front}}/admin/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                <img src="{{__PUBLIC__}}/assets/ace/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
 										<span class="msg-body">
 
 											<span class="msg-title">
@@ -194,7 +188,7 @@
 
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="{{$front}}/admin/assets/avatars/user.jpg" alt="Jason's Photo" />
+                        <img class="nav-user-photo" src="{{__PUBLIC__}}/assets/ace/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎光临,</small>
 									{{$user|default:"游客"}}

@@ -182,15 +182,13 @@ class Model
 	public function insert($data)
 	{
 		$columns = array_keys($data);
-
 		$columns = implode(',',$columns);
-
 		foreach($data as  $key =>$v)
 		{
-			$data[$key] = "'".$v."'";
+			$data[$key] = str_replace('\'','\'\'',$v);   //将一个引号换成两个引号，以方便插入到数据库中
+			$data[$key] = "'$data[$key]'";       //给数据添加引号
 		}
 		$values =  implode(',',$data);
-		str_replace('\'','\'\'',$values);   //将一个引号换成两个引号，以方便插入到数据库中
 		$sql = "insert into ".$this->option['table']."(".$columns.")"." values "."(".$values.")";
 		$this->mysqli->query($sql);
 		if($this->mysqli->errno == 0)

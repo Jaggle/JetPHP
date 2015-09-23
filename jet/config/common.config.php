@@ -7,6 +7,9 @@ return  $config = array(
     'cookie_prefix'     => 'jet_',
     'jet_identity'      => 'what does the fox say ?',
     'summary_length'    => 250,
+	'register_status'   => 'verifying',
+	'register_type'     => 'member',
+	'register_fans'     => 'Jake',
 
 );
 

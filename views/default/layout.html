@@ -6,15 +6,15 @@
 
 </head>
 
-<body>
+<body class="navbar-fixed">
     {{block name=topnav}}
         {{include file= "./block/topnav.html"}}
     {{/block}}
 
-<div class="main-container" id="main-container">
-    <script type="text/javascript">
+<div class="main-container container" id="main-container">
+   <!-- <script type="text/javascript">
         try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-    </script>
+    </script>-->
 
     <div class="main-container-inner">
         <a class="menu-toggler" id="menu-toggler" href="#">
@@ -78,12 +78,6 @@
 
 {{block name = foot}}
         {{include file = "./block/foot.html"}}
-
-    <style>
-        .edui-editor-iframeholder.edui-default{
-            height: 500px !important;
-        }
-    </style>
     {{/block}}
 </body>
 </html>

@@ -25,7 +25,7 @@ function autoload($class)
 	switch($_list[1])
 	{
 		case 'Agent' :
-			require_once JET . "/agent/".$_list[2].'.php';
+			file_exists(JET . "/agent/".$_list[2].'.php') && require_once JET . "/agent/".$_list[2].'.php';
 			return;
 			break;
 		case 'Model':

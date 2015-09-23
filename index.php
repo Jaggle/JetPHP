@@ -11,7 +11,7 @@ define('CONFIG',JET.'/config');
 define('URL','http://jetstar.dev');
 
 //开发者模式
-define('DEBUG',false);
+define('DEBUG',true);
 
 //默认模板名称，对应views目录下的路径
 define("TEMPLATE",'default');
