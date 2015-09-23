@@ -1,0 +1,49 @@
+{{extends file = "../layout.html"}}
+{{block name = title}}jetstar - 首页{{/block}}
+{{block name = head}}
+{{$smarty.block.parent}}
+<link rel="stylesheet" href="{{__STATIC__}}/css/common.css"/>
+{{/block}}
+{{block name = location}}
+<ul class="breadcrumb">
+    <li>
+        <i class="icon-home home-icon"></i>
+        <a href="/">首页</a>
+    </li>
+</ul><!-- .breadcrumb -->
+{{/block}}
+
+{{block name = content}}
+
+
+<ul  id=""  class="area" data-current=1></ul>
+
+<input type="button" class="num" value=48>
+
+<script>
+    $(function () {
+        setInterval(function () {
+            $.ajax({
+                url: '/index/polling',
+                type: 'post',
+                data: {id: parseInt($(".num").val())},
+                success: function (data, status) {
+                    data = $.parseJSON(data);
+                    if (data.has == true) {
+                        $(".area").append("<li>"+data.title+"</li>");
+                        //alert('有新的消息');
+                        $("input[type='button']").val(parseInt(data.id));
+                    } else {
+                        //$(".area").append("<li>没有新的消息</li>");
+                        //alert('没有新的消息');
+                    }
+                },
+                error: function () {
+                    alert('建立连接失败！');
+                }
+            });
+        }, 2000);
+    })
+</script>
+
+{{/block}}
