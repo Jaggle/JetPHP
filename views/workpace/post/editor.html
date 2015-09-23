@@ -1,0 +1,144 @@
+{{extends file = '../../layout.html'}}
+
+{{block name = title}}Jet - {{if $action eq 'do_publish'}}发布新文章{{else}}修改{{/if}}{{/block}}
+
+{{block name = location}}
+<ul class="breadcrumb">
+    <li>
+        <i class="icon-home home-icon"></i>
+        <a href="#">控制台</a>
+    </li>
+
+    <li>
+        <a href="#">文档</a>
+    </li>
+    <li class="active">{{if $action eq 'do_publish'}}发布新文章{{else}}修改{{/if}}</li>
+</ul><!-- .breadcrumb -->
+{{/block}}
+
+{{block name = content}}
+
+    <table class="table table-striped table-bordered table-hover" style="">
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label class="col-sm-1 col-lg-1 control-label no-padding-right" for="post-title">标题 </label>
+
+                    <div class="col-sm-11">
+                        <input type="text" name="post[title]" id="post-title" class="col-md-12" value="{{$post.title|default:''}}">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label no-padding-right" for="post-category">分类 </label>
+
+                    <div class="col-sm-10">
+                        <select class="form-control" id="post-category" name="post[category]">
+                            {{foreach from=$category item = ct}}
+                            <option {{if $post.category eq $ct.name}}selected{{/if}} value="{{$ct.name}}">{{$ct.name}}</option>
+                            {{/foreach}}
+
+
+                        </select>
+                    </div>
+                </div>
+            </td>
+            <td>标签：<div class="tags"><span class="tag">Tag Input Control<button type="button" class="close">×</button></span><input type="text" name="tags" id="form-field-tags" value="Tag Input Control" placeholder="Enter tags ..." style="display: none;"><input type="text" placeholder="Enter tags ..."></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label no-padding-right" for="post-summary">摘要 </label>
+
+                    <div class="col-sm-11">
+                        <input type="text" name="post[summary]" id="post-summary" class="col-xs-12" value="{{$post.summary|default:''}}">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <script id="container"  name="content" type="text/plain">{{$post.content|default:''}}</script>
+            </td>
+        </tr>
+        <tr>
+            <td  colspan="3">
+                <input type="hidden" name="action" value="{{$action}}">
+                <input type="submit" value="{{if $action eq 'do_publish'}}发布新文章{{else}}提交修改{{/if}}" class="submit">
+            </td>
+        </tr>
+    </table>
+
+<!-- 配置文件 -->
+<script type="text/javascript" src="{{__LIBS__}}/ueditor1.4.3.1/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="{{__LIBS__}}/ueditor1.4.3.1/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+
+    var ue = UE.getEditor('container', {
+        autoHeight: true,
+        /*toolbars: [
+         ['fullscreen', 'source', 'undo', 'redo', 'bold']
+         ]*/
+    });
+</script>
+{{/block}}
+{{block name = foot}}
+{{$smarty.block.parent}}
+
+
+<script>
+    /* ajax发布文章 */
+    $(function(){
+        $("input[type='submit']").click(function(){
+
+            var action = $("input[name='action']").val();
+            if(action === 'do_publish'){
+
+                $.ajax({
+                    type    : 'post',
+                    url     : '/admin/index?p=post&a=publish',
+                    data    : {
+                        title : $("#post-title").val(),
+                        category : $("#post-category").val(),
+                        summary : $("#post-summary").val(),
+                        content : $("input[name='content']").val(),
+                        action  : 'do_publish',
+                    },
+                    success : function(data){
+                        //alert(data);
+                        data = $.parseJSON(data);
+                        if(data.has == true){      //发布成功
+                            alert(data.msg);
+                            window.location.href = "/post/"+data.id;
+
+                        }else{                      //发布失败
+                            alert(data.msg);
+                        }
+                    },
+                    error   : function () {
+                        alert("建立连接失败！");
+                    }
+                });
+            }else if(action === 'do_publish'){
+
+            }
+
+        })
+    })
+
+</script>
+
+
+<script type="text/javascript">
+
+
+
+
+
+
+</script>
+{{/block}}

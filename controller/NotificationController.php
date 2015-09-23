@@ -1,12 +1,9 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2015/8/11
- * Time: 13:14
- */
-class NotificationController extends CommonController
+namespace Jet\Controller;
+use Jet\Core\Controller;
+
+class NotificationController extends Controller
 {
 
     function __call($name, $args)

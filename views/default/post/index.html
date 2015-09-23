@@ -83,24 +83,47 @@
 <script>
     $(function () {
         $(".btn-comment").click(function () {
-
-            $.post(
-                    "/comment/post?id={{$it.id}}",
-                    {
-                        content: $("#tta").val()
-                    },
-                    function (data, status) {
-                       if(status == 'success'){
-                           alert('发布成功！');
-                           //alert("Data: " + data + "\nStatus: " + status);
-                           var data = $.parseJSON(data);
-                           $("#tta").val('');
-                           $(".comment-list ol").append(' <li class="text-primary">' + data.author + ' - ' + data.publish_time + ' <br/>' + data.content + '</li>')
-                       }else{
-                           alert('发不失败，请重试!');
-                       }
+            //data应该是一个对象
+            var _data = {};
+            _data.attach         = "{{$it.id}}";
+            _data.attach         = parseInt(_data.attach);
+            _data.content    = $("#tta").val();
+            $.ajax({
+                type    : 'post',
+                url     : "/post/addComment",
+                data    : {data : _data},
+                //dataType: 'JSON',
+                success : function(data){
+                     data = $.parseJSON(data);
+                    if(data.status == true){
+                        alert("发布成功!");
+                        $("#tta").val('');
+                        $(".comment-list ol").append(' <li class="text-primary">' + data.author + ' - ' + data.publish_time + ' <br/>' + data.content + '</li>')
+                    }else{
+                        alert('发布失败，请重试!');
                     }
-            );
+                },
+                error   : function(data){
+                    alert(data.toString);
+                    alert('出现错误');
+                }
+
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         })
     })
 

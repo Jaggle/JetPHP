@@ -1,12 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2015/9/8
- * Time: 16:23
- */
+namespace Jet\Controller;
+use Jet\Core\Controller;
 
-class PhotoController extends CommonController
+class PhotoController extends Controller
 {
 
     public function upload()

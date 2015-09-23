@@ -1,12 +1,9 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2015/8/11
- * Time: 13:14
- */
-class AjaxController extends CommonController
+namespace Jet\Controller;
+use Jet\Core\Controller;
+
+class AjaxController extends Controller
 {
 
     function __call($name, $args)
@@ -24,7 +21,7 @@ class AjaxController extends CommonController
        if(jet_Post('action') == 'do_mailer')
        {
            error_reporting(0);
-           $mail = new PHPMailer;
+           $mail = new \PHPMailer();
            apply_config($mail,'smtp');
            $mail->isSMTP();// Set mailer to use SMTP
            $mail->addAddress(jet_Post('to'), 'HELLO');     // Add a recipient
@@ -37,13 +34,9 @@ class AjaxController extends CommonController
            }
            $mail->Body    =  $content;
            $mail->AltBody = strip_tags($content);
-
-
-
-
            if(!$mail->send())
            {
-               echo jet_JSON(array('message' => '错误: ' . $mail->ErrorInfo.$content.$to, 'has' => false));
+               echo jet_JSON(array('message' => '错误: ' . $mail->ErrorInfo, 'has' => false));
            }
            else
            {

@@ -1,18 +1,20 @@
 <?php
 
+namespace Jet\Controller;
 
-class AdminController extends CommonController
+use Jet\Core\Controller;
+
+class AdminController extends Controller
 {
     public $p = '';     //position
     public $a = '';     //action
 
     function __call($name, $args)
     {
-        die('指定的方法不存在');
+       $this->error_404();
 
     }
 
-    //构造函数
     function __construct()
     {
         parent::__construct();
@@ -21,7 +23,6 @@ class AdminController extends CommonController
         }
         $this->p = jet_Get('p');
         $this->a = jet_Get('a');
-
 
     }
 
@@ -190,8 +191,6 @@ class AdminController extends CommonController
             $id = jet_Get('id');
             if (is_numeric($id)) {
                 if (jet_Post('action') != 'do_modify') {
-
-
                     $post = $this->model('post')->where($id)->select();
                     $post[0]['summary'] = strip_tags($post[0]['summary']);
                     $this->assign('post', $post[0]);

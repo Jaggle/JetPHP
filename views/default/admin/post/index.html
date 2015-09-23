@@ -3,6 +3,7 @@
 <div class="row">
     <div class="col-xs-12">
         <h3 class="header smaller lighter blue">文章列表</h3>
+
         <div class="table-header">
             所有文章-的列表
         </div>
@@ -13,7 +14,7 @@
                 <tr>
                     <th class="center">
                         <label>
-                            <input type="checkbox" class="ace" />
+                            <input type="checkbox" class="ace"/>
                             <span class="lbl"></span>
                         </label>
                     </th>
@@ -37,7 +38,7 @@
                 <tr class="post-{{$ls.id}}">
                     <td class="center">
                         <label>
-                            <input type="checkbox" class="ace" />
+                            <input type="checkbox" class="ace"/>
                             <span class="lbl"></span>
                         </label>
                     </td>
@@ -70,39 +71,37 @@
                         </div>
 
 
-
-
                         <div class="visible-xs visible-sm hidden-md hidden-lg">
                             <div class="inline position-relative">
                                 <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
                                     <i class="icon-caret-down icon-only bigger-120"></i>
-                                </but   ton>
+                                    </but   ton>
 
-                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                    <li>
-                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                        <li>
+                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
 																				<span class="blue">
 																					<i class="icon-zoom-in bigger-120"></i>
 																				</span>
-                                        </a>
-                                    </li>
+                                            </a>
+                                        </li>
 
-                                    <li>
-                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                        <li>
+                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
 																				<span class="green">
 																					<i class="icon-edit bigger-120"></i>
 																				</span>
-                                        </a>
-                                    </li>
+                                            </a>
+                                        </li>
 
-                                    <li>
-                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                        <li>
+                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
 																				<span class="red">
 																					<i class="icon-trash bigger-120"></i>
 																				</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                            </a>
+                                        </li>
+                                    </ul>
                             </div>
                         </div>
                     </td>
@@ -111,25 +110,26 @@
                 {{/foreach}}
 
                 <script>
-                    $(function(){
-                        $("a.a-delete").click(function(){
+                    $(function () {
+                        $("a.a-delete").click(function () {
                             var flag = confirm('确定删除吗?');
                             var id = $(this).attr('data-id');
-                            if(flag){       //发送ajax请求
+                            if (flag) {       //发送ajax请求
                                 $.ajax({
-                                    type    : 'post',
-                                    url     : "/admin/index?p=post&a=delete",
-                                    data    : {id : id},
-                                    success : function(data){
-                                        if(data.msg == 'false'){
-                                            alert('删除失败！');
-                                        }else{
+                                    type: 'post',
+                                    url: "/agent/db/delete",
+                                    data: {id: id,model: 'post'},
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        if (data.status == true) {
                                             alert("删除成功！");
-                                            $(".post-"+id).remove();        //动态删除网站内容
-
+                                            $(".post-" + id).remove();        //动态删除网站内容
+                                        } else {
+                                            alert('删除失败！');
+                                            return;
                                         }
                                     },
-                                    error   : function(){
+                                    error: function () {
                                         alert("发生错误！");
                                     }
                                 });
@@ -139,7 +139,6 @@
                         });
                     })
                 </script>
-
 
 
                 </tbody>
