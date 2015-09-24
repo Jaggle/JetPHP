@@ -324,7 +324,7 @@ class Controller extends Jet
     /**
      * todo current_user - 应该有很好的获取当前用户的方法
      *
-     * 获取当前用户
+     * 获取当前用户的name
      */
     public function current_user()
     {

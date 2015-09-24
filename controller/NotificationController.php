@@ -8,7 +8,7 @@ class NotificationController extends Controller
 
     function __call($name, $args)
     {
-        die('指定的方法不存在');
+        jet_log('尝试访问NotificationController的不存在的方法'.$name);
     }
 
     /**

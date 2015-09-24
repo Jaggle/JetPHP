@@ -7,10 +7,11 @@
  * @link        http://www.yeskn.com
  */
 namespace Jet\Agent;
+use Jet\Core\Jet;
 use Jet\Core\Model;
 use Whoops\Exception\ErrorException;
 
-class CommonAgent
+class CommonAgent extends Jet
 {
 	function __call($name,$args)
 	{

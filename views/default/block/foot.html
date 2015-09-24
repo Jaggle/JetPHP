@@ -1,7 +1,7 @@
 <script>
     $(function(){
         $(".jet_message li").click(function(){
-            //alert('hello！');
+            var index = $(this).index();
             $.ajax({
                 type    : 'post',
                 url     : '/notification/setread',
@@ -12,6 +12,8 @@
                     data = $.parseJSON(data);
                     if(data.has){
                         alert(data.message);
+                        $(".jet_message li").eq(index).remove();    //去掉消息的列
+                        $(".notNum").html(parseInt($(".notNum").html()) - 1);
 
                     }else{
                         alert(data.message);
@@ -30,27 +32,44 @@
 
 
         //每4秒polling通知信息
-       /* setInterval(function(){
+        setInterval(function(){
             $.ajax({
                 type    : 'post',
-                url     : '/notification/get',
+                url     : '/agent/notification/ajaxGet',
                 data    : {
                     id  : $(this).attr("data-id")
                 },
+                dataType : 'json',
                 success : function (data){
-                    data = $.parseJSON(data);
                     if(data.has){
-                        alert(data.message);
+                        console.log(data.msg);
+                        $(".notNum").html(data.notNum);
+                        //载入html,data.not是一个二维数组
+                        $(".message-li").remove();
+                        for(var i = 0;i<data.not.length;i++){
+                            $(".jet_message").append(
+                                    '<li data-id="'+i+'" class="message-li">'+
+                                        '<a href="#">'+
+                                        '<img src="{{__PUBLIC__}}/assets/ace/avatars/avatar.png" class="msg-photo" alt="Alexs Avatar" />'+
+                                        '<span class="msg-body">'+
+                                            '<span class="msg-title"><span class="blue">'+ data.not[i].sender +'</span>'+ data.not[i].content+
+                                        '</span>'+
+                                        '</span>'+
+                                        '</a>'+
+                                    '</li>'
+                            );
+                        }
 
                     }else{
-                        alert(data.message);
+                       console.log('no new message');
+                        $(".notNum").html(0);
                     }
                 },
                 error   : function(){
-                    alert('连接服务器失败！');
+                    console.log('尝试接收通知失败');
                 }
             })
-        },4000);*/
+        },4000);
 
     })
 </script>

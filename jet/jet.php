@@ -12,7 +12,6 @@ use Jet\Controller;
 
 class jet
 {
-	private static $models = array();
 
 	public static function start()
 	{
@@ -40,7 +39,7 @@ class jet
 				$agent = new $agent_space();
 				return $agent->$route[2]();
 			} else {
-				throw new Whoops\Exception\ErrorException('不存在该代理');
+				die(jet_JSON(array('msg' => '不存在该代理')));
 			}
 		}
 
@@ -88,27 +87,6 @@ class jet
 		unset($arr[1]);
 		$arr = array_values($arr);
 		return $arr;
-	}
-
-	/**
-	 * FIXME 本函数尚未被使用
-	 * 调用系统 Model
-	 * 根据命名规则调用相应的Mdel并初始化类库保存于 self::$models数组，防止重复初始化
-	 * @param null $model_class
-	 * @return mixed
-	 */
-	public static function model($model_class = null)
-	{
-		if (!$model_class) {
-			$model_class = 'JET_MODEL';
-		}
-		else if (!strstr($model_class, '_class')) {
-			$model_class .= '_class';
-		}
-		if (!isset(self::$models['model_class'])) {
-			self::$models[$model_class] = new $model_class();
-		}
-		return self::$models[$model_class];
 	}
 
 

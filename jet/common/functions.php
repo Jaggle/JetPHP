@@ -10,18 +10,18 @@
 /**
  * 去除数组中的某个元素
  *
- * @param   array   $arr
- * @param   null    $ele
+ * @param   array $arr
+ * @param   null $ele
  * @return mixed
  */
 function array_rid($arr, $ele = null)
 {
-    foreach ($arr as $k => $v) {
-        if ($v == $ele) {
-            unset($arr[$k]);
-        }
-    }
-    return $arr;
+	foreach ($arr as $k => $v) {
+		if ($v == $ele) {
+			unset($arr[$k]);
+		}
+	}
+	return $arr;
 }
 
 /**
@@ -30,11 +30,11 @@ function array_rid($arr, $ele = null)
  */
 function jetRandString($len = 8)
 {
-    $rand_string = '';
-    for ($i = 0; $i < $len; $i++) {
-        $rand_string .= chr(mt_rand(97, 122));
-    }
-    return $rand_string;
+	$rand_string = '';
+	for ($i = 0; $i < $len; $i++) {
+		$rand_string .= chr(mt_rand(97, 122));
+	}
+	return $rand_string;
 }
 
 
@@ -44,7 +44,7 @@ function jetRandString($len = 8)
  */
 function get_extension($file)
 {
-    return end(explode('.', $file));
+	return end(explode('.', $file));
 }
 
 /**
@@ -52,31 +52,31 @@ function get_extension($file)
  * @param string $type
  * @return bool
  */
-function jet_Upload($name = 'random',$type = 'image')
+function jet_Upload($name = 'random', $type = 'image')
 {
-    if($type and !file_exists(ROOT.'/uploads/'.$type)){
-        mkdir(ROOT.'/uploads/'.$type);
-    }
-    $f = array_keys($_FILES)[0];
-    $ext = get_extension($_FILES[$f]['name']);
-    $save_path = $type ? ROOT . '/uploads/'.$type.'/' : ROOT . 'uploads/';
-    $save_name = $name ? $name.'.'.$ext : jetRandString(12).'.'.$ext;
+	if ($type and !file_exists(ROOT . '/uploads/' . $type)) {
+		mkdir(ROOT . '/uploads/' . $type);
+	}
+	$f = array_keys($_FILES)[0];
+	$ext = get_extension($_FILES[$f]['name']);
+	$save_path = $type ? ROOT . '/uploads/' . $type . '/' : ROOT . 'uploads/';
+	$save_name = $name ? $name . '.' . $ext : jetRandString(12) . '.' . $ext;
 
-    return move_uploaded_file($_FILES[$f]["tmp_name"], $save_path . $save_name) || false;
+	return move_uploaded_file($_FILES[$f]["tmp_name"], $save_path . $save_name) || false;
 }
 
 /**
  * @param $var
  * @param int $flag
  */
-function dump($var,$flag = 0){
-    echo "<pre>";
-    var_dump($var);
-    echo "</pre>";
-    if($flag)
-    {
-        die();
-    }
+function dump($var, $flag = 0)
+{
+	echo "<pre>";
+	var_dump($var);
+	echo "</pre>";
+	if ($flag) {
+		die();
+	}
 }
 
 /**
@@ -85,35 +85,34 @@ function dump($var,$flag = 0){
  */
 function &load_class($class)
 {
-    static $_classes = array();
-    if(isset($_classes[$class])){
-        return $_classes[$class];
-    }
-    if(class_exists($class) === false) {
-        $file = JET.preg_replace('`_+`','/',$class).'.php';
-        if(!file_exists($file)) {
-            die("can't find class file for : $file ");
-        }
-        $_classes[$class] = new $class();
-        return $_classes[$class];
-    }
+	static $_classes = array();
+	if (isset($_classes[$class])) {
+		return $_classes[$class];
+	}
+	if (class_exists($class) === false) {
+		$file = JET . preg_replace('`_+`', '/', $class) . '.php';
+		if (!file_exists($file)) {
+			die("can't find class file for : $file ");
+		}
+		$_classes[$class] = new $class();
+		return $_classes[$class];
+	}
 }
 
 /**
  * @param bool|false $flag
  */
-function debug($flag = false){
-    $numargs = func_num_args();
-    $arg_list = func_get_args();
-    for($i=0;$i<$numargs;$i++)
-    {
-        echo "第 $i 个变量为：".$arg_list[$i],PHP_EOL;
-    }
-    echo "当前文件为：".__FILE__,PHP_EOL;
-    if($flag)
-    {
-        die;
-    }
+function debug($flag = false)
+{
+	$numargs = func_num_args();
+	$arg_list = func_get_args();
+	for ($i = 0; $i < $numargs; $i++) {
+		echo "第 $i 个变量为：" . $arg_list[$i], PHP_EOL;
+	}
+	echo "当前文件为：" . __FILE__, PHP_EOL;
+	if ($flag) {
+		die;
+	}
 }
 
 
@@ -123,11 +122,11 @@ function debug($flag = false){
  * @param $string
  * @param $key
  */
-function jet_Encrypt($string,$key)
+function jet_Encrypt($string, $key)
 {
-    $tKey = md5($key);
-    $bString = base64_encode($string);
-    $salt = 'jet is a cat';
+	$tKey = md5($key);
+	$bString = base64_encode($string);
+	$salt = 'jet is a cat';
 
 
 }
@@ -140,7 +139,7 @@ function jet_Encrypt($string,$key)
  */
 function jet_Decrypt($string)
 {
-    return $string;
+	return $string;
 }
 
 /**
@@ -149,10 +148,10 @@ function jet_Decrypt($string)
  */
 function jet_Get($s)
 {
-    if(isset($_GET[$s]))
-        return $_GET[$s];
-    else
-        return false;
+	if (isset($_GET[$s]))
+		return $_GET[$s];
+	else
+		return false;
 }
 
 /**
@@ -161,31 +160,26 @@ function jet_Get($s)
  */
 function jet_Post($variable)
 {
-    if(isset($_POST[$variable]))
-    {
-        $p = $_POST[$variable];
-        if($p == false)
-        {
-            return false;
-        }
+	if (isset($_POST[$variable])) {
+		$p = $_POST[$variable];
+		if ($p == false) {
+			return false;
+		}
 
-        //字符串
-        if(is_string($p))
-            $p = trim($p,"' :：,，");
+		//字符串
+		if (is_string($p))
+			$p = trim($p, "' :：,，");
 
-        //数组
-        else if( is_array($p) )
-        {
-            foreach($p as $key => $value )
-            {
-                $p[$key] = trim($value);
-            }
-        }
-        return $p;
+		//数组
+		else if (is_array($p)) {
+			foreach ($p as $key => $value) {
+				$p[$key] = trim($value);
+			}
+		}
+		return $p;
 
-    }
-    else
-        return false;
+	} else
+		return false;
 }
 
 /**
@@ -196,11 +190,10 @@ function jet_Post($variable)
  */
 function jet_Files($var = null)
 {
-    if($var == null)
-    {
-        return $_FILES;
-    }
-    return $_FILES[$var];
+	if ($var == null) {
+		return $_FILES;
+	}
+	return $_FILES[$var];
 }
 
 /**
@@ -213,22 +206,16 @@ function jet_Files($var = null)
  */
 function jet_Config($var)
 {
-    $config = include(CONFIG . '/common.config.php');
-    if(isset($config[$var]))
-    {
-        return $config[$var];
-    }
-    else
-    {
-        if(file_exists(CONFIG . "/$var.config.php"))
-        {
-            return require(CONFIG . "/$var.config.php");
-        }
-        else
-        {
-            return false;
-        }
-    }
+	$config = include(CONFIG . '/common.config.php');
+	if (isset($config[$var])) {
+		return $config[$var];
+	} else {
+		if (file_exists(CONFIG . "/$var.config.php")) {
+			return require(CONFIG . "/$var.config.php");
+		} else {
+			return false;
+		}
+	}
 }
 
 /**
@@ -239,66 +226,88 @@ function jet_Config($var)
  * @param null $domain
  * @return mixed
  */
-function jet_cookie($name,$value = null,$expire = null,$path = null, $domain = null)
+function jet_cookie($name, $value = null, $expire = null, $path = null, $domain = null)
 {
-    //判断前缀
-    if(strpos($name,jet_config('cookie_prefix')) == false)
-    {
-        $name = jet_config('cookie_prefix').$name;
-    }
+	//判断前缀
+	if (strpos($name, jet_config('cookie_prefix')) == false) {
+		$name = jet_config('cookie_prefix') . $name;
+	}
 
-    //设置cookie
-    if($expire > 0)
-    {
-        setcookie($name,$value,$expire,$path,$domain);
-    }
+	//设置cookie
+	if ($expire > 0) {
+		setcookie($name, $value, $expire, $path, $domain);
+	} //获得cookie
+	else {
 
-    //获得cookie
-    else
-    {
+		return $_COOKIE[$name];
 
-        return $_COOKIE[$name];
-
-    }
+	}
 }
 
 /**
  * 重写JSON_encode函数
  *
- * @param   mixed  $var 只接受一维数组和字符串
+ * @param   mixed $var 只接受一维数组和字符串[fix: 可以接收二维数组]
  * @return  mixed
  */
-function jet_JSON( $var)
+function jet_JSON($var)
 {
-    if(is_array($var)) {
-        foreach($var as $key => $value)
-        {
-            $var[$key] = str_replace('"','\'',urlencode($value));       //替换双引号
-	        $var[$key] = str_replace(':','|=|',$var[$key]);             //替换冒号
-        }
-        $var = json_encode($var);
-        return urldecode($var);
-    }
-	//字符串
-	else if(is_string($var)) {
-		return 	urldecode(json_encode(urlencode($var)));
+	if (is_array($var)) {
+		foreach ($var as $key => $value) {
+			if (is_array($value)) {
+				$key_name = array_search($value, $var);
+				foreach ($value as $k => $v) {        //
+					if (is_array($v)) {
+						$sub_key_name = array_search($v, $value);
+						foreach ($v as $sub_k => $sub_v) {
+							$var[$key_name][$sub_key_name][$sub_k] = str_replace('"', '\'', urlencode($sub_v));       //替换双引号
+							$var[$key_name][$sub_key_name][$sub_k] = str_replace('"', '\'', $var[$key_name][$sub_key_name][$sub_k]);       //替换双引号
+						}
+					} else {
+						$var[$key_name][$k] = str_replace('"', '\'', urlencode($v));
+						$var[$key_name][$k] = str_replace(':', '|=|', $var[$key_name][$k]);
+					}
+
+				}
+			} else {
+				$var[$key] = str_replace('"', '\'', urlencode($value));
+				$var[$key] = str_replace(':', '|=|', $var[$key]);
+			}
+
+		}
+		$var = json_encode($var);
+		return urldecode($var);
+	} else if (is_string($var)) {       //$var是字符串
+		return urldecode(json_encode(urlencode($var)));
+	} else {
+		return false;
 	}
-    else{
-        return false;
-    }
 }
+
 
 /**
  * 多语言支持
  * 虽然目前没有多语言支持，但是我还是需要为它做准备
- * @param   string  $string 需要翻译的字符串
+ * @param   string $string 需要翻译的字符串
  * @return  string  返回翻译过的字符串或者不做翻译
  */
 function jet_Lang($string)
 {
-    return $string;
+	return $string;
 }
 
+/**
+ * jet Log 函数 用于记录日志
+ * @param   string $type 日志类型
+ * @param   string $message 日志的内容
+ * @param   string $file_name 日志文件的位置
+ */
+function jet_log($message, $type = 'SYSTEM', $file_name = 'log.txt')
+{
+	$log = new Monolog\Logger($type);
+	$log->pushHandler(new Monolog\Handler\StreamHandler(RUNTIME . '/logs/' . $file_name));
+	$log->addInfo($message);
+}
 
 /*  其他非jet系列函数 */
 
@@ -309,13 +318,12 @@ function jet_Lang($string)
  * @param string $arr
  */
 
-function apply_config($obj,$arr)
+function apply_config($obj, $arr)
 {
-    $arr = require(CONFIG."/$arr.config.php");
-    foreach($arr as $key => $value)
-    {
-        $obj->$key = $value;
-    }
+	$arr = require(CONFIG . "/$arr.config.php");
+	foreach ($arr as $key => $value) {
+		$obj->$key = $value;
+	}
 
 }
 
