@@ -1,6 +1,7 @@
 <?php
 
 namespace Jet\Core;
+
 use mysqli;
 
 class Model
@@ -25,7 +26,7 @@ class Model
 		$db = require(CONFIG . '/db.config.php');
 		$this->mysqli = new mysqli($db['host'], $db['user'], $db['pswd'], $db['name']);
 		$this->mysqli->set_charset("utf8");
-		$this->option['table'] = $db['prefix'].$table;
+		$this->option['table'] = $db['prefix'] . $table;
 	}
 
 
@@ -65,12 +66,12 @@ class Model
 
 	/**
 	 * where子句,使支持直接通过系统model获得数据
-	 * @param   string  $s  查询条件
+	 * @param   string $s 查询条件
 	 * @return  object  当前对象
 	 */
 	public function where($s)
 	{
-		if(is_numeric($s))
+		if (is_numeric($s))
 			$this->option['where'] = " where id = $s";
 		else
 			$this->option['where'] = " where $s ";
@@ -80,24 +81,24 @@ class Model
 
 	/**
 	 * order子句
-	 * @param   string  $order 排序条件
+	 * @param   string $order 排序条件
 	 * @return  object  当前对象
 	 */
 	public function order($order)
 	{
-		$this->option['order'] = ' order by '.$order;
+		$this->option['order'] = ' order by ' . $order;
 		return $this;
 	}
 
 	/**
 	 * limit子句
-	 * @param   string  $limit 限制条件
+	 * @param   string $limit 限制条件
 	 * @return  object
 	 *
 	 */
 	public function limit($limit)
 	{
-		$this->option['limit'] = ' limit '.$limit;
+		$this->option['limit'] = ' limit ' . $limit;
 		return $this;
 	}
 
@@ -111,17 +112,17 @@ class Model
 	{
 		$sql = $this->make_sql();
 		$result = $this->mysqli->query($sql);
-		$r =array();
+		$r = array();
 		if ($result) {
 			if ($result->num_rows > 0) {
-				while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-					array_push($r,$row);
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					array_push($r, $row);
 				}
 				return $r;
-			}else{
+			} else {
 				return false;
 			}
-		}else{
+		} else {
 			return false;
 		}
 
@@ -135,27 +136,24 @@ class Model
 	public function get()
 	{
 		$data = $this->select();
-		if(is_array($data))
-		{
+		if (is_array($data)) {
 			return $data[0];
-		}else
+		} else
 			return false;
 	}
 
 
 	/**
 	 * 返回一个字段，并弃用find函数
-	 * @param   $f    //需要取得的字段的名称
+	 * @param   $f //需要取得的字段的名称
 	 * @return  string|bool
 	 */
 	public function field($f)
 	{
 		$data = $this->get();
-		if(is_array($data))
-		{
+		if (is_array($data)) {
 			return $data[$f];
-		}else
-		{
+		} else {
 			return false;
 		}
 	}
@@ -167,7 +165,7 @@ class Model
 	public function num()
 	{
 		$data = $this->select();
-		if(is_array($data))
+		if (is_array($data))
 			return sizeof($data);
 		else
 			return false;
@@ -182,16 +180,15 @@ class Model
 	public function insert($data)
 	{
 		$columns = array_keys($data);
-		$columns = implode(',',$columns);
-		foreach($data as  $key =>$v)
-		{
-			$data[$key] = str_replace('\'','\'\'',$v);   //将一个引号换成两个引号，以方便插入到数据库中
+		$columns = implode(',', $columns);
+		foreach ($data as $key => $v) {
+			$data[$key] = str_replace('\'', '\'\'', $v);   //将一个引号换成两个引号，以方便插入到数据库中
 			$data[$key] = "'$data[$key]'";       //给数据添加引号
 		}
-		$values =  implode(',',$data);
-		$sql = "insert into ".$this->option['table']."(".$columns.")"." values "."(".$values.")";
+		$values = implode(',', $data);
+		$sql = "insert into " . $this->option['table'] . "(" . $columns . ")" . " values " . "(" . $values . ")";
 		$this->mysqli->query($sql);
-		if($this->mysqli->errno == 0)
+		if ($this->mysqli->errno == 0)
 			return $this->mysqli->insert_id;
 		else
 			return false;
@@ -199,11 +196,11 @@ class Model
 	}
 
 
-	public function setField($field,$value)
+	public function setField($field, $value)
 	{
-		$sql = "update ". $this->option['table']." set  $field = '$value' ".$this->option['where'];
+		$sql = "update " . $this->option['table'] . " set  $field = '$value' " . $this->option['where'];
 		$this->mysqli->query($sql);
-		if($this->mysqli->errno == 0)
+		if ($this->mysqli->errno == 0)
 			return true;
 		else
 			return false;
@@ -217,43 +214,45 @@ class Model
 	 */
 	public function update($data)
 	{
-		if(is_array($data))
-		{
+		if (is_array($data)) {
 			$field = '';
-			foreach($data as $key => $value)
-			{
-				$value = str_replace('\'','\'\'',$value);   //将一个引号换成两个引号，以方便插入到数据库中
+			foreach ($data as $key => $value) {
+				$value = str_replace('\'', '\'\'', $value);   //将一个引号换成两个引号，以方便插入到数据库中
 
-				$field .= $key."='".$value."', ";
+				$field .= $key . "='" . $value . "', ";
 			}
 			$field = trim($field);
-			$field = substr($field,0,-1); //去掉最后的逗号
+			$field = substr($field, 0, -1); //去掉最后的逗号
 			$field = ' ' . $field . ' ';
-			$sql = "update ". $this->option['table']." set " . $field.$this->option['where'];
+			$sql = "update " . $this->option['table'] . " set " . $field . $this->option['where'];
 			$result = $this->mysqli->query($sql);
-			if($result)
+			if ($result)
 				return true;
 			else
 				return false;
-		}else
+		} else
 			return false;
 	}
 
 
 	/**
-	 * @return bool 删除操作，
+	 * delete子句
+	 * @param   string
+	 * @return  bool 删除操作，
 	 */
 	public function delete($where = null)
 	{
-		if($where != null and strpos($where,','))   //通过id批量删除
+		if ($where != null and strpos($where, ','))   //通过id批量删除
 		{
-			$sql =  "delete from ".$this->option['table']." where id in (".$where.")";
-		}else
-		{
-			$sql = $this->make_sql('d');
+			$where = trim($where,', .');                  //去掉前后的特殊字符
+			$sql = "delete from " . $this->option['table'] . " where id in (" . $where . ")";
+		}elseif(is_numeric($where)){
+			$sql = "delete from " . $this->option['table'] . " where id = $where";
 		}
+		else
+			$sql = $this->make_sql('d');
 		$result = $this->mysqli->query($sql);
-		if($result)
+		if ($result)
 			return true;
 		else
 			return false;
@@ -263,11 +262,11 @@ class Model
 	 * 字段加1
 	 * @return true or false
 	 */
-	public function increase($field,$num)
+	public function increase($field, $num)
 	{
-		$sql = "update ".$this->option['table']." set $field = $field+$num ".$this->option['where'];
+		$sql = "update " . $this->option['table'] . " set $field = $field+$num " . $this->option['where'];
 		$this->mysqli->query($sql);
-		if($this->mysqli->errno == 0)
+		if ($this->mysqli->errno == 0)
 			return true;
 		else
 			return false;
@@ -277,6 +276,7 @@ class Model
 	/**
 	 * make_sql()
 	 * 创建$sql查询字符串
+	 * @param   string  $a  数据库的操作
 	 * 参数说明：
 	 *      - 默认值 select
 	 *      - d delete
@@ -284,44 +284,42 @@ class Model
 	 *      - u update
 	 *      - i insert
 	 *      - s select
+	 * @return  string 返回组织好的sql语句
 	 */
 	public function make_sql($a = '')
 	{
 
 
 		//select
-		if($a == 's' or $a == '')
-		{
-			if($this->option['where'] != '')
-				$this->sql = "select * from ".$this->option['table'].$this->option['where'];
+		if ($a == 's' or $a == '') {
+			if ($this->option['where'] != '')
+				$this->sql = "select * from " . $this->option['table'] . $this->option['where'];
 			else
-				$this->sql = "select * from ".$this->option['table'];
-			if($this->option['order'] != '')
+				$this->sql = "select * from " . $this->option['table'];
+			if ($this->option['order'] != '')
 				$this->sql .= $this->option['order'];
-			if($this->option['limit'] != '')
+			if ($this->option['limit'] != '')
 				$this->sql .= $this->option['limit'];
 			return $this->sql;
 
 		}
 
 		//delete
-		if($a  == 'd')
-		{
-			if($this->option['where'] != '')
-				$this->sql = "delete from ".$this->option['table'].$this->option['where'];
+		if ($a == 'd') {
+			if ($this->option['where'] != '')
+				$this->sql = "delete from " . $this->option['table'] . $this->option['where'];
 			else
-				die('你正在尝试删除表'.$this->option['table'].'中的所有数据，已经被程序阻止');
+				die('你正在尝试删除表' . $this->option['table'] . '中的所有数据，已经被程序阻止');
 			return $this->sql;
 
 		}
 
 		//update
-		if($a == 'u')
-		{
-			if($this->option['where'] != '')
-				$this->sql = "update ".$this->option['table']." set "." ## ".$this->option['where'];
+		if ($a == 'u') {
+			if ($this->option['where'] != '')
+				$this->sql = "update " . $this->option['table'] . " set " . " ## " . $this->option['where'];
 			else
-				die('你正在尝试修改表'.$this->option['table'].'中的所有数据，已经被程序阻止');
+				die('你正在尝试修改表' . $this->option['table'] . '中的所有数据，已经被程序阻止');
 			return $this->sql;
 		}
 	}

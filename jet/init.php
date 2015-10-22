@@ -16,7 +16,7 @@ switch (jet_Config('template_engine')) {
 		break;
 	default:
 		$TE = new Smarty;
-		apply_config($TE, 'smarty');
+		apply_config($TE, 'smarty');   
 }
 
 function autoload($class)
